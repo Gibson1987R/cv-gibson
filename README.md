@@ -3,7 +3,7 @@
 Mi currículum, hecho a mano. Una sola página, bilingüe (español / inglés), con
 estética de editor de código y sin una sola dependencia en el navegador.
 
-**En línea:** _pendiente de desplegar_
+**En línea:** https://cv-gibson-rosales.netlify.app
 **Autor:** [Gibson Rosales](https://www.linkedin.com/in/gibson-rosales-fuenmayor-7b2201176) · [gibsonrosales@gmail.com](mailto:gibsonrosales@gmail.com)
 
 > _My CV as a single page: bilingual, keyboard-driven, zero runtime dependencies,

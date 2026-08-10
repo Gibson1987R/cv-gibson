@@ -118,8 +118,7 @@ export const CV_DATA = {
       {
         name: "directo-ia",
         role: "Responsable del flujo de onboarding",
-        about:
-          "Venta por WhatsApp con IA para restaurantes, entrando a piloto real",
+        about: "Venta por WhatsApp con IA para restaurantes",
         stack: ["Next.js", "TypeScript", "React"],
         work: [
           "41 commits repartidos en unas 28 pull requests numeradas (#12 a #39).",
@@ -446,7 +445,7 @@ export const CV_DATA = {
       {
         name: "directo-ia",
         role: "Owner of the onboarding flow",
-        about: "AI sales over WhatsApp for restaurants, entering a real pilot",
+        about: "AI sales over WhatsApp for restaurants",
         stack: ["Next.js", "TypeScript", "React"],
         work: [
           "41 commits across about 28 numbered pull requests (#12 to #39).",

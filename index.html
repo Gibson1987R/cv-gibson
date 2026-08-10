@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Currículum</title>
+    <meta name="color-scheme" content="light dark" />
+
+    <!--
+      Este script va aquí, inline y sin defer, a propósito: aplica el tema y el
+      idioma guardados ANTES del primer pintado. Si esperase a main.js, la página
+      parpadearía en claro antes de ponerse oscura.
+    -->
+    <script>
+      try {
+        const tema = localStorage.getItem("cv-theme");
+        if (tema === "light" || tema === "dark") {
+          document.documentElement.dataset.theme = tema;
+        }
+        const idioma = localStorage.getItem("cv-lang");
+        if (idioma === "es" || idioma === "en") {
+          document.documentElement.lang = idioma;
+        }
+      } catch (_) {
+        /* localStorage bloqueado: nos quedamos con las preferencias del sistema */
+      }
+    </script>
+
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <div class="window">
+      <!-- Barra de ventana: la parte "terminal" de la estética + las acciones -->
+      <div class="window__bar">
+        <span class="window__dots" aria-hidden="true">
+          <i></i><i></i><i></i>
+        </span>
+        <span class="window__path" aria-hidden="true">~/cv</span>
+
+        <div class="toolbar">
+          <button type="button" class="toolbar__btn" data-action="open-palette">
+            <span class="toolbar__kbd" aria-hidden="true">⌘K</span>
+            <span class="toolbar__label">Buscar</span>
+          </button>
+          <button type="button" class="toolbar__btn" data-action="print">
+            <span aria-hidden="true">⇩</span>
+            <span class="toolbar__label">PDF</span>
+          </button>
+          <button
+            type="button"
+            class="toolbar__btn"
+            data-action="toggle-theme"
+            aria-label="Cambiar a tema claro"
+          >
+            <span class="toolbar__icon" aria-hidden="true"></span>
+            <span class="toolbar__label">Tema</span>
+          </button>
+          <!-- Los textos de estos botones los sobrescribe render.js desde
+               data.js. Los de aquí son solo lo que se ve si el JS no carga. -->
+          <button
+            type="button"
+            id="lang-toggle"
+            class="toolbar__btn toolbar__btn--lang"
+            data-action="toggle-lang"
+            aria-label="Switch to English"
+            lang="en"
+          >
+            <span aria-hidden="true">⇄</span>
+            <span class="toolbar__label">EN</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Header, main y footer los rellena render.js a partir de data.js -->
+      <header class="hero" id="cabecera"></header>
+      <main id="contenido"></main>
+      <footer class="site-footer"></footer>
+    </div>
+
+    <!--
+      <dialog> nativo: nos regala trampa de foco, cierre con Esc, ::backdrop
+      y bloqueo del fondo. Todo eso sin una sola dependencia.
+    -->
+    <dialog id="palette" class="palette" aria-label="Paleta de comandos">
+      <div class="palette__box">
+        <div class="palette__inputRow">
+          <span class="prompt" aria-hidden="true">&gt;</span>
+          <input
+            id="palette-input"
+            class="palette__input"
+            type="text"
+            role="combobox"
+            aria-expanded="true"
+            aria-controls="palette-list"
+            aria-autocomplete="list"
+            aria-label="Buscar sección o acción"
+            placeholder="Ir a una sección o ejecutar una acción…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+
+        <ul id="palette-list" class="palette__list" role="listbox" aria-label="Comandos"></ul>
+
+        <p id="palette-empty" class="palette__empty" hidden>Sin resultados.</p>
+        <p class="sr-only" role="status" aria-live="polite" id="palette-status"></p>
+
+        <p class="palette__hints" aria-hidden="true">
+          <kbd>↑</kbd><kbd>↓</kbd> moverse · <kbd>⏎</kbd> ejecutar · <kbd>esc</kbd> cerrar
+        </p>
+      </div>
+    </dialog>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

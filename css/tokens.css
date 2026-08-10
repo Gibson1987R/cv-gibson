@@ -1,0 +1,88 @@
+/* Variables de diseño.
+   Los colores se declaran TRES veces a propósito:
+     1. :root                      → tema claro, siempre presente (valor por defecto)
+     2. @media prefers-color-scheme→ oscuro automático si el sistema lo pide
+     3. :root[data-theme="dark"]   → oscuro forzado por el conmutador
+   Sin el paso 3, el botón no podría contradecir al sistema.
+   Todas las parejas texto/fondo están comprobadas contra WCAG AA (4.5:1). */
+
+:root {
+  /* --- Tipografía --- */
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  --font-print: Georgia, "Times New Roman", serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: clamp(1.25rem, 1rem + 1.2vw, 1.6rem);
+  --text-2xl: clamp(1.75rem, 1.2rem + 2.8vw, 3rem);
+
+  /* --- Espaciado (escala de 4px) --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+
+  --radius: 6px;
+  --radius-lg: 10px;
+  --measure: 72ch; /* ancho máximo de lectura cómoda */
+
+  /* --- Color: tema claro --- */
+  --bg: #ffffff;
+  --bg-soft: #f6f8fa;
+  --surface: #ffffff;
+  --border: #d0d7de;
+  --border-strong: #9aa4ae;
+
+  --text: #1f2328; /* 15.9:1 sobre --bg  */
+  --text-muted: #59636e; /*  6.4:1 sobre --bg  */
+  --accent: #1a7f37; /*  5.0:1 sobre --bg  */
+  --link: #0969da; /*  5.4:1 sobre --bg  */
+  --danger: #b3261e;
+
+  --shadow: 0 1px 2px rgb(31 35 40 / 8%), 0 8px 24px rgb(31 35 40 / 10%);
+  --backdrop: rgb(31 35 40 / 45%);
+}
+
+/* Oscuro automático: solo si el usuario no ha forzado el claro con el botón */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b0f14;
+    --bg-soft: #11161d;
+    --surface: #11161d;
+    --border: #232a33;
+    --border-strong: #48515b;
+
+    --text: #e6edf3; /* 15.2:1 sobre --bg */
+    --text-muted: #9aa5b1; /*  7.9:1 sobre --bg */
+    --accent: #3fb950; /*  7.4:1 sobre --bg */
+    --link: #79c0ff; /*  9.4:1 sobre --bg */
+    --danger: #ff7b72;
+
+    --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 12px 32px rgb(0 0 0 / 50%);
+    --backdrop: rgb(1 4 9 / 70%);
+  }
+}
+
+/* Oscuro forzado por el conmutador (gana también en sistemas en modo claro) */
+:root[data-theme="dark"] {
+  --bg: #0b0f14;
+  --bg-soft: #11161d;
+  --surface: #11161d;
+  --border: #232a33;
+  --border-strong: #48515b;
+
+  --text: #e6edf3;
+  --text-muted: #9aa5b1;
+  --accent: #3fb950;
+  --link: #79c0ff;
+  --danger: #ff7b72;
+
+  --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 12px 32px rgb(0 0 0 / 50%);
+  --backdrop: rgb(1 4 9 / 70%);
+}

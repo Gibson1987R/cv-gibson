@@ -1,0 +1,18 @@
+# Cómo tiene que compilar Netlify este proyecto.
+#
+# Sin este fichero Netlify intenta adivinarlo. Con él queda escrito en el
+# repo, así que cualquiera que lo clone despliega igual que tú.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# La página es de una sola URL, pero si alguien entra directo a /algo
+# conviene que reciba el index en vez de un 404 de Netlify.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

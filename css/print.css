@@ -1,0 +1,248 @@
+/* Modo impresión: el mismo data.js, pero un CV clásico en papel.
+   Nada de terminal, nada de color, nada de adornos de pantalla. */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 15mm;
+  }
+
+  :root {
+    --text: #000;
+    --text-muted: #333;
+    --accent: #000;
+    --link: #000;
+    --border: #999;
+    --bg: #fff;
+    --bg-soft: #fff;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-family: var(--font-print);
+    font-size: 10.2pt;
+    line-height: 1.35;
+  }
+
+  /* Fuera todo lo que solo existe en pantalla */
+  .window__bar,
+  .skip-link,
+  .palette,
+  .toast,
+  .prompt,
+  .section__cmd,
+  .hero__linkLabel {
+    display: none !important;
+  }
+
+  .window {
+    max-width: none;
+    min-height: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .hero,
+  main,
+  .site-footer {
+    padding: 0;
+  }
+
+  /* Las animaciones no se imprimen, pero su estado final sí: hay que
+     neutralizarlas o el texto sale recortado o invisible. */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .typing {
+    width: auto !important;
+    animation: none !important;
+    border-right: 0;
+    padding-right: 0;
+  }
+
+  /* --- Cabecera --- */
+
+  .hero {
+    padding-bottom: 6pt;
+    border-bottom: 1pt solid #000;
+  }
+
+  .hero__cmd {
+    display: none;
+  }
+
+  .hero__name {
+    margin: 0;
+    font-size: 20pt;
+    letter-spacing: 0;
+  }
+
+  .hero__role {
+    margin-top: 2pt;
+    font-size: 12pt;
+    font-style: italic;
+  }
+
+  .hero__tagline {
+    margin-top: 4pt;
+    font-size: 10.5pt;
+    max-width: none;
+  }
+
+  .hero__meta,
+  .hero__links {
+    margin-top: 3pt;
+    font-size: 9.5pt;
+    gap: 0 12pt;
+  }
+
+  /* --- Secciones --- */
+
+  .section {
+    padding-block: 8pt 0;
+    border-top: 0;
+    break-inside: auto;
+  }
+
+  .section__title {
+    margin-bottom: 5pt;
+    font-size: 11pt;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 0.5pt solid #666;
+    padding-bottom: 2pt;
+    break-after: avoid;
+  }
+
+  /* El título accesible, oculto en pantalla, es el que se imprime */
+  .section__plain {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+  }
+
+  .entries {
+    gap: 7pt;
+  }
+
+  /* Formación: título y centro en la misma línea. Cuatro estudios en cuatro
+     bloques de dos líneas gastaban media hoja para nada. */
+  .entry--compact {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 6pt;
+  }
+
+  .entry--compact .entry__meta {
+    margin-top: 0;
+  }
+
+  .entry {
+    break-inside: avoid;
+  }
+
+  .entry--card,
+  .entry--contrib {
+    padding: 0;
+    background: none;
+    border: 0;
+  }
+
+  /* El "✓ mergeado tras revisión" es contexto de pantalla; en papel la línea
+     entera sobra y el espacio vale más. */
+  .entry__merged {
+    display: none;
+  }
+
+  /* Al revés que en pantalla: aquí SÍ salen los datos personales, si están */
+  .hero__printOnly {
+    display: block;
+    margin-top: 3pt;
+    font-size: 9.5pt;
+  }
+
+  .hero__printOnly .hero__linkLabel {
+    display: inline;
+  }
+
+  .entry__title,
+  .entry--compact .entry__title {
+    font-size: 11pt;
+    break-after: avoid;
+  }
+
+  .entry__meta,
+  .entry__result {
+    font-size: 9.5pt;
+  }
+
+  .bullets,
+  .prose,
+  .entry__summary,
+  .entry__result {
+    max-width: none;
+  }
+
+  .bullets {
+    margin-top: 3pt;
+  }
+
+  .bullets li + li {
+    margin-top: 1pt;
+  }
+
+  /* Las "chips" en papel son una lista separada por puntos, no pastillas */
+  .chips {
+    display: block;
+    margin-top: 3pt;
+    font-size: 9.5pt;
+    color: #333;
+  }
+
+  .chip {
+    display: inline;
+    padding: 0;
+    border: 0;
+    font-size: inherit;
+  }
+
+  .chip + .chip::before {
+    content: " · ";
+  }
+
+  .skills {
+    gap: 6pt 18pt;
+  }
+
+  .skills__category {
+    font-size: 9.5pt;
+  }
+
+  /* Enlaces en negro y sin subrayado: en papel el subrayado no lleva a
+     ninguna parte, y la dirección ya se ve porque es el propio texto. */
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .site-footer {
+    margin-top: 10pt;
+    padding-top: 4pt;
+    border-top: 0.5pt solid #999;
+    font-size: 8.5pt;
+    color: #555;
+  }
+
+  .site-footer__note {
+    display: none;
+  }
+}

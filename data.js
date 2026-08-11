@@ -83,11 +83,28 @@ export const CV_DATA = {
     /* Un elemento por párrafo */
     about: [
       "Enseñé matemáticas nueve años y coordiné proyectos educativos en el Amazonas. Trabajando en el área de facturación de un hospital escribí mi primer script en Python para no seguir renombrando soportes a mano: ahí empezó esto.",
-      "Hoy contribuyo con código revisado en dos productos reales y mantengo en producción una automatización que registra movimientos bancarios. Sigo siendo profesor en una cosa: si no sé explicar lo que escribí, es que todavía no lo entiendo.",
+      "Hoy contribuyo con código revisado en dos productos reales, mantengo en producción una automatización que registra movimientos bancarios y monté un servicio propio de páginas para eventos. Sigo siendo profesor en una cosa: si no sé explicar lo que escribí, es que todavía no lo entiendo.",
     ],
 
     /* Proyectos donde soy el dueño del código */
     projects: [
+      {
+        name: "fiestas-web",
+        summary:
+          "Servicio de páginas para fiestas infantiles: la invitación antes, la confirmación de asistencia en vivo durante y la galería de recuerdos después. Cada cliente es una entrada de configuración con su propia ruta y su lista de invitados aislada.",
+        stack: ["React", "Firestore", "Firebase Auth", "Vite", "Vercel"],
+        result:
+          "Usado en una fiesta real y con demo pública donde cualquiera puede confirmar y ver la lista actualizarse. Editar y borrar está cerrado por reglas de Firestore con rol de administrador.",
+        // La raíz es la página que vende; desde ahí se llega a /demo (fiesta
+        // inventada, con fecha futura, donde cualquiera puede confirmar) y a
+        // /joaquin (la fiesta real, ya celebrada).
+        //
+        // En Vercel el proyecto se llama `fiestas-app` y no `fiestas-web` como
+        // el repo, porque fiestas-web.vercel.app lo tiene ocupado otra persona.
+        // El dominio viejo (landing-cumple-joaquin-jeremias.vercel.app) sigue
+        // vivo a propósito: es el enlace que se repartió a los invitados.
+        href: "https://fiestas-app.vercel.app",
+      },
       {
         name: "honest-english",
         summary:
@@ -221,6 +238,8 @@ export const CV_DATA = {
       {
         category: "Backend y datos",
         items: [
+          "Firebase / Firestore",
+          "Autenticación y roles",
           "Supabase",
           "IndexedDB / Dexie",
           "Google Apps Script",
@@ -417,10 +436,21 @@ export const CV_DATA = {
 
     about: [
       "I taught maths for nine years and coordinated education projects in Amazonas. While working in a hospital billing office I wrote my first Python script so I would stop renaming files by hand. That is where this started.",
-      "Today I contribute reviewed code to two real products, and I keep an automation in production that records bank transactions. I am still a teacher in one way: if I cannot explain what I wrote, I have not understood it yet.",
+      "Today I contribute reviewed code to two real products, I keep an automation in production that records bank transactions, and I built a service of my own that makes pages for events. I am still a teacher in one way: if I cannot explain what I wrote, I have not understood it yet.",
     ],
 
     projects: [
+      {
+        name: "fiestas-web",
+        summary:
+          "A service that builds pages for children's parties: the invitation before, live RSVP during, and a photo gallery afterwards. Each client is one config entry with its own route and its own isolated guest list.",
+        stack: ["React", "Firestore", "Firebase Auth", "Vite", "Vercel"],
+        result:
+          "Used at a real party, with a public demo where anyone can RSVP and watch the list update live. Editing and deleting are locked behind Firestore rules with an admin role.",
+        // Ver la nota del bloque `es` sobre por qué el dominio no coincide
+        // con el nombre del repo.
+        href: "https://fiestas-app.vercel.app",
+      },
       {
         name: "honest-english",
         summary:
@@ -548,6 +578,8 @@ export const CV_DATA = {
       {
         category: "Backend and data",
         items: [
+          "Firebase / Firestore",
+          "Authentication and roles",
           "Supabase",
           "IndexedDB / Dexie",
           "Google Apps Script",

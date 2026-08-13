@@ -49,20 +49,20 @@ const renderizadores = {
         .map(
           (entrada) => `
         <li class="entry entry--card">
+          <!-- El rol va ENCIMA del nombre: primero qué fui, después dónde. -->
           <h3 class="entry__title">
-            <span class="prompt" aria-hidden="true">./</span>${
-              // Sin href no se pinta un enlace muerto: solo el nombre. Varios
-              // de estos repos son privados o ajenos y no hay nada que enlazar.
-              entrada.href
-                ? `<a href="${esc(entrada.href)}"${enlaceExterno(entrada.href)}>${esc(entrada.name)}</a>`
-                : esc(entrada.name)
-            }
-          </h3>
-          <p class="entry__meta">
             <span class="entry__roleTag">${esc(entrada.role)}</span>
-            <span class="entry__dot" aria-hidden="true">·</span>
-            ${esc(entrada.about)}
-          </p>
+            <span class="entry__name">
+              <span class="prompt" aria-hidden="true">./</span>${
+                // Sin href no se pinta un enlace muerto: solo el nombre. Varios
+                // de estos repos son privados o ajenos y no hay nada que enlazar.
+                entrada.href
+                  ? `<a href="${esc(entrada.href)}"${enlaceExterno(entrada.href)}>${esc(entrada.name)}</a>`
+                  : esc(entrada.name)
+              }
+            </span>
+          </h3>
+          <p class="entry__meta">${esc(entrada.about)}</p>
           ${
             entrada.work?.length
               ? `<ul class="bullets">

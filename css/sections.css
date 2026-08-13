@@ -215,11 +215,19 @@
   margin-top: var(--space-2);
 }
 
-/* El nombre del rol dentro de la línea meta: es lo primero que hay que leer
-   después del nombre del producto. */
+/* El rol va encima del nombre del repo, como antetítulo: se lee primero qué
+   hice y después dónde. Más pequeño que el nombre para que la jerarquía se
+   entienda sin leer. */
 .entry__roleTag {
+  display: block;
+  font-size: var(--text-sm);
   color: var(--accent);
   font-weight: 700;
+}
+
+.entry__name {
+  display: block;
+  margin-top: 2px;
 }
 
 .entry__result {

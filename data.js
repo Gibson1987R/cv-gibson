@@ -83,7 +83,7 @@ export const CV_DATA = {
     /* Un elemento por párrafo */
     about: [
       "Construyo producto web dirigiendo agentes de IA: escribo la especificación, reviso el código que sale, lo pruebo y lo pongo en línea. Hoy lo hago para directo-ia, un producto de venta por WhatsApp para restaurantes, donde soy responsable del flujo de onboarding.",
-      "Llegué aquí por necesidad, no por curiosidad. En facturación de un hospital se iban las tardes dividiendo y renombrando soportes a mano, así que escribí un script en Python que hiciera el trabajo pesado: el bloque que costaba unas treinta horas pasó a costar una. En Talento Humano el dolor era otro —nadie encontraba los documentos de un contratista— y la solución fue modelar los datos de más de quinientos para que cada documento saliera solo, en cinco minutos en vez de media hora.",
+      "Llegué aquí porque una necesidad me despertó la curiosidad. En facturación de un hospital se iban las tardes dividiendo y renombrando soportes a mano; me pregunté si aquello no podría hacerlo una máquina, y escribí un script en Python que se llevara el trabajo pesado: el bloque que costaba unas treinta horas pasó a costar una. En Talento Humano el dolor era otro —nadie encontraba los documentos de un contratista— y la respuesta fue modelar los datos de más de quinientos para que cada documento saliera solo, en cinco minutos en vez de media hora.",
       "Vengo de coordinar equipos y de administrar procesos, y eso es lo que aporto además del código: entiendo el problema desde dentro antes de proponer nada. Primero me meto en el dolor, luego construyo la solución.",
     ],
 
@@ -111,12 +111,12 @@ export const CV_DATA = {
         role: "Responsable del flujo de onboarding",
         about: "Venta por WhatsApp con IA para restaurantes · mi trabajo hoy",
         work: [
-          "Propuse cómo debía sentirse el alta de un restaurante nuevo, y esa idea dio forma al onboarding que hoy usa el producto: el dueño lo dijo así en revisión. No fue una tarea asignada, salió de entender cómo iba a usar aquello un restaurante en medio del servicio.",
-          "Rehíce el flujo completo: el usuario ya no llega al final para descubrir que le falta algo. Cada paso valida lo suyo, avisa en el punto exacto del error y marca lo que queda incompleto antes de dejarte avanzar.",
-          "Lo dejé usable solo con teclado y aguantando nombres largos, pantallas bajas y móvil, porque quien da de alta un restaurante lo hace desde el celular y con prisa.",
+          "El restaurante que se da de alta va a trabajar con una IA todos los días, así que propuse que el registro se pareciera a eso: una conversación, y no un formulario de pasos como el de cualquier otra web. Al dueño del producto le gustó la idea y el onboarding se rehízo con esa forma.",
+          "Construí ese flujo: cada paso pregunta lo que necesita cuando toca, avisa en el punto exacto donde falta algo y no te deja seguir con secciones a medias sin que lo sepas.",
+          "Lo dejé usable solo con teclado y aguantando nombres largos, pantallas bajas y móvil, porque quien da de alta un restaurante lo hace desde el celular y en medio del servicio.",
         ],
         result:
-          "41 commits en unas 28 pull requests numeradas, todas mergeadas tras revisión del dueño del producto.",
+          "Hoy un restaurante se da de alta conversando con la misma IA que va a usar después, en vez de rellenando un formulario. Ese cambio de forma salió de mi propuesta.",
       },
       {
         name: "chess-lab",
@@ -134,7 +134,8 @@ export const CV_DATA = {
           "Dejé la aplicación entera en tres idiomas, de modo que el mismo curso sirve a tres públicos sin duplicar contenido.",
           "Añadí el inicio de sesión opcional: quien quiera conservar su progreso puede, y quien no, sigue jugando sin cuenta. Y arreglé la navegación entre puzzles, que dejaba al usuario atascado.",
         ],
-        result: "36 commits, todo mergeado tras revisión del dueño del repo.",
+        result:
+          "Un estudiante puede hacer el curso entero en su idioma y sin conexión; antes el contenido existía en uno solo. Todo lo que entregué entró tras la revisión del dueño del repo.",
       },
       {
         name: "honest-english",
@@ -148,7 +149,7 @@ export const CV_DATA = {
           "Me impuse una restricción que ningún cliente exigía —cero dependencias— y la sostuve con una lista de revisión propia que la impide.",
         ],
         result:
-          "Cuatro fases publicadas y en línea, sin una sola dependencia.",
+          "En línea y en uso: es la herramienta con la que sigo mi propio inglés, sin racha que mantener ni elogios de adorno.",
       },
       {
         name: "fiestas-web",
@@ -184,7 +185,8 @@ export const CV_DATA = {
           "Es dinero de otra persona, así que no improviso: cada cambio en la lectura de los correos lo pruebo antes contra correos reales guardados.",
           "La opero y la mantengo yo. Cuando el banco cambia el formato del mensaje, el que lo arregla soy yo.",
         ],
-        result: "En producción y en uso diario.",
+        result:
+          "En producción sobre las cuentas reales de un cliente: sus gastos quedan registrados sin que él apunte nada.",
       },
     ],
 
@@ -220,9 +222,8 @@ export const CV_DATA = {
         startLabel: "feb 2025",
         endLabel: "oct 2025",
         achievements: [
-          "Escribí un script en Python que hacía el trabajo pesado de clasificar los soportes de glosas: generaba todas las combinaciones de nombre posibles según el estándar que exigían las EPS y las dejaba listas. Yo solo tenía que confirmar cuál era la correcta.",
-          "Mis compañeros se quedaban horas después de la jornada para no atrasarse; yo digitalizaba y revisaba. El bloque de trabajo que costaba unas 30 horas pasó a resolverse en una.",
-          "Atendí caja, facturación y usuarios manejando información clínica sensible, con el procedimiento que eso exige.",
+          "Cada EPS pide un juego distinto de documentos y cambia según el tipo de atención: facturar era partir a mano un PDF escaneado, hoja por hoja. Ordené primero la recepción, para que cada escaneo saliera siempre igual.",
+          "Sobre ese orden, escribí con Copilot un script que identificaba EPS, factura y tipo de atención y dejaba las carpetas ya divididas y renombradas en todas las combinaciones posibles; yo solo borraba las que no aplicaban. De unas 30 horas a una, y cien casos costaban lo mismo que uno.",
         ],
       },
       {
@@ -494,7 +495,7 @@ export const CV_DATA = {
 
     about: [
       "I build web products by directing AI agents: I write the spec, review the code that comes out, test it and put it online. Today I do that for directo-ia, a WhatsApp sales product for restaurants, where I own the onboarding flow.",
-      "I got here out of need, not curiosity. In a hospital billing office the afternoons went into splitting and renaming supporting documents by hand, so I wrote a Python script to do the heavy lifting: the block of work that cost about thirty hours came down to one. In Human Resources the pain was different — nobody could find a contractor's paperwork — and the fix was to model the data of more than five hundred of them so each document generated itself, in five minutes instead of half an hour.",
+      "I got here because a need woke up my curiosity. In a hospital billing office the afternoons went into splitting and renaming supporting documents by hand; I wondered whether a machine could not do that instead, and wrote a Python script to take the heavy lifting: the block of work that cost about thirty hours came down to one. In Human Resources the pain was different — nobody could find a contractor's paperwork — and the answer was to model the data of more than five hundred of them so each document generated itself, in five minutes instead of half an hour.",
       "I come from coordinating teams and running administrative processes, and that is what I bring on top of the code: I understand the problem from the inside before proposing anything. First I get into the pain, then I build the solution.",
     ],
 
@@ -508,12 +509,12 @@ export const CV_DATA = {
         role: "Owner of the onboarding flow",
         about: "AI sales over WhatsApp for restaurants · my job today",
         work: [
-          "I proposed how signing up a new restaurant should feel, and that idea shaped the onboarding the product uses today: the owner said so in review. It was not an assigned task, it came from understanding how a restaurant would actually use it in the middle of service.",
-          "I rebuilt the whole flow: users no longer reach the end to find out something is missing. Each step validates its own part, flags the error where it happens, and marks what is still incomplete before letting you move on.",
-          "I made it usable with the keyboard alone, and able to hold up with long names, short screens and mobile, because whoever signs up a restaurant does it from a phone and in a hurry.",
+          "A restaurant signing up is going to work with an AI every day, so I proposed that the sign-up should feel like that: a conversation, not the step-by-step form every other site uses. The product owner liked the idea and the onboarding was rebuilt around it.",
+          "I built that flow: each step asks for what it needs when it needs it, flags the exact point where something is missing, and does not let you carry on with half-finished sections without knowing.",
+          "I made it usable with the keyboard alone, and able to hold up with long names, short screens and mobile, because whoever signs up a restaurant does it from a phone in the middle of service.",
         ],
         result:
-          "41 commits across about 28 numbered pull requests, all merged after review by the product owner.",
+          "A restaurant now signs up by talking to the same AI it will use afterwards, instead of filling in a form. That change of shape came from my proposal.",
       },
       {
         name: "chess-lab",
@@ -526,7 +527,8 @@ export const CV_DATA = {
           "I left the whole application in three languages, so the same course serves three audiences without duplicating content.",
           "I added optional sign-in: those who want to keep their progress can, and those who do not keep playing without an account. And I fixed the navigation between puzzles, which left users stuck.",
         ],
-        result: "36 commits, all merged after review by the repository owner.",
+        result:
+          "A student can now take the whole course in their own language and with no connection; before, the content existed in one language only. Everything I delivered went in after review by the repository owner.",
       },
       {
         name: "honest-english",
@@ -538,7 +540,8 @@ export const CV_DATA = {
           "I wrote writing feedback that does not flatter: if the text is bad, it says so. A product that congratulates you for everything does not teach you English.",
           "I imposed a constraint no client asked for — zero dependencies — and held it with a review checklist of my own that blocks them.",
         ],
-        result: "Four phases published and online, with zero dependencies.",
+        result:
+          "Online and in use: it is the tool I track my own English with, no streak to keep and no praise for decoration.",
       },
       {
         name: "fiestas-web",
@@ -566,7 +569,8 @@ export const CV_DATA = {
           "It is someone else's money, so I do not improvise: every change to how the emails are read is tested first against real saved emails.",
           "I run it and I maintain it. When the bank changes the format of the message, I am the one who fixes it.",
         ],
-        result: "In production and in daily use.",
+        result:
+          "In production over a client's real accounts: his spending gets recorded without him writing down a thing.",
       },
     ],
 
@@ -595,9 +599,8 @@ export const CV_DATA = {
         startLabel: "Feb 2025",
         endLabel: "Oct 2025",
         achievements: [
-          "I wrote a Python script that did the heavy lifting of sorting the claim documents: it generated every possible filename under the standard the health insurers required and left them ready. All I had to do was confirm which one was correct.",
-          "My colleagues stayed hours after the shift to keep up; I scanned and reviewed. The block of work that cost about 30 hours came down to one.",
-          "I handled the cash desk, billing and user support with sensitive clinical information, following the procedure that requires.",
+          "Every insurer asks for a different set of documents, and it changes again with the type of visit: billing meant splitting a scanned PDF by hand, page by page. I fixed the intake first, so every scan came out the same.",
+          "On top of that order, I wrote a script with Copilot that identified the insurer, the invoice and the type of visit, and left the folders already split and renamed in every possible combination; all I did was delete the ones that did not apply. From about 30 hours down to one, and a hundred cases cost the same as one.",
         ],
       },
       {

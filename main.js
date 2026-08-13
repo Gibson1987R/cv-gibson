@@ -52,6 +52,22 @@ document
   .querySelector('[data-action="toggle-lang"]')
   ?.addEventListener("click", alternarIdioma);
 
+/**
+ * Antes de imprimir, abrir todos los desplegables. Un <details> cerrado no se
+ * abre con CSS —el navegador oculta su contenido él mismo—, así que hay que
+ * poner el atributo. Se vuelven a cerrar al terminar para que la pantalla quede
+ * como estaba, salvo los que el usuario hubiera abierto a mano.
+ */
+let abiertosAlImprimir = [];
+addEventListener("beforeprint", () => {
+  abiertosAlImprimir = [...document.querySelectorAll("details:not([open])")];
+  abiertosAlImprimir.forEach((d) => (d.open = true));
+});
+addEventListener("afterprint", () => {
+  abiertosAlImprimir.forEach((d) => (d.open = false));
+  abiertosAlImprimir = [];
+});
+
 // 5. Micro-interacciones al final: son lo prescindible
 initMotion();
 

@@ -236,6 +236,148 @@
   font-size: var(--text-sm);
 }
 
+/* --- Collage de cifras (Otras experiencias) --- */
+
+.viz {
+  margin-top: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-soft);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  max-width: var(--measure);
+}
+
+.viz__title {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Cifras sueltas: el número grande, la etiqueta debajo y pequeña */
+.viz__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin-top: var(--space-2);
+}
+
+.viz__figure {
+  display: block;
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+}
+
+.viz__caption {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+/* Barras: etiqueta · barra · valor, en tres columnas alineadas */
+.viz__bars {
+  margin-top: var(--space-3);
+  display: grid;
+  gap: var(--space-2);
+}
+
+.viz__row {
+  display: grid;
+  /* 12rem es lo que mide la etiqueta más larga ("operadores logísticos") sin
+     partirse; el mínimo deja sitio a la barra cuando la pantalla es estrecha. */
+  grid-template-columns: minmax(5.5rem, 12rem) 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.viz__label {
+  color: var(--text-muted);
+}
+
+.viz__track {
+  height: 10px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.viz__fill {
+  display: block;
+  height: 100%;
+  /* Sin el mínimo, un valor muy pequeño frente al mayor (1 h contra 30 h)
+     se queda en una barra invisible y parece un fallo de render. */
+  min-width: 3px;
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+.viz__value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+/* --- Desplegable de «Otras experiencias» --- */
+
+.fold {
+  margin-top: var(--space-2);
+}
+
+.fold__toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  font-size: var(--text-sm);
+  color: var(--accent);
+  cursor: pointer;
+  /* Quita el triangulito del navegador: dibujamos el nuestro para que gire */
+  list-style: none;
+  user-select: none;
+}
+
+.fold__toggle::-webkit-details-marker {
+  display: none;
+}
+
+/* La flecha, en el propio texto para que no dependa de una fuente de iconos */
+.fold__toggle::before {
+  content: "▸";
+}
+
+/* El giro solo si el sistema no pide menos movimiento, como el resto del sitio */
+@media (prefers-reduced-motion: no-preference) {
+  .fold__toggle::before {
+    transition: transform 0.15s ease;
+  }
+}
+
+.fold[open] .fold__toggle::before {
+  transform: rotate(90deg);
+}
+
+.fold__toggle:hover {
+  text-decoration: underline;
+}
+
+.fold__toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+/* Solo se ve el rótulo que corresponde al estado */
+.fold__close,
+.fold[open] .fold__open {
+  display: none;
+}
+
+.fold[open] .fold__close {
+  display: inline;
+}
+
 /* Datos que solo se imprimen (documento, etc.): en pantalla no ocupan sitio */
 .hero__printOnly {
   display: none;
@@ -266,6 +408,12 @@
 }
 
 /* --- Educación --- */
+
+/* El enlace de verificación de un estudio (el perfil público de Platzi) */
+.entry__verify {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+}
 
 .entry--compact .entry__title {
   font-size: var(--text-base);

@@ -32,6 +32,53 @@ const chips = (items, etiqueta) => `
 const enlaceExterno = (href) =>
   href.startsWith("mailto:") ? "" : ' target="_blank" rel="noopener noreferrer"';
 
+/**
+ * El "collage" de cifras de una experiencia. Dos piezas, ambas opcionales:
+ *   stats → cifras sueltas, sin comparación posible (200-300 estudiantes)
+ *   bars  → valores comparables entre sí, dibujados proporcionales al mayor
+ *
+ * Las barras son `aria-hidden` a propósito: el número ya está escrito al lado
+ * en texto, así que repetirlo en el lector de pantalla solo estorba. La barra
+ * nunca es el único sitio donde vive el dato.
+ */
+const viz = (v) => {
+  if (!v) return "";
+  const mayor = v.bars?.length ? Math.max(...v.bars.map((b) => b.value)) : 0;
+  return `
+  <figure class="viz">
+    ${v.title ? `<figcaption class="viz__title">${esc(v.title)}</figcaption>` : ""}
+    ${
+      v.stats?.length
+        ? `<ul class="viz__stats">
+      ${v.stats
+        .map(
+          (s) => `<li class="viz__stat">
+        <span class="viz__figure">${esc(s.figure)}</span>
+        <span class="viz__caption">${esc(s.caption)}</span>
+      </li>`,
+        )
+        .join("")}
+    </ul>`
+        : ""
+    }
+    ${
+      v.bars?.length
+        ? `<ul class="viz__bars">
+      ${v.bars
+        .map(
+          (b) => `<li class="viz__row">
+        <span class="viz__label">${esc(b.label)}</span>
+        <span class="viz__track" aria-hidden="true"><span class="viz__fill" style="width:${Math.round((b.value / mayor) * 100)}%"></span></span>
+        <span class="viz__value">${esc(b.display)}</span>
+      </li>`,
+        )
+        .join("")}
+    </ul>`
+        : ""
+    }
+  </figure>`;
+};
+
 /* --- Un renderizador por tipo de sección --------------------------------- */
 
 const renderizadores = {
@@ -104,9 +151,20 @@ const renderizadores = {
             <span class="entry__dot" aria-hidden="true">·</span>
             ${esc(puesto.context)}
           </p>
-          <ul class="bullets">
-            ${puesto.achievements.map((logro) => `<li>${esc(logro)}</li>`).join("")}
-          </ul>
+          ${viz(puesto.viz)}
+          <!-- Plegado por defecto: la cabecera y las cifras se ven siempre, el
+               relato se abre al tocarlo. Es un details nativo, sin JS: funciona
+               con teclado y con lector de pantalla. Ojo, summary solo admite
+               texto y titulos, por eso el collage se queda fuera. -->
+          <details class="fold">
+            <summary class="fold__toggle">
+              <span class="fold__open">${esc(ui().foldOpen)}</span>
+              <span class="fold__close">${esc(ui().foldClose)}</span>
+            </summary>
+            <ul class="bullets">
+              ${puesto.achievements.map((logro) => `<li>${esc(logro)}</li>`).join("")}
+            </ul>
+          </details>
         </li>`,
         )
         .join("")}
@@ -135,13 +193,26 @@ const renderizadores = {
           <p class="entry__meta">
             ${esc(estudio.institution)}
             ${
-              // Sin año no se pinta ni el punto separador ni un <time> vacío
+              // Sin año no se pinta ni el punto separador ni un <time> vacío.
+              // Y solo es <time> si es un año suelto: "2017-2020" es un rango y
+              // como fecha legible por máquina no vale, así que va como texto.
               estudio.year
                 ? `<span class="entry__dot" aria-hidden="true">·</span>
-                   <time datetime="${esc(estudio.year)}">${esc(estudio.year)}</time>`
+                   ${
+                     /^\d{4}$/.test(estudio.year)
+                       ? `<time datetime="${esc(estudio.year)}">${esc(estudio.year)}</time>`
+                       : `<span>${esc(estudio.year)}</span>`
+                   }`
                 : ""
             }
           </p>
+          ${
+            // El enlace de verificación: sin él, "35 cursos" es una afirmación;
+            // con él, es algo que el lector puede comprobar en diez segundos.
+            estudio.link
+              ? `<p class="entry__verify"><a href="${esc(estudio.link.href)}"${enlaceExterno(estudio.link.href)}>${esc(estudio.link.text)}</a></p>`
+              : ""
+          }
         </li>`,
         )
         .join("")}

@@ -83,7 +83,8 @@ export const CV_DATA = {
     /* Un elemento por párrafo */
     about: [
       "Construyo producto web dirigiendo agentes de IA: escribo la especificación, reviso el código que sale, lo pruebo y lo pongo en línea. Hoy lo hago para directo-ia, un producto de venta por WhatsApp para restaurantes, donde soy responsable del flujo de onboarding.",
-      "Llegué aquí porque una necesidad me despertó la curiosidad. En facturación de un hospital se iban las tardes dividiendo y renombrando soportes a mano; me pregunté si aquello no podría hacerlo una máquina, y escribí un script en Python que se llevara el trabajo pesado: el bloque que costaba unas treinta horas pasó a costar una. En Talento Humano el dolor era otro —nadie encontraba los documentos de un contratista— y la respuesta fue modelar los datos de más de quinientos para que cada documento saliera solo, en cinco minutos en vez de media hora.",
+      "Llegué aquí porque una necesidad me despertó la curiosidad. Facturando en un hospital se iban las tardes partiendo a mano los PDF escaneados de cada paciente. Yo no sabía programar, pero sí sabía la regla: qué documentos pide cada EPS y cómo cambian según el tipo de atención. Puse esa lógica por escrito, la trabajé con Copilot hasta que salió un script que se llevaba el trabajo pesado, y treinta horas de clasificación pasaron a una.",
+      "Ese fue mi primer código y ya lo escribí así: dirigiendo una IA con un criterio que era mío. Ahí aprendí lo que sigo haciendo hoy — el cuello de botella no es escribir el código, es entender bien el problema. Lo volví a comprobar en Talento Humano, modelando los datos de más de quinientos contratistas para que cada documento saliera solo.",
       "Vengo de coordinar equipos y de administrar procesos, y eso es lo que aporto además del código: entiendo el problema desde dentro antes de proponer nada. Primero me meto en el dolor, luego construyo la solución.",
     ],
 
@@ -207,6 +208,23 @@ export const CV_DATA = {
         end: "2023-12",
         startLabel: "sep 2021",
         endLabel: "dic 2023",
+        /**
+         * El "collage": las cifras dibujadas antes de contarlas.
+         * `bars` se dibujan proporcionales al valor más alto del grupo, y
+         * `display` es lo que se lee (la cifra con su unidad). El número vivo
+         * siempre está en el texto: las barras son decoración encima del dato,
+         * nunca el único sitio donde está.
+         */
+        viz: {
+          title: "58 personas coordinadas en territorio",
+          bars: [
+            { label: "acompañantes", value: 21, display: "21" },
+            { label: "promotores", value: 16, display: "16" },
+            { label: "operadores logísticos", value: 10, display: "10" },
+            { label: "ingenieros de agua", value: 6, display: "6" },
+            { label: "proveedores", value: 5, display: "5" },
+          ],
+        },
         achievements: [
           "Coordiné a 58 personas en territorio: 21 acompañantes que verificaban el cumplimiento de los menús, 16 promotores, 10 operadores logísticos, 6 ingenieros y técnicos de agua y 5 proveedores. Repartí las tareas, armé los cronogramas y sostuve el seguimiento de lo que cada quien tenía que entregar.",
           "Articulé a comunidades indígenas, equipos técnicos e instituciones aliadas para que una actividad pudiera ocurrir. Sin ese acuerdo previo, en terreno no se ejecuta nada.",
@@ -221,6 +239,14 @@ export const CV_DATA = {
         end: "2025-10",
         startLabel: "feb 2025",
         endLabel: "oct 2025",
+        viz: {
+          title: "Clasificar los soportes de un lote de glosas",
+          bars: [
+            { label: "a mano", value: 30, display: "30 h" },
+            { label: "con el script", value: 1, display: "1 h" },
+          ],
+          stats: [{ figure: "×100", caption: "casos en el mismo tiempo" }],
+        },
         achievements: [
           "Cada EPS pide un juego distinto de documentos y cambia según el tipo de atención: facturar era partir a mano un PDF escaneado, hoja por hoja. Ordené primero la recepción, para que cada escaneo saliera siempre igual.",
           "Sobre ese orden, escribí con Copilot un script que identificaba EPS, factura y tipo de atención y dejaba las carpetas ya divididas y renombradas en todas las combinaciones posibles; yo solo borraba las que no aplicaban. De unas 30 horas a una, y cien casos costaban lo mismo que uno.",
@@ -234,6 +260,17 @@ export const CV_DATA = {
         end: "2026-03",
         startLabel: "nov 2025",
         endLabel: "mar 2026",
+        viz: {
+          title: "Emitir un documento de contratista",
+          bars: [
+            { label: "a mano", value: 30, display: "30 min" },
+            { label: "desde la base", value: 5, display: "5 min" },
+          ],
+          stats: [
+            { figure: "+500", caption: "contratistas" },
+            { figure: "4", caption: "municipios" },
+          ],
+        },
         achievements: [
           "Modelé en Excel la base de más de 500 contratistas de cuatro municipios, contando que una misma persona puede tener varios perfiles si está en más de un programa: datos personales, rol y cargo, fecha de inicio y de cierre.",
           "La conecté con Word por combinación de correspondencia, tratando la hoja como una tabla de entidad-relación: cada plantilla consulta los campos que necesita y se rellena sola. Emitir un documento pasó de 20 o 30 minutos a 4 o 5.",
@@ -248,6 +285,14 @@ export const CV_DATA = {
         end: "2021-07",
         startLabel: "sep 2012",
         endLabel: "jul 2021",
+        /* Sin barras: aquí no hay partes que comparar, solo escala. */
+        viz: {
+          title: "Cada año, un grupo nuevo",
+          stats: [
+            { figure: "200–300", caption: "estudiantes por año" },
+            { figure: "9", caption: "años en aula" },
+          ],
+        },
         achievements: [
           "Enseñé matemáticas nueve años a entre 200 y 300 estudiantes por año, y reformulé la misma explicación tantas veces como hizo falta hasta dar con la que le servía a cada uno.",
           "Sostuve la comunicación con familias y comunidad educativa para que el acompañamiento no terminara en la puerta del aula.",
@@ -346,10 +391,26 @@ export const CV_DATA = {
           "Convalidado en Colombia como Tecnólogo en Gestión de Talento Humano",
         year: "",
       },
+      /**
+       * Los 44 diplomas de Platzi están descargados en
+       * ~/Documents/Currículum/Certificados. Aquí NO se listan uno a uno: nadie
+       * lee 44 líneas. Va el titular y el enlace al perfil, que es lo que
+       * cualquiera puede comprobar en diez segundos y vale más que los PDF.
+       */
       {
-        title: "Programación — formación continua, sin titulación",
+        title: "Formación en programación — Platzi",
         institution:
-          "Python y SQL en curso de Udemy · «Think Python» · desarrollo web sobre proyectos reales",
+          "Carrera de JavaScript · ~35 cursos entre JavaScript, React, Node y maquetación · Curso Práctico de Python: creación de un CRUD (21 h)",
+        year: "2017–2020",
+        link: {
+          text: "platzi.com/@GibsonR",
+          href: "https://platzi.com/@GibsonR",
+        },
+      },
+      {
+        title: "Formación continua",
+        institution:
+          "«Think Python» · Visual Studio Code (Udemy) · desarrollo web sobre proyectos reales",
         year: "2026",
       },
     ],
@@ -441,6 +502,10 @@ export const CV_DATA = {
       cmdLangWords: ["idioma", "language", "ingles", "english", "lang"],
       emailCopied: "Email copiado:",
 
+      /* Desplegable de «Otras experiencias» */
+      foldOpen: "Ver lo que hice",
+      foldClose: "Ocultar",
+
       /* Etiquetas invisibles: las lee un lector de pantalla, no se ven */
       resultLabel: "Resultado:",
       srTo: "a",
@@ -495,7 +560,8 @@ export const CV_DATA = {
 
     about: [
       "I build web products by directing AI agents: I write the spec, review the code that comes out, test it and put it online. Today I do that for directo-ia, a WhatsApp sales product for restaurants, where I own the onboarding flow.",
-      "I got here because a need woke up my curiosity. In a hospital billing office the afternoons went into splitting and renaming supporting documents by hand; I wondered whether a machine could not do that instead, and wrote a Python script to take the heavy lifting: the block of work that cost about thirty hours came down to one. In Human Resources the pain was different — nobody could find a contractor's paperwork — and the answer was to model the data of more than five hundred of them so each document generated itself, in five minutes instead of half an hour.",
+      "I got here because a need woke up my curiosity. Billing at a hospital, the afternoons went into splitting scanned PDFs by hand, patient by patient. I could not program, but I did know the rule: which documents each insurer asks for and how they change with the type of visit. I wrote that logic down, worked it through with Copilot until a script came out that took the heavy lifting, and thirty hours of sorting came down to one.",
+      "That was my first code and I already wrote it this way: directing an AI with judgement that was mine. It taught me what I still do today — the bottleneck is not writing the code, it is understanding the problem. I saw it again in Human Resources, modelling the records of more than five hundred contractors so each document generated itself.",
       "I come from coordinating teams and running administrative processes, and that is what I bring on top of the code: I understand the problem from the inside before proposing anything. First I get into the pain, then I build the solution.",
     ],
 
@@ -584,6 +650,17 @@ export const CV_DATA = {
         end: "2023-12",
         startLabel: "Sep 2021",
         endLabel: "Dec 2023",
+        /* Ver la nota del bloque `es` sobre cómo se dibuja `viz`. */
+        viz: {
+          title: "58 people coordinated in the field",
+          bars: [
+            { label: "meal monitors", value: 21, display: "21" },
+            { label: "promoters", value: 16, display: "16" },
+            { label: "logistics operators", value: 10, display: "10" },
+            { label: "water engineers", value: 6, display: "6" },
+            { label: "suppliers", value: 5, display: "5" },
+          ],
+        },
         achievements: [
           "I coordinated 58 people in the field: 21 monitors checking that the meal plans were met, 16 promoters, 10 logistics operators, 6 water engineers and technicians, and 5 suppliers. I split the tasks, built the schedules and kept track of what each of them had to deliver.",
           "I brought together indigenous communities, technical teams and partner institutions so an activity could happen at all. Without that agreement up front, nothing gets done on the ground.",
@@ -598,6 +675,14 @@ export const CV_DATA = {
         end: "2025-10",
         startLabel: "Feb 2025",
         endLabel: "Oct 2025",
+        viz: {
+          title: "Sorting the documents of a batch of claims",
+          bars: [
+            { label: "by hand", value: 30, display: "30 h" },
+            { label: "with the script", value: 1, display: "1 h" },
+          ],
+          stats: [{ figure: "×100", caption: "cases in the same time" }],
+        },
         achievements: [
           "Every insurer asks for a different set of documents, and it changes again with the type of visit: billing meant splitting a scanned PDF by hand, page by page. I fixed the intake first, so every scan came out the same.",
           "On top of that order, I wrote a script with Copilot that identified the insurer, the invoice and the type of visit, and left the folders already split and renamed in every possible combination; all I did was delete the ones that did not apply. From about 30 hours down to one, and a hundred cases cost the same as one.",
@@ -611,6 +696,17 @@ export const CV_DATA = {
         end: "2026-03",
         startLabel: "Nov 2025",
         endLabel: "Mar 2026",
+        viz: {
+          title: "Issuing one contractor document",
+          bars: [
+            { label: "by hand", value: 30, display: "30 min" },
+            { label: "from the database", value: 5, display: "5 min" },
+          ],
+          stats: [
+            { figure: "+500", caption: "contractors" },
+            { figure: "4", caption: "municipalities" },
+          ],
+        },
         achievements: [
           "I modelled in Excel the records of more than 500 contractors across four municipalities, accounting for the fact that one person can hold several profiles if they work in more than one programme: personal data, role and position, start and end dates.",
           "I connected it to Word through mail merge, treating the sheet as an entity-relationship table: each template pulls the fields it needs and fills itself in. Issuing a document went from 20 or 30 minutes down to 4 or 5.",
@@ -625,6 +721,13 @@ export const CV_DATA = {
         end: "2021-07",
         startLabel: "Sep 2012",
         endLabel: "Jul 2021",
+        viz: {
+          title: "A new group every year",
+          stats: [
+            { figure: "200–300", caption: "students a year" },
+            { figure: "9", caption: "years teaching" },
+          ],
+        },
         achievements: [
           "I taught maths for nine years to between 200 and 300 students a year, and reworked the same explanation as many times as it took to find the one that worked for each of them.",
           "I kept up the communication with families and the school community so the support did not end at the classroom door.",
@@ -709,10 +812,21 @@ export const CV_DATA = {
           "Recognized in Colombia as Tecnólogo en Gestión de Talento Humano",
         year: "",
       },
+      /* Ver la nota del bloque `es`: el titular y el enlace, no los 44 diplomas. */
       {
-        title: "Programming — ongoing self-study, no degree",
+        title: "Programming — Platzi",
         institution:
-          "Python and SQL in a Udemy course · «Think Python» · web development on real projects",
+          "JavaScript career path · ~35 courses across JavaScript, React, Node and markup · Practical Python course: building a CRUD (21 h)",
+        year: "2017–2020",
+        link: {
+          text: "platzi.com/@GibsonR",
+          href: "https://platzi.com/@GibsonR",
+        },
+      },
+      {
+        title: "Ongoing self-study",
+        institution:
+          "«Think Python» · Visual Studio Code (Udemy) · web development on real projects",
         year: "2026",
       },
     ],
@@ -785,6 +899,9 @@ export const CV_DATA = {
       cmdLangHint: "language",
       cmdLangWords: ["language", "idioma", "spanish", "español", "lang"],
       emailCopied: "Email copied:",
+
+      foldOpen: "See what I did",
+      foldClose: "Hide",
 
       resultLabel: "Result:",
       srTo: "to",

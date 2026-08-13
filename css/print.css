@@ -156,6 +156,52 @@
     border: 0;
   }
 
+  /* En papel no hay nada que tocar: el botón sobra y el contenido tiene que
+     salir siempre. El atributo `open` lo pone main.js antes de imprimir, porque
+     un `details` cerrado no se abre solo con CSS. */
+  .fold__toggle {
+    display: none;
+  }
+
+  .fold {
+    margin-top: 0;
+  }
+
+  /* El collage en papel: se quedan los números, se va la barra. Los fondos de
+     color no se imprimen por defecto en casi ningún navegador, así que una
+     barra impresa saldría vacía o no saldría; el dato ya está en el texto. */
+  .viz {
+    padding: 0;
+    margin-top: 4pt;
+    background: none;
+    border-left: 0;
+  }
+
+  .viz__track {
+    display: none;
+  }
+
+  .viz__row {
+    grid-template-columns: auto auto;
+    justify-content: start;
+    gap: 6pt;
+    font-size: 9.5pt;
+  }
+
+  .viz__stats {
+    gap: 14pt;
+    margin-top: 2pt;
+  }
+
+  .viz__figure {
+    font-size: 11pt;
+  }
+
+  .viz__title,
+  .viz__caption {
+    font-size: 8.5pt;
+  }
+
   /* Al revés que en pantalla: aquí SÍ salen los datos personales, si están */
   .hero__printOnly {
     display: block;

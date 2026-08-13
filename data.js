@@ -16,9 +16,9 @@
  *
  * ── Regla de estructura ──────────────────────────────────────────────────
  * El `id` de cada entrada de `sections` tiene que coincidir con la clave de
- * datos del mismo bloque (id "projects" → cv.projects), y su `type` con un
+ * datos del mismo bloque (id "experience" → cv.experience), y su `type` con un
  * renderizador de js/render.js. Los `id` son iguales en los dos idiomas a
- * propósito: así un enlace compartido (#projects) funciona en ambos.
+ * propósito: así un enlace compartido (#experience) funciona en ambos.
  */
 
 export const CV_DATA = {
@@ -28,14 +28,14 @@ export const CV_DATA = {
   es: {
     /* Metadatos de la pestaña del navegador y del buscador */
     meta: {
-      title: "Gibson Rosales · Desarrollador web junior",
+      title: "Gibson Rosales · Desarrollador con IA",
       description:
-        "Currículum de Gibson Rosales: profesor de matemáticas y administrativo que se volvió desarrollador automatizando su propio trabajo.",
+        "Currículum de Gibson Rosales: construyo producto web dirigiendo agentes de IA. Llegué aquí automatizando mi propio trabajo.",
     },
 
     identity: {
       name: "Gibson Rosales",
-      role: "Desarrollador web junior",
+      role: "Desarrollador con IA",
       tagline:
         "De profesor de matemáticas a desarrollador. Automatizo lo que antes hacía a mano.",
       location: "Medellín, Antioquia, Colombia",
@@ -82,19 +82,76 @@ export const CV_DATA = {
 
     /* Un elemento por párrafo */
     about: [
-      "Enseñé matemáticas nueve años y coordiné proyectos educativos en el Amazonas. Trabajando en el área de facturación de un hospital escribí mi primer script en Python para no seguir renombrando soportes a mano: ahí empezó esto.",
-      "Hoy contribuyo con código revisado en dos productos reales, mantengo en producción una automatización que registra movimientos bancarios y monté un servicio propio de páginas para eventos. Sigo siendo profesor en una cosa: si no sé explicar lo que escribí, es que todavía no lo entiendo.",
+      "Construyo producto web dirigiendo agentes de IA: escribo la especificación, reviso el código que sale, lo pruebo y lo pongo en línea. Hoy lo hago para directo-ia, un producto de venta por WhatsApp para restaurantes, donde soy responsable del flujo de onboarding.",
+      "Llegué aquí por necesidad, no por curiosidad. En facturación de un hospital se iban las tardes dividiendo y renombrando soportes a mano, así que escribí un script en Python que hiciera el trabajo pesado: el bloque que costaba unas treinta horas pasó a costar una. En Talento Humano el dolor era otro —nadie encontraba los documentos de un contratista— y la solución fue modelar los datos de más de quinientos para que cada documento saliera solo, en cinco minutos en vez de media hora.",
+      "Vengo de coordinar equipos y de administrar procesos, y eso es lo que aporto además del código: entiendo el problema desde dentro antes de proponer nada. Primero me meto en el dolor, luego construyo la solución.",
     ],
 
-    /* Proyectos donde soy el dueño del código */
-    projects: [
+    /**
+     * Experiencia en programación. Una sola lista, ordenada por IMPACTO y no
+     * por cronología ni por quién es dueño del repo: al que contrata le da
+     * igual esa distinción, quiere ver qué construiste y qué resolvió.
+     *
+     * Cada entrada es una historia STAR (ver star.md):
+     *   about  → Situación, una línea: qué es el producto
+     *   role   → Tarea: el nombre significativo de tu participación
+     *   work[] → Acción: el 60% del peso, siempre en primera persona
+     *   result → Resultado, con cifra cuando exista
+     *
+     * Sin `stack`: todo el vocabulario técnico vive en `skills`, para que aquí
+     * se lea el producto y no la lista de herramientas.
+     */
+    experience: [
+      {
+        name: "directo-ia",
+        // El repo es privado y de otra persona; lo que sí es público es el
+        // producto. Cuidado: el enlace lleva a la landing comercial, y el
+        // onboarding que hice está detrás del registro.
+        href: "https://directo-ia.vercel.app",
+        role: "Responsable del flujo de onboarding",
+        about: "Venta por WhatsApp con IA para restaurantes · mi trabajo hoy",
+        work: [
+          "Propuse cómo debía sentirse el alta de un restaurante nuevo, y esa idea dio forma al onboarding que hoy usa el producto: el dueño lo dijo así en revisión. No fue una tarea asignada, salió de entender cómo iba a usar aquello un restaurante en medio del servicio.",
+          "Rehíce el flujo completo: el usuario ya no llega al final para descubrir que le falta algo. Cada paso valida lo suyo, avisa en el punto exacto del error y marca lo que queda incompleto antes de dejarte avanzar.",
+          "Lo dejé usable solo con teclado y aguantando nombres largos, pantallas bajas y móvil, porque quien da de alta un restaurante lo hace desde el celular y con prisa.",
+        ],
+        result:
+          "41 commits en unas 28 pull requests numeradas, todas mergeadas tras revisión del dueño del producto.",
+      },
+      {
+        name: "chess-lab",
+        // El repo es privado y se llama `skool-scraper` por decisión del dueño;
+        // lo que sí se puede enseñar es la app desplegada. Por eso aquí va la
+        // URL de Netlify y no la de GitHub. El subdominio conserva el nombre
+        // viejo de la app (chesspwa) y no se toca: está registrado en Supabase
+        // como redirección de login y cambiarlo rompe el acceso.
+        href: "https://chesspwa.netlify.app",
+        role: "Internacionalización y traducción sin conexión",
+        about:
+          "PWA para aprender ajedrez sin conexión: lecciones, tablero y puzzles",
+        work: [
+          "El contenido estaba en un solo idioma y traducirlo a mano era inviable. Monté una traducción que ocurre en el propio navegador, respeta el vocabulario de ajedrez (una torre no es una «tower»), conserva las imágenes de las lecciones y guarda lo ya traducido para no repetir el trabajo ni gastar conexión.",
+          "Dejé la aplicación entera en tres idiomas, de modo que el mismo curso sirve a tres públicos sin duplicar contenido.",
+          "Añadí el inicio de sesión opcional: quien quiera conservar su progreso puede, y quien no, sigue jugando sin cuenta. Y arreglé la navegación entre puzzles, que dejaba al usuario atascado.",
+        ],
+        result: "36 commits, todo mergeado tras revisión del dueño del repo.",
+      },
+      {
+        name: "honest-english",
+        href: "https://gibson1987r.github.io/honest-english/",
+        role: "Producto propio, de la idea al despliegue",
+        about:
+          "Rastreador de aprendizaje de inglés que se niega a gamificar",
+        work: [
+          "Decidí el producto en contra de lo obvio: el contador muestra los días que llevo SIN practicar, no la racha. La racha premia no romperla; el hueco te enseña dónde abandonaste.",
+          "Escribí un feedback de escritura que no adula: si el texto está mal, lo dice. Un producto que te felicita por todo no te enseña inglés.",
+          "Me impuse una restricción que ningún cliente exigía —cero dependencias— y la sostuve con una lista de revisión propia que la impide.",
+        ],
+        result:
+          "Cuatro fases publicadas y en línea, sin una sola dependencia.",
+      },
       {
         name: "fiestas-web",
-        summary:
-          "Servicio de páginas para fiestas infantiles: la invitación antes, la confirmación de asistencia en vivo durante y la galería de recuerdos después. Cada cliente es una entrada de configuración con su propia ruta y su lista de invitados aislada.",
-        stack: ["React", "Firestore", "Firebase Auth", "Vite", "Vercel"],
-        result:
-          "Usado en una fiesta real y con demo pública donde cualquiera puede confirmar y ver la lista actualizarse. Editar y borrar está cerrado por reglas de Firestore con rol de administrador.",
         // La raíz es la página que vende; desde ahí se llega a /demo (fiesta
         // inventada, con fecha futura, donde cualquiera puede confirmar) y a
         // /joaquin (la fiesta real, ya celebrada).
@@ -104,78 +161,58 @@ export const CV_DATA = {
         // El dominio viejo (landing-cumple-joaquin-jeremias.vercel.app) sigue
         // vivo a propósito: es el enlace que se repartió a los invitados.
         href: "https://fiestas-app.vercel.app",
-      },
-      {
-        name: "honest-english",
-        summary:
-          "Rastreador de aprendizaje de inglés que se niega a gamificar: el contador muestra los días SIN practicar, no la racha, y el feedback de escritura no adula.",
-        stack: ["JavaScript vanilla", "GitHub Pages", "BYOK (Claude · Whisper)"],
+        role: "Servicio propio de punta a punta",
+        about:
+          "Páginas para fiestas infantiles: la invitación, la confirmación en vivo y la galería",
+        work: [
+          "Nació de un dolor concreto: organizar el cumpleaños de mi hijo sin saber cuánta gente iba a llegar. En vez de resolver esa fiesta, lo convertí en servicio: cada cliente es una entrada de configuración con su propia ruta y su lista de invitados aislada, así que dar de alta una fiesta nueva ya no es volver a programar.",
+          "Cerré la edición y el borrado con permisos de administrador: los invitados confirman, y nadie más toca la lista.",
+          "Publiqué una demo abierta con una fiesta inventada, porque a un cliente no le vendes una captura: le enseñas la lista actualizándose en su propio teléfono.",
+        ],
         result:
-          "4 fases publicadas y en línea; sin una sola dependencia, con una lista de revisión que lo impide.",
-        href: "https://gibson1987r.github.io/honest-english/",
+          "Usado en una fiesta real y con demo pública donde cualquiera puede confirmar y ver la lista actualizarse en vivo.",
       },
       {
         name: "bancolombia-lunchmoney",
-        summary:
-          "Automatización en Google Apps Script que lee las alertas del banco en Gmail y crea las transacciones en Lunch Money. La opero y la mantengo.",
-        stack: ["Google Apps Script", "clasp", "API de Lunch Money"],
-        result:
-          "En producción sobre dinero real: cada cambio de parsing se valida antes contra correos guardados como fixtures.",
-        href: "",
+        // Repo de Sebastián y sobre sus cuentas: no hay nada público que
+        // enlazar, y por eso esta entrada va sin `href`.
+        role: "Automatización en producción sobre dinero real",
+        about:
+          "Las alertas del banco se convierten solas en movimientos registrados",
+        work: [
+          "Un cliente perdía el rastro de sus gastos porque nadie apunta cada compra. Automaticé el registro entero: la alerta del banco entra al correo y sale como movimiento clasificado, sin que nadie escriba nada.",
+          "Es dinero de otra persona, así que no improviso: cada cambio en la lectura de los correos lo pruebo antes contra correos reales guardados.",
+          "La opero y la mantengo yo. Cuando el banco cambia el formato del mensaje, el que lo arregla soy yo.",
+        ],
+        result: "En producción y en uso diario.",
       },
     ],
 
     /**
-     * Contribuciones en repos que no son míos.
-     * Van aparte de `projects` a propósito: un proyecto propio demuestra que
-     * sé empezar; una PR revisada y mergeada demuestra que sé trabajar con
-     * otros.
+     * Los empleos anteriores a la programación. Van DESPUÉS de `experience` y
+     * también ordenados por impacto, no por fecha: primero donde coordiné más
+     * gente, al final la docencia.
+     *
+     * Estas sí llevan fechas (son cargos con contrato) y tampoco llevan
+     * `stack`.
      */
-    contributions: [
+    otherExperience: [
       {
-        name: "directo-ia",
-        role: "Responsable del flujo de onboarding",
-        about: "Venta por WhatsApp con IA para restaurantes",
-        stack: ["Next.js", "TypeScript", "React"],
-        work: [
-          "41 commits repartidos en unas 28 pull requests numeradas (#12 a #39).",
-          "Rehíce el onboarding completo: validación paso a paso, mensajes de error en contexto y secciones incompletas señaladas antes de continuar.",
-          "Accesibilidad por teclado y maquetación que aguanta títulos largos, pantallas bajas y móvil.",
-        ],
-        merged: "Todo mergeado tras revisión del dueño del repo",
-      },
-      {
-        name: "skool-scraper",
-        role: "Internacionalización y traducción offline",
-        about: "PWA de cursos de ajedrez que funciona sin conexión",
-        stack: ["React 19", "Vite", "Dexie / IndexedDB", "Supabase"],
-        work: [
-          "36 commits. Localicé la interfaz en tres idiomas y añadí la traducción del contenido de los cursos (PR #19).",
-          "La traducción usa la API Translator del navegador, aplica un glosario de ajedrez, conserva las imágenes del markdown y se cachea en IndexedDB para no repetirse.",
-          "Autenticación opcional con Supabase (PR #29) y corrección de la navegación entre puzzles.",
-        ],
-        merged: "Todo mergeado tras revisión del dueño del repo",
-      },
-    ],
-
-    experience: [
-      {
-        role: "Tecnólogo, área de Talento Humano",
-        company: "Hospital Departamental San Juan de Dios E.S.E.",
-        context: "Colombia · Contratación y control documental",
-        start: "2025-11",
-        end: "2026-03",
-        startLabel: "nov 2025",
-        endLabel: "mar 2026",
+        role: "Coordinador de proyecto",
+        company: "A.C. Construyendo Futuros / socio de UNICEF",
+        context: "Amazonas, Venezuela · Educación, protección, agua y saneamiento",
+        start: "2021-09",
+        end: "2023-12",
+        startLabel: "sep 2021",
+        endLabel: "dic 2023",
         achievements: [
-          "Revisión documental de hojas de vida, soportes y expedientes de contratistas para validación jurídica.",
-          "Seguimiento al plan de mejora y al mapa de riesgos exigidos por la Contraloría.",
-          "Organicé la información de contratistas en hojas de cálculo y bases de datos para que el área jurídica pudiera rastrearla sin pedirla.",
+          "Coordiné a 58 personas en territorio: 21 acompañantes que verificaban el cumplimiento de los menús, 16 promotores, 10 operadores logísticos, 6 ingenieros y técnicos de agua y 5 proveedores. Repartí las tareas, armé los cronogramas y sostuve el seguimiento de lo que cada quien tenía que entregar.",
+          "Articulé a comunidades indígenas, equipos técnicos e instituciones aliadas para que una actividad pudiera ocurrir. Sin ese acuerdo previo, en terreno no se ejecuta nada.",
+          "Mantuve la trazabilidad de todo lo ejecutado con reportes y organización documental: un proyecto humanitario que no puede demostrar lo que hizo, no se renueva.",
         ],
-        stack: ["Excel", "Bases de datos", "Gestión documental"],
       },
       {
-        role: "Tecnólogo, Caja y Facturación",
+        role: "Tecnólogo en Caja y Facturación",
         company: "Hospital Departamental San Juan de Dios E.S.E.",
         context: "Colombia · Aquí escribí mi primer código útil",
         start: "2025-02",
@@ -183,25 +220,24 @@ export const CV_DATA = {
         startLabel: "feb 2025",
         endLabel: "oct 2025",
         achievements: [
-          "Automaticé con Python la división, el renombrado y la organización de los soportes digitales: lo que se hacía a mano expediente por expediente pasó a ser un script.",
-          "Eso redujo el tiempo de clasificación y entrega de la documentación para el cobro de glosas ante las EPS.",
-          "Caja, facturación y atención a usuarios, con información clínica sensible y los procedimientos que eso exige.",
+          "Escribí un script en Python que hacía el trabajo pesado de clasificar los soportes de glosas: generaba todas las combinaciones de nombre posibles según el estándar que exigían las EPS y las dejaba listas. Yo solo tenía que confirmar cuál era la correcta.",
+          "Mis compañeros se quedaban horas después de la jornada para no atrasarse; yo digitalizaba y revisaba. El bloque de trabajo que costaba unas 30 horas pasó a resolverse en una.",
+          "Atendí caja, facturación y usuarios manejando información clínica sensible, con el procedimiento que eso exige.",
         ],
-        stack: ["Python", "Automatización de archivos"],
       },
       {
-        role: "Coordinador de proyecto",
-        company: "A.C. Construyendo Futuros / socio de UNICEF",
-        context: "Venezuela · Educación, protección y agua en terreno",
-        start: "2021-09",
-        end: "2023-12",
-        startLabel: "sep 2021",
-        endLabel: "dic 2023",
+        role: "Tecnólogo para el área de Talento Humano",
+        company: "Hospital Departamental San Juan de Dios E.S.E.",
+        context: "Colombia · Contratación y control documental",
+        start: "2025-11",
+        end: "2026-03",
+        startLabel: "nov 2025",
+        endLabel: "mar 2026",
         achievements: [
-          "Coordiné equipos, cronogramas y reportes de actividades educativas y humanitarias con comunidades indígenas.",
-          "Sostuve la trazabilidad de lo ejecutado: sin documentación verificable, un proyecto humanitario no se puede auditar ni renovar.",
+          "Modelé en Excel la base de más de 500 contratistas de cuatro municipios, contando que una misma persona puede tener varios perfiles si está en más de un programa: datos personales, rol y cargo, fecha de inicio y de cierre.",
+          "La conecté con Word por combinación de correspondencia, tratando la hoja como una tabla de entidad-relación: cada plantilla consulta los campos que necesita y se rellena sola. Emitir un documento pasó de 20 o 30 minutos a 4 o 5.",
+          "Revisé hojas de vida, soportes y expedientes verificando que cada requisito y cada título estuvieran donde debían antes de la validación jurídica, y llevé el seguimiento del plan de mejora y del mapa de riesgos que exige la Contraloría.",
         ],
-        stack: ["Coordinación de equipos", "Reportería", "Trabajo en territorio"],
       },
       {
         role: "Profesor de matemáticas y educación básica",
@@ -212,13 +248,18 @@ export const CV_DATA = {
         startLabel: "sep 2012",
         endLabel: "jul 2021",
         achievements: [
-          "Nueve años explicando lo mismo de maneras distintas hasta dar con la que le servía a cada estudiante.",
-          "Es la habilidad que más uso programando: leer código ajeno, entenderlo y poder contarlo.",
+          "Enseñé matemáticas nueve años a entre 200 y 300 estudiantes por año, y reformulé la misma explicación tantas veces como hizo falta hasta dar con la que le servía a cada uno.",
+          "Sostuve la comunicación con familias y comunidad educativa para que el acompañamiento no terminara en la puerta del aula.",
+          "Es la habilidad que más uso programando: leer algo ajeno, entenderlo y poder contarlo.",
         ],
-        stack: ["Docencia", "Planeación", "Comunicación"],
       },
     ],
 
+    /**
+     * Aquí y solo aquí van las palabras técnicas. Las entradas de experiencia
+     * cuentan el producto; los nombres de herramientas se concentran en esta
+     * sección para que un filtro automático los encuentre juntos.
+     */
     skills: [
       {
         category: "Lenguajes",
@@ -229,6 +270,7 @@ export const CV_DATA = {
         items: [
           "React",
           "Next.js",
+          "Vite",
           "PWA y offline",
           "Accesibilidad",
           "Internacionalización",
@@ -239,20 +281,44 @@ export const CV_DATA = {
         category: "Backend y datos",
         items: [
           "Firebase / Firestore",
-          "Autenticación y roles",
           "Supabase",
           "IndexedDB / Dexie",
           "Google Apps Script",
-          "Consumo de APIs REST",
+          "APIs REST",
+          "Autenticación y roles",
         ],
       },
       {
-        category: "Herramientas",
+        category: "Flujo de trabajo",
         items: [
-          "Git y flujo de pull requests",
+          "Git",
+          "GitHub",
+          "Pull requests",
+          "Issues",
+          "Revisión de código",
           "GitHub Actions",
-          "Vite",
-          "Trabajo con agentes de IA",
+          "Despliegue continuo (Vercel, Netlify)",
+        ],
+      },
+      {
+        category: "Trabajo con IA",
+        items: [
+          "Dirección de agentes",
+          "Especificación de tareas",
+          "Revisión del código generado",
+        ],
+      },
+      {
+        category: "Gestión y equipo",
+        items: [
+          "Coordinación de equipos",
+          "Delegación y seguimiento",
+          "Comunicación con cliente",
+          "Excel y Google Sheets",
+          "Modelado de datos en tablas",
+          "Combinación de correspondencia",
+          "Tableros Kanban (Trello, Notion, Asana)",
+          "Documentación y trazabilidad",
         ],
       },
     ],
@@ -282,7 +348,7 @@ export const CV_DATA = {
       {
         title: "Programación — formación continua, sin titulación",
         institution:
-          "Python con «Think Python» · desarrollo web sobre proyectos reales",
+          "Python y SQL en curso de Udemy · «Think Python» · desarrollo web sobre proyectos reales",
         year: "2026",
       },
     ],
@@ -292,29 +358,23 @@ export const CV_DATA = {
      * Añadir, quitar o reordenar aquí cambia la página Y la paleta de
      * comandos. Los `id` tienen que ser los mismos en los dos idiomas.
      *
-     * El orden NO es casual: proyectos y contribuciones van antes que la
-     * experiencia. Los cargos dicen "profesor" y "facturador"; si eso es lo
-     * primero que se lee, nadie llega hasta el código.
+     * El orden NO es casual: la experiencia en programación va antes que
+     * cualquier otra cosa. Los cargos anteriores dicen "profesor" y
+     * "facturador"; si eso es lo primero que se lee, nadie llega al código.
      */
     sections: [
       { id: "about", title: "Sobre mí", file: "sobre-mi.md", type: "about" },
-      {
-        id: "projects",
-        title: "Proyectos propios",
-        file: "proyectos.md",
-        type: "projects",
-      },
-      {
-        id: "contributions",
-        title: "Contribuciones en equipo",
-        file: "contribuciones.md",
-        type: "contributions",
-      },
       {
         id: "experience",
         title: "Experiencia",
         file: "experiencia.md",
         type: "experience",
+      },
+      {
+        id: "otherExperience",
+        title: "Otras experiencias",
+        file: "otras-experiencias.md",
+        type: "otherExperience",
       },
       { id: "skills", title: "Skills", file: "skills.json", type: "skills" },
       {
@@ -381,8 +441,6 @@ export const CV_DATA = {
       emailCopied: "Email copiado:",
 
       /* Etiquetas invisibles: las lee un lector de pantalla, no se ven */
-      techIn: "Tecnologías en",
-      stackOf: "Stack de",
       resultLabel: "Resultado:",
       srTo: "a",
     },
@@ -393,14 +451,14 @@ export const CV_DATA = {
      ══════════════════════════════════════════════════════════════════════ */
   en: {
     meta: {
-      title: "Gibson Rosales · Junior web developer",
+      title: "Gibson Rosales · Developer building with AI",
       description:
-        "CV of Gibson Rosales: a maths teacher and administrative worker who became a developer by automating his own job.",
+        "CV of Gibson Rosales: I build web products by directing AI agents. I got here by automating my own job.",
     },
 
     identity: {
       name: "Gibson Rosales",
-      role: "Junior web developer",
+      role: "Developer building with AI",
       tagline:
         "From maths teacher to developer. I automate what I used to do by hand.",
       location: "Medellín, Antioquia, Colombia",
@@ -435,87 +493,101 @@ export const CV_DATA = {
     },
 
     about: [
-      "I taught maths for nine years and coordinated education projects in Amazonas. While working in a hospital billing office I wrote my first Python script so I would stop renaming files by hand. That is where this started.",
-      "Today I contribute reviewed code to two real products, I keep an automation in production that records bank transactions, and I built a service of my own that makes pages for events. I am still a teacher in one way: if I cannot explain what I wrote, I have not understood it yet.",
+      "I build web products by directing AI agents: I write the spec, review the code that comes out, test it and put it online. Today I do that for directo-ia, a WhatsApp sales product for restaurants, where I own the onboarding flow.",
+      "I got here out of need, not curiosity. In a hospital billing office the afternoons went into splitting and renaming supporting documents by hand, so I wrote a Python script to do the heavy lifting: the block of work that cost about thirty hours came down to one. In Human Resources the pain was different — nobody could find a contractor's paperwork — and the fix was to model the data of more than five hundred of them so each document generated itself, in five minutes instead of half an hour.",
+      "I come from coordinating teams and running administrative processes, and that is what I bring on top of the code: I understand the problem from the inside before proposing anything. First I get into the pain, then I build the solution.",
     ],
 
-    projects: [
+    /* Ver la nota del bloque `es`: una sola lista, ordenada por impacto. */
+    experience: [
       {
-        name: "fiestas-web",
-        summary:
-          "A service that builds pages for children's parties: the invitation before, live RSVP during, and a photo gallery afterwards. Each client is one config entry with its own route and its own isolated guest list.",
-        stack: ["React", "Firestore", "Firebase Auth", "Vite", "Vercel"],
+        name: "directo-ia",
+        // Ver la nota del bloque `es`: el enlace es a la landing pública, no al
+        // repo (privado y ajeno).
+        href: "https://directo-ia.vercel.app",
+        role: "Owner of the onboarding flow",
+        about: "AI sales over WhatsApp for restaurants · my job today",
+        work: [
+          "I proposed how signing up a new restaurant should feel, and that idea shaped the onboarding the product uses today: the owner said so in review. It was not an assigned task, it came from understanding how a restaurant would actually use it in the middle of service.",
+          "I rebuilt the whole flow: users no longer reach the end to find out something is missing. Each step validates its own part, flags the error where it happens, and marks what is still incomplete before letting you move on.",
+          "I made it usable with the keyboard alone, and able to hold up with long names, short screens and mobile, because whoever signs up a restaurant does it from a phone and in a hurry.",
+        ],
         result:
-          "Used at a real party, with a public demo where anyone can RSVP and watch the list update live. Editing and deleting are locked behind Firestore rules with an admin role.",
-        // Ver la nota del bloque `es` sobre por qué el dominio no coincide
-        // con el nombre del repo.
-        href: "https://fiestas-app.vercel.app",
+          "41 commits across about 28 numbered pull requests, all merged after review by the product owner.",
+      },
+      {
+        name: "chess-lab",
+        // Ver la nota del bloque `es` sobre por qué se enlaza Netlify y no GitHub.
+        href: "https://chesspwa.netlify.app",
+        role: "Internationalization and offline translation",
+        about: "A PWA for learning chess offline: lessons, board and puzzles",
+        work: [
+          "The content existed in one language only and translating it by hand was not viable. I built a translation that happens in the browser itself, respects chess vocabulary (a «torre» is not a tower), keeps the lesson images, and stores what is already translated so the work is never repeated and no connection is wasted.",
+          "I left the whole application in three languages, so the same course serves three audiences without duplicating content.",
+          "I added optional sign-in: those who want to keep their progress can, and those who do not keep playing without an account. And I fixed the navigation between puzzles, which left users stuck.",
+        ],
+        result: "36 commits, all merged after review by the repository owner.",
       },
       {
         name: "honest-english",
-        summary:
-          "An English learning tracker that refuses to gamify: the counter shows the days WITHOUT practice, not the streak, and the writing feedback does not flatter.",
-        stack: ["Vanilla JavaScript", "GitHub Pages", "BYOK (Claude · Whisper)"],
-        result:
-          "Four phases published and online, with zero dependencies and a review checklist that keeps it that way.",
         href: "https://gibson1987r.github.io/honest-english/",
+        role: "My own product, from idea to deploy",
+        about: "An English learning tracker that refuses to gamify",
+        work: [
+          "I decided the product against the obvious: the counter shows the days I have gone WITHOUT practising, not the streak. A streak rewards not breaking it; the gap shows you where you gave up.",
+          "I wrote writing feedback that does not flatter: if the text is bad, it says so. A product that congratulates you for everything does not teach you English.",
+          "I imposed a constraint no client asked for — zero dependencies — and held it with a review checklist of my own that blocks them.",
+        ],
+        result: "Four phases published and online, with zero dependencies.",
+      },
+      {
+        name: "fiestas-web",
+        // Ver la nota del bloque `es` sobre por qué el dominio no coincide
+        // con el nombre del repo.
+        href: "https://fiestas-app.vercel.app",
+        role: "A service of my own, end to end",
+        about:
+          "Pages for children's parties: the invitation, the live RSVP and the gallery",
+        work: [
+          "It came from a concrete pain: organizing my son's birthday without knowing how many people would show up. Instead of solving that one party, I turned it into a service: each client is one config entry with its own route and its own isolated guest list, so adding a new party is no longer programming again.",
+          "I locked editing and deleting behind admin permissions: guests confirm, and nobody else touches the list.",
+          "I published an open demo with a made-up party, because you do not sell a client a screenshot: you show them the list updating on their own phone.",
+        ],
+        result:
+          "Used at a real party, with a public demo where anyone can RSVP and watch the list update live.",
       },
       {
         name: "bancolombia-lunchmoney",
-        summary:
-          "A Google Apps Script automation that reads bank alerts in Gmail and creates the transactions in Lunch Money. I run it and I maintain it.",
-        stack: ["Google Apps Script", "clasp", "Lunch Money API"],
-        result:
-          "In production with real money: every parsing change is tested against saved emails first.",
-        href: "",
+        // Ver la nota del bloque `es`: no hay nada público que enlazar.
+        role: "An automation in production over real money",
+        about: "Bank alerts turn themselves into recorded transactions",
+        work: [
+          "A client kept losing track of his spending because nobody writes down every purchase. I automated the whole record: the bank alert arrives by email and comes out as a classified transaction, with nobody typing anything.",
+          "It is someone else's money, so I do not improvise: every change to how the emails are read is tested first against real saved emails.",
+          "I run it and I maintain it. When the bank changes the format of the message, I am the one who fixes it.",
+        ],
+        result: "In production and in daily use.",
       },
     ],
 
-    contributions: [
+    /* Ver la nota del bloque `es`: también por impacto, y estas sí con fechas. */
+    otherExperience: [
       {
-        name: "directo-ia",
-        role: "Owner of the onboarding flow",
-        about: "AI sales over WhatsApp for restaurants",
-        stack: ["Next.js", "TypeScript", "React"],
-        work: [
-          "41 commits across about 28 numbered pull requests (#12 to #39).",
-          "I rebuilt the whole onboarding: step by step validation, error messages in context, and incomplete sections flagged before moving on.",
-          "Keyboard accessibility and a layout that holds up with long titles, short screens and mobile.",
-        ],
-        merged: "All merged after review by the repository owner",
-      },
-      {
-        name: "skool-scraper",
-        role: "Internationalization and offline translation",
-        about: "A chess course PWA that works without a connection",
-        stack: ["React 19", "Vite", "Dexie / IndexedDB", "Supabase"],
-        work: [
-          "36 commits. I localized the interface in three languages and added translation of the course content (PR #19).",
-          "The translation uses the browser Translator API, applies a chess glossary, keeps the markdown images and is cached in IndexedDB so it does not repeat.",
-          "Optional Supabase authentication (PR #29) and a fix for the navigation between puzzles.",
-        ],
-        merged: "All merged after review by the repository owner",
-      },
-    ],
-
-    experience: [
-      {
-        role: "Human resources assistant",
-        company: "Hospital Departamental San Juan de Dios E.S.E.",
-        context: "Colombia · Hiring paperwork and document control",
-        start: "2025-11",
-        end: "2026-03",
-        startLabel: "Nov 2025",
-        endLabel: "Mar 2026",
+        role: "Project coordinator",
+        company: "A.C. Construyendo Futuros / UNICEF partner",
+        context: "Amazonas, Venezuela · Education, protection, water and sanitation",
+        start: "2021-09",
+        end: "2023-12",
+        startLabel: "Sep 2021",
+        endLabel: "Dec 2023",
         achievements: [
-          "Document review of CVs, supporting files and contractor records for legal validation.",
-          "Follow-up on the improvement plan and the risk map required by the public audit office.",
-          "I organized contractor information in spreadsheets and databases so the legal team could find it without asking for it.",
+          "I coordinated 58 people in the field: 21 monitors checking that the meal plans were met, 16 promoters, 10 logistics operators, 6 water engineers and technicians, and 5 suppliers. I split the tasks, built the schedules and kept track of what each of them had to deliver.",
+          "I brought together indigenous communities, technical teams and partner institutions so an activity could happen at all. Without that agreement up front, nothing gets done on the ground.",
+          "I kept everything delivered traceable through reports and document management: a humanitarian project that cannot prove what it did does not get renewed.",
         ],
-        stack: ["Excel", "Databases", "Document management"],
       },
       {
-        role: "Cashier and billing assistant",
+        role: "Cash desk and billing officer",
         company: "Hospital Departamental San Juan de Dios E.S.E.",
         context: "Colombia · Where I wrote my first useful code",
         start: "2025-02",
@@ -523,25 +595,24 @@ export const CV_DATA = {
         startLabel: "Feb 2025",
         endLabel: "Oct 2025",
         achievements: [
-          "I used Python to automate splitting, renaming and filing the digital supporting documents: what was done by hand, file by file, became a script.",
-          "That cut the time needed to sort and deliver the documentation used to claim payment from the health insurers.",
-          "Cash desk, billing and user support, working with sensitive clinical information and the procedures it requires.",
+          "I wrote a Python script that did the heavy lifting of sorting the claim documents: it generated every possible filename under the standard the health insurers required and left them ready. All I had to do was confirm which one was correct.",
+          "My colleagues stayed hours after the shift to keep up; I scanned and reviewed. The block of work that cost about 30 hours came down to one.",
+          "I handled the cash desk, billing and user support with sensitive clinical information, following the procedure that requires.",
         ],
-        stack: ["Python", "File automation"],
       },
       {
-        role: "Project coordinator",
-        company: "A.C. Construyendo Futuros / UNICEF partner",
-        context: "Venezuela · Education, protection and water in the field",
-        start: "2021-09",
-        end: "2023-12",
-        startLabel: "Sep 2021",
-        endLabel: "Dec 2023",
+        role: "Human resources officer",
+        company: "Hospital Departamental San Juan de Dios E.S.E.",
+        context: "Colombia · Hiring paperwork and document control",
+        start: "2025-11",
+        end: "2026-03",
+        startLabel: "Nov 2025",
+        endLabel: "Mar 2026",
         achievements: [
-          "I coordinated teams, schedules and activity reports for educational and humanitarian work with indigenous communities.",
-          "I kept a record of everything delivered: without verifiable documents a humanitarian project cannot be audited or renewed.",
+          "I modelled in Excel the records of more than 500 contractors across four municipalities, accounting for the fact that one person can hold several profiles if they work in more than one programme: personal data, role and position, start and end dates.",
+          "I connected it to Word through mail merge, treating the sheet as an entity-relationship table: each template pulls the fields it needs and fills itself in. Issuing a document went from 20 or 30 minutes down to 4 or 5.",
+          "I reviewed CVs, supporting files and contractor records, checking that every requirement and every qualification was in place before legal validation, and followed up on the improvement plan and the risk map required by the public audit office.",
         ],
-        stack: ["Team coordination", "Reporting", "Field work"],
       },
       {
         role: "Maths and primary school teacher",
@@ -552,13 +623,14 @@ export const CV_DATA = {
         startLabel: "Sep 2012",
         endLabel: "Jul 2021",
         achievements: [
-          "Nine years explaining the same thing in different ways until I found the one that worked for each student.",
-          "It is the skill I use most when I program: reading someone else's code, understanding it and being able to explain it.",
+          "I taught maths for nine years to between 200 and 300 students a year, and reworked the same explanation as many times as it took to find the one that worked for each of them.",
+          "I kept up the communication with families and the school community so the support did not end at the classroom door.",
+          "It is the skill I use most when I program: reading something written by someone else, understanding it and being able to explain it.",
         ],
-        stack: ["Teaching", "Lesson planning", "Communication"],
       },
     ],
 
+    /* Ver la nota del bloque `es`: las palabras técnicas viven solo aquí. */
     skills: [
       {
         category: "Languages",
@@ -569,6 +641,7 @@ export const CV_DATA = {
         items: [
           "React",
           "Next.js",
+          "Vite",
           "PWA and offline",
           "Accessibility",
           "Internationalization",
@@ -579,20 +652,44 @@ export const CV_DATA = {
         category: "Backend and data",
         items: [
           "Firebase / Firestore",
-          "Authentication and roles",
           "Supabase",
           "IndexedDB / Dexie",
           "Google Apps Script",
-          "REST API integration",
+          "REST APIs",
+          "Authentication and roles",
         ],
       },
       {
-        category: "Tools",
+        category: "Workflow",
         items: [
-          "Git and pull request workflow",
+          "Git",
+          "GitHub",
+          "Pull requests",
+          "Issues",
+          "Code review",
           "GitHub Actions",
-          "Vite",
-          "Working with AI agents",
+          "Continuous deployment (Vercel, Netlify)",
+        ],
+      },
+      {
+        category: "Working with AI",
+        items: [
+          "Directing agents",
+          "Writing task specs",
+          "Reviewing generated code",
+        ],
+      },
+      {
+        category: "Management and teams",
+        items: [
+          "Team coordination",
+          "Delegation and follow-up",
+          "Client communication",
+          "Excel and Google Sheets",
+          "Data modelling in tables",
+          "Mail merge",
+          "Kanban boards (Trello, Notion, Asana)",
+          "Documentation and traceability",
         ],
       },
     ],
@@ -612,7 +709,7 @@ export const CV_DATA = {
       {
         title: "Programming — ongoing self-study, no degree",
         institution:
-          "Python with «Think Python» · web development on real projects",
+          "Python and SQL in a Udemy course · «Think Python» · web development on real projects",
         year: "2026",
       },
     ],
@@ -620,22 +717,16 @@ export const CV_DATA = {
     sections: [
       { id: "about", title: "About me", file: "about-me.md", type: "about" },
       {
-        id: "projects",
-        title: "My own projects",
-        file: "projects.md",
-        type: "projects",
-      },
-      {
-        id: "contributions",
-        title: "Team contributions",
-        file: "contributions.md",
-        type: "contributions",
-      },
-      {
         id: "experience",
         title: "Experience",
         file: "experience.md",
         type: "experience",
+      },
+      {
+        id: "otherExperience",
+        title: "Other experience",
+        file: "other-experience.md",
+        type: "otherExperience",
       },
       { id: "skills", title: "Skills", file: "skills.json", type: "skills" },
       {
@@ -692,8 +783,6 @@ export const CV_DATA = {
       cmdLangWords: ["language", "idioma", "spanish", "español", "lang"],
       emailCopied: "Email copied:",
 
-      techIn: "Technologies at",
-      stackOf: "Stack of",
       resultLabel: "Result:",
       srTo: "to",
     },

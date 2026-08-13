@@ -11,7 +11,8 @@ The site uses Vite only for development and production build, not as a frontend 
   - Edit `data.js` for any visible text changes.
   - Keep content consistent in both language blocks.
   - Section `id` values must match the keys in `CV_DATA.es` and `CV_DATA.en`.
-  - Section ids are identical across languages so fragment links like `#projects` work in both.
+  - Section ids are identical across languages so fragment links like `#experience` work in both.
+  - `experience` is the programming track (cards, no dates, ordered by impact); `otherExperience` is the earlier non-programming jobs (with dates). Both are written following [star.md](./star.md).
 - `main.js` orchestrates page initialization, rendering, theme, motion and palette behavior.
 - `js/i18n.js` decides the active language.
 - `js/render.js` maps `data.js` into DOM structure.

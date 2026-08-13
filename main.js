@@ -55,7 +55,7 @@ document
 // 5. Micro-interacciones al final: son lo prescindible
 initMotion();
 
-// Si se entra con un ancla en la URL (#projects), el contenido aún no existía
+// Si se entra con un ancla en la URL (#experience), el contenido aún no existía
 // cuando el navegador intentó saltar. Lo repetimos ahora.
 if (location.hash) {
   const destino = document.querySelector(location.hash);

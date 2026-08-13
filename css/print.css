@@ -150,17 +150,10 @@
     break-inside: avoid;
   }
 
-  .entry--card,
-  .entry--contrib {
+  .entry--card {
     padding: 0;
     background: none;
     border: 0;
-  }
-
-  /* El "✓ mergeado tras revisión" es contexto de pantalla; en papel la línea
-     entera sobra y el espacio vale más. */
-  .entry__merged {
-    display: none;
   }
 
   /* Al revés que en pantalla: aquí SÍ salen los datos personales, si están */
@@ -187,7 +180,6 @@
 
   .bullets,
   .prose,
-  .entry__summary,
   .entry__result {
     max-width: none;
   }

@@ -40,7 +40,50 @@ const renderizadores = {
       ${parrafos.map((p) => `<p>${esc(p)}</p>`).join("")}
     </div>`,
 
-  experience: (puestos) => `
+  /* Experiencia en programación. Da igual si el repo es mío o ajeno: lo que
+     importa es el producto, mi papel dentro de él y qué resolvió. Cada tarjeta
+     es una historia STAR (about → role → work[] → result). Ver star.md. */
+  experience: (entradas) => `
+    <ul class="entries entries--cards">
+      ${entradas
+        .map(
+          (entrada) => `
+        <li class="entry entry--card">
+          <h3 class="entry__title">
+            <span class="prompt" aria-hidden="true">./</span>${
+              // Sin href no se pinta un enlace muerto: solo el nombre. Varios
+              // de estos repos son privados o ajenos y no hay nada que enlazar.
+              entrada.href
+                ? `<a href="${esc(entrada.href)}"${enlaceExterno(entrada.href)}>${esc(entrada.name)}</a>`
+                : esc(entrada.name)
+            }
+          </h3>
+          <p class="entry__meta">
+            <span class="entry__roleTag">${esc(entrada.role)}</span>
+            <span class="entry__dot" aria-hidden="true">·</span>
+            ${esc(entrada.about)}
+          </p>
+          ${
+            entrada.work?.length
+              ? `<ul class="bullets">
+            ${entrada.work.map((linea) => `<li>${esc(linea)}</li>`).join("")}
+          </ul>`
+              : ""
+          }
+          ${
+            entrada.result
+              ? `<p class="entry__result">
+            <span class="entry__resultLabel">${esc(ui().resultLabel)}</span> ${esc(entrada.result)}
+          </p>`
+              : ""
+          }
+        </li>`,
+        )
+        .join("")}
+    </ul>`,
+
+  /* Los empleos anteriores a la programación. Estos sí llevan fechas. */
+  otherExperience: (puestos) => `
     <ol class="entries">
       ${puestos
         .map(
@@ -64,61 +107,10 @@ const renderizadores = {
           <ul class="bullets">
             ${puesto.achievements.map((logro) => `<li>${esc(logro)}</li>`).join("")}
           </ul>
-          ${chips(puesto.stack, `${ui().techIn} ${puesto.company}`)}
         </li>`,
         )
         .join("")}
     </ol>`,
-
-  projects: (proyectos) => `
-    <ul class="entries entries--cards">
-      ${proyectos
-        .map(
-          (proyecto) => `
-        <li class="entry entry--card">
-          <h3 class="entry__title">
-            <span class="prompt" aria-hidden="true">./</span>${
-              // Sin href no se pinta un enlace muerto: solo el nombre
-              proyecto.href
-                ? `<a href="${esc(proyecto.href)}"${enlaceExterno(proyecto.href)}>${esc(proyecto.name)}</a>`
-                : esc(proyecto.name)
-            }
-          </h3>
-          <p class="entry__summary">${esc(proyecto.summary)}</p>
-          <p class="entry__result">
-            <span class="entry__resultLabel">${esc(ui().resultLabel)}</span> ${esc(proyecto.result)}
-          </p>
-          ${chips(proyecto.stack, `${ui().stackOf} ${proyecto.name}`)}
-        </li>`,
-        )
-        .join("")}
-    </ul>`,
-
-  /* Trabajo en repos que no son míos: lo que importa aquí no es el proyecto,
-     es mi papel dentro de él y que el código pasó por revisión ajena. */
-  contributions: (repos) => `
-    <ul class="entries entries--cards">
-      ${repos
-        .map(
-          (repo) => `
-        <li class="entry entry--card entry--contrib">
-          <h3 class="entry__title">
-            <span class="prompt" aria-hidden="true">~/</span>${esc(repo.name)}
-          </h3>
-          <p class="entry__meta">
-            <span class="entry__contribRole">${esc(repo.role)}</span>
-            <span class="entry__dot" aria-hidden="true">·</span>
-            ${esc(repo.about)}
-          </p>
-          <ul class="bullets">
-            ${repo.work.map((linea) => `<li>${esc(linea)}</li>`).join("")}
-          </ul>
-          <p class="entry__merged">${esc(repo.merged)}</p>
-          ${chips(repo.stack, `${ui().stackOf} ${repo.name}`)}
-        </li>`,
-        )
-        .join("")}
-    </ul>`,
 
   skills: (grupos) => `
     <ul class="skills">

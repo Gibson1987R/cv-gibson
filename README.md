@@ -55,8 +55,8 @@ Todo vive en **`data.js`**, en dos bloques con la misma estructura:
 
 ```js
 export const CV_DATA = {
-  es: { meta, identity, about, projects, …, ui },
-  en: { meta, identity, about, projects, …, ui },
+  es: { meta, identity, about, experience, …, ui },
+  en: { meta, identity, about, experience, …, ui },
 };
 ```
 
@@ -70,9 +70,14 @@ export const CV_DATA = {
 Dos reglas de estructura que el código da por hechas:
 
 - El `id` de cada entrada de `sections` tiene que coincidir con la clave de
-  datos del mismo bloque (`id: "projects"` → `CV_DATA.es.projects`).
+  datos del mismo bloque (`id: "experience"` → `CV_DATA.es.experience`).
 - Los `id` son **iguales en los dos idiomas** a propósito, para que un enlace
-  compartido (`#projects`) funcione en ambos.
+  compartido (`#experience`) funcione en ambos.
+
+Hay dos secciones de trayectoria y conviene no confundirlas: `experience` es la
+experiencia en programación (tarjetas, sin fechas, ordenadas por impacto) y
+`otherExperience` son los empleos anteriores (con fechas). La regla de
+redacción de ambas está en [star.md](star.md).
 
 ## Cómo está montado
 

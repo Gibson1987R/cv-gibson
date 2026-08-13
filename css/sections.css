@@ -192,7 +192,7 @@
   border-radius: 999px;
 }
 
-/* --- Proyectos --- */
+/* --- Experiencia en programación (tarjetas) --- */
 
 .entries--cards {
   gap: var(--space-4);
@@ -209,44 +209,23 @@
   margin-right: 1px;
 }
 
-.entry__summary {
+/* Las tarjetas llevan la línea meta justo encima de las viñetas, así que
+   necesitan menos aire que las entradas con fechas. */
+.entry--card .bullets {
   margin-top: var(--space-2);
-  max-width: var(--measure);
+}
+
+/* El nombre del rol dentro de la línea meta: es lo primero que hay que leer
+   después del nombre del producto. */
+.entry__roleTag {
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .entry__result {
   margin-top: var(--space-2);
   max-width: var(--measure);
   font-size: var(--text-sm);
-}
-
-/* --- Contribuciones en repos ajenos --- */
-
-/* Una barra lateral las separa de los proyectos propios sin necesidad de
-   explicarlo: se ve que son otra cosa antes de leer el título. */
-.entry--contrib {
-  border-left: 3px solid var(--accent);
-}
-
-.entry--contrib .entry__contribRole {
-  color: var(--accent);
-  font-weight: 700;
-}
-
-.entry--contrib .bullets {
-  margin-top: var(--space-2);
-}
-
-.entry__merged {
-  margin-top: var(--space-3);
-  font-size: var(--text-xs);
-  color: var(--text-muted);
-}
-
-.entry__merged::before {
-  content: "✓ ";
-  color: var(--accent);
-  font-weight: 700;
 }
 
 /* Datos que solo se imprimen (documento, etc.): en pantalla no ocupan sitio */

@@ -2,9 +2,13 @@
    Nada de terminal, nada de color, nada de adornos de pantalla. */
 
 @media print {
+  /* Márgenes apretados pero no agresivos: 12mm sigue por encima del mínimo
+     que imprime cualquier impresora doméstica sin recortar, y da unos 20mm más
+     de ancho útil por hoja. Se recorta espacio en blanco antes que contenido:
+     ni una palabra del CV se pierde por ganar una página. */
   @page {
     size: A4;
-    margin: 14mm 15mm;
+    margin: 12mm 13mm;
   }
 
   :root {
@@ -21,8 +25,11 @@
     background: #fff;
     color: #000;
     font-family: var(--font-print);
-    font-size: 10.2pt;
-    line-height: 1.35;
+    /* 9.8pt es el suelo cómodo para Georgia impresa; por debajo se lee con
+       esfuerzo y un CV que cansa se deja a medias. El interlineado baja a 1.3:
+       es donde más se gana, porque afecta a todas las líneas del documento. */
+    font-size: 9.8pt;
+    line-height: 1.3;
   }
 
   /* Fuera todo lo que solo existe en pantalla */
@@ -69,7 +76,7 @@
   /* --- Cabecera --- */
 
   .hero {
-    padding-bottom: 6pt;
+    padding-bottom: 4pt;
     border-bottom: 1pt solid #000;
   }
 
@@ -89,12 +96,6 @@
     font-style: italic;
   }
 
-  .hero__tagline {
-    margin-top: 4pt;
-    font-size: 10.5pt;
-    max-width: none;
-  }
-
   .hero__meta,
   .hero__links {
     margin-top: 3pt;
@@ -102,16 +103,52 @@
     gap: 0 12pt;
   }
 
+  /* Un poco más de aire que en pantalla: aquí el texto es serif y de cuerpo
+     pequeño, y con la separación de pantalla el dibujo roza la primera letra.
+     Las direcciones se escriben siempre — un icono impreso no lleva a ninguna
+     parte y nadie puede teclear un dibujo —, pero eso ya no hay que forzarlo:
+     las reglas que los esconden están marcadas como `screen`. */
+  .icon {
+    margin-right: 4pt;
+  }
+
+  /* --- Las dos caras del CV -----------------------------------------------
+     Este documento lo lee primero un programa (el ATS de la empresa) y solo
+     después una persona. Lo que ese programa necesita —fechas, títulos de
+     sección con nombres que reconoce— sobra en la web, y al revés. Estas dos
+     clases son el interruptor: el contenido vive una sola vez en data.js y
+     cada medio muestra su versión. */
+  .printOnly {
+    display: inline;
+  }
+
+  .webOnly {
+    display: none;
+  }
+
+  /* Sin partir palabras en papel.
+     El guion del silabeo NO es un adorno: se queda dentro del texto del PDF,
+     así que un buscador lee "con-tractors" como dos palabras y deja de
+     encontrar "contractors". En pantalla hace falta porque la fuente es
+     monoespaciada; aquí es Georgia, que reparte el sobrante entre espacios
+     pequeños y justifica bien sin ayuda. */
+  .prose p,
+  .bullets li,
+  .entry__result {
+    -webkit-hyphens: none;
+    hyphens: none;
+  }
+
   /* --- Secciones --- */
 
   .section {
-    padding-block: 8pt 0;
+    padding-block: 5pt 0;
     border-top: 0;
     break-inside: auto;
   }
 
   .section__title {
-    margin-bottom: 5pt;
+    margin-bottom: 4pt;
     font-size: 11pt;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -130,7 +167,17 @@
   }
 
   .entries {
-    gap: 7pt;
+    gap: 4pt;
+  }
+
+  /* Orden cronológico inverso, solo en papel.
+     El número lo calcula render.js y lo deja en cada entrada; aquí solo se
+     aplica. Funciona porque `.entries` es una rejilla, y en una rejilla
+     `order` cambia dónde se dibuja cada hijo sin tocar el HTML: la web
+     conserva su orden por impacto y el PDF sale de lo más reciente a lo más
+     antiguo, que es como espera leerlo quien recluta. */
+  .entries > .entry {
+    order: var(--print-order, 0);
   }
 
   /* Formación: título y centro en la misma línea. Cuatro estudios en cuatro
@@ -146,8 +193,15 @@
     margin-top: 0;
   }
 
+  /* Antes ninguna entrada podía partirse entre dos páginas, y cuando una no
+     cabía entera saltaba al principio de la siguiente dejando medio folio en
+     blanco. Ahora sí puede partirse, con dos condiciones que evitan lo feo:
+     el título nunca se queda solo al pie (break-after: avoid, más abajo) y
+     nunca cruza de página una línea suelta. */
   .entry {
-    break-inside: avoid;
+    break-inside: auto;
+    orphans: 3;
+    widows: 3;
   }
 
   .entry--card {
@@ -165,41 +219,6 @@
 
   .fold {
     margin-top: 0;
-  }
-
-  /* El collage en papel: se quedan los números, se va la barra. Los fondos de
-     color no se imprimen por defecto en casi ningún navegador, así que una
-     barra impresa saldría vacía o no saldría; el dato ya está en el texto. */
-  .viz {
-    padding: 0;
-    margin-top: 4pt;
-    background: none;
-    border-left: 0;
-  }
-
-  .viz__track {
-    display: none;
-  }
-
-  .viz__row {
-    grid-template-columns: auto auto;
-    justify-content: start;
-    gap: 6pt;
-    font-size: 9.5pt;
-  }
-
-  .viz__stats {
-    gap: 14pt;
-    margin-top: 2pt;
-  }
-
-  .viz__figure {
-    font-size: 11pt;
-  }
-
-  .viz__title,
-  .viz__caption {
-    font-size: 8.5pt;
   }
 
   /* Al revés que en pantalla: aquí SÍ salen los datos personales, si están */
@@ -231,7 +250,7 @@
   }
 
   .bullets {
-    margin-top: 3pt;
+    margin-top: 2pt;
   }
 
   .bullets li + li {
@@ -241,7 +260,7 @@
   /* Las "chips" en papel son una lista separada por puntos, no pastillas */
   .chips {
     display: block;
-    margin-top: 3pt;
+    margin-top: 2pt;
     font-size: 9.5pt;
     color: #333;
   }
@@ -258,7 +277,7 @@
   }
 
   .skills {
-    gap: 6pt 18pt;
+    gap: 4pt 18pt;
   }
 
   .skills__category {
@@ -280,7 +299,10 @@
     color: #555;
   }
 
-  .site-footer__note {
+  /* En papel no se toca nada: unos iconos sin URL debajo no llevan a ningún
+     sitio, y el contacto completo ya está impreso en la cabecera. */
+  .site-footer__note,
+  .site-footer__contact {
     display: none;
   }
 }

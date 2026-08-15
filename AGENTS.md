@@ -16,6 +16,9 @@ The site uses Vite only for development and production build, not as a frontend 
 - `main.js` orchestrates page initialization, rendering, theme, motion and palette behavior.
 - `js/i18n.js` decides the active language.
 - `js/render.js` maps `data.js` into DOM structure.
+- `js/icons.js` holds the inline SVG glyphs for the contact links. It is not
+  content: it does not change with language. `data.js` only names the icon each
+  link uses (`icon: "github"`); an unknown name renders the link without a glyph.
 - `js/palette.js` implements the keyboard command palette using a native `<dialog>`.
 - `js/theme.js` handles light/dark theme and prefers `prefers-color-scheme`.
 - `js/motion.js` handles scroll reveal behavior.

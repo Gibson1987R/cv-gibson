@@ -92,6 +92,53 @@ main {
   font-size: var(--text-sm);
 }
 
+/* Fila de contacto del pie: los cuatro iconos, sin texto y separados.
+   El `gap` es el aire ENTRE zonas tocables, no entre dibujos: cada enlace ya
+   trae su propio relleno alrededor. */
+.site-footer__contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  margin-left: calc(var(--space-3) * -1); /* alinea el icono, no su relleno */
+}
+
+/* 44 px es el tamaño mínimo que se acierta con un dedo sin fallar (WCAG 2.5.5).
+   El dibujo mide 24, así que el relleno completa el resto: la zona que responde
+   es más grande que lo que se ve, y eso es intencionado. */
+.site-footer__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: var(--space-3);
+  color: var(--text-muted);
+  border-radius: var(--radius);
+}
+
+.site-footer__icon .icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0;
+}
+
+/* Apagados hasta que te acercas: en el pie no compiten con nada, y al tocarlos
+   confirman que responden. */
+.site-footer__icon:hover,
+.site-footer__icon:focus-visible {
+  color: var(--accent);
+  background: var(--bg-soft);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-footer__icon {
+    transition:
+      color 0.15s ease,
+      background-color 0.15s ease;
+  }
+}
+
 .site-footer__updated {
   margin-top: var(--space-1);
   opacity: 0.85;
@@ -116,7 +163,11 @@ main {
 
 /* --- Responsive --- */
 
-@media (max-width: 48rem) {
+/* `screen and` por el mismo motivo que en sections.css: una hoja A4 es más
+   estrecha que este corte, y sin esa palabra el papel heredaría el diseño de
+   móvil. Aquí solo cambian márgenes que print.css vuelve a fijar, pero
+   dejarlo explícito evita que el próximo cambio se cuele sin avisar. */
+@media screen and (max-width: 48rem) {
   .window {
     margin: 0;
     border: 0;
@@ -139,7 +190,7 @@ main {
 }
 
 /* En pantallas estrechas el atajo de teclado sobra: no hay teclado físico */
-@media (max-width: 34rem) {
+@media screen and (max-width: 34rem) {
   .toolbar__kbd,
   .window__path {
     display: none;

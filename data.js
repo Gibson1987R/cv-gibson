@@ -36,15 +36,31 @@ export const CV_DATA = {
     identity: {
       name: "Gibson Rosales",
       role: "Desarrollador con IA",
-      tagline:
-        "De profesor de matemáticas a desarrollador. Automatizo lo que antes hacía a mano.",
+      /**
+       * El puesto tal y como lo escribe quien publica la vacante, más el
+       * stack. Solo sale en el PDF, que es el archivo que analiza el sistema
+       * de selección de la empresa: "Desarrollador con IA" describe muy bien
+       * cómo trabaja Gibson, pero no es un título que nadie tenga en su lista
+       * de búsqueda, y en la criba automática eso se paga.
+       *
+       * Cámbialo al puesto de la vacante a la que apuntes: si buscas frontend,
+       * "Desarrollador Frontend"; si buscas full stack, ese.
+       */
+      rolePrint: "Desarrollador Web · JavaScript, React, Next.js",
       location: "Medellín, Antioquia, Colombia",
-      status: "Buscando mi primer puesto como desarrollador",
+      status: "Disponible · remoto o presencial",
+      /**
+       * `icon` es el nombre del glifo que va delante del enlace; los dibuja
+       * js/icons.js. Si se pone uno que no existe ahí, el enlace se pinta
+       * igual, sin icono. El `label` sigue haciendo falta: es lo que anuncia
+       * un lector de pantalla, porque el icono no le dice nada.
+       */
       links: [
         {
           label: "GitHub",
           text: "github.com/Gibson1987R",
           href: "https://github.com/Gibson1987R",
+          icon: "github",
         },
         {
           label: "LinkedIn",
@@ -53,16 +69,27 @@ export const CV_DATA = {
           // allí, cámbialo en los dos bloques de idioma.
           text: "linkedin.com/in/gibson-rosales-fuenmayor-7b2201176",
           href: "https://www.linkedin.com/in/gibson-rosales-fuenmayor-7b2201176",
+          icon: "linkedin",
+        },
+        /**
+         * El número va a WhatsApp, no a `tel:`. Aquí el reclutamiento pasa por
+         * ahí, y un enlace wa.me abre la conversación de un toque desde el
+         * móvil; un `tel:` obliga a llamar en frío, que casi nadie hace. El
+         * número se sigue viendo escrito, así que quien prefiera llamar lo
+         * tiene. Ojo con el formato del href: wa.me quiere el número sin `+`
+         * ni espacios, con indicativo de país (57 = Colombia).
+         */
+        {
+          label: "WhatsApp",
+          text: "+57 310 552 8854",
+          href: "https://wa.me/573105528854",
+          icon: "whatsapp",
         },
         {
           label: "Email",
           text: "gibsonrosales@gmail.com",
           href: "mailto:gibsonrosales@gmail.com",
-        },
-        {
-          label: "Teléfono",
-          text: "+57 310 552 8854",
-          href: "tel:+573105528854",
+          icon: "email",
         },
       ],
 
@@ -80,11 +107,25 @@ export const CV_DATA = {
       },
     },
 
-    /* Un elemento por párrafo */
+    /**
+     * Un elemento por párrafo.
+     *
+     * Los dos de en medio llevan `soloWeb: true`: cuentan entera la historia
+     * del hospital, que en la web es el relato que engancha, pero en el PDF
+     * se repite —está otra vez, con más detalle, en «Experiencia profesional
+     * previa»— y esa repetición vale media página de papel. El primero (qué
+     * hace hoy) y el último (qué aporta) se quedan en los dos.
+     */
     about: [
       "Construyo producto web dirigiendo agentes de IA: escribo la especificación, reviso el código que sale, lo pruebo y lo pongo en línea. Hoy lo hago para directo-ia, un producto de venta por WhatsApp para restaurantes, donde soy responsable del flujo de onboarding.",
-      "Llegué aquí porque una necesidad me despertó la curiosidad. Había estudiado programación años antes, pero nunca la había aplicado en un trabajo: ni dando clases ni coordinando proyectos humanitarios se me cruzó el problema que la pidiera. Se me cruzó facturando en un hospital, donde se iban las tardes partiendo a mano los PDF escaneados de cada paciente. Sabía la regla —qué documentos pide cada EPS y cómo cambian según el tipo de atención—, así que la puse por escrito, la trabajé con Copilot hasta que salió un script que se llevaba el trabajo pesado, y treinta horas de clasificación pasaron a una.",
-      "Ese fue el primer código mío que resolvió algo de verdad, y ya lo escribí así: dirigiendo una IA con un criterio que era mío. Ahí aprendí lo que sigo haciendo hoy — el cuello de botella no es escribir el código, es entender bien el problema. Lo volví a comprobar en Talento Humano, modelando los datos de más de quinientos contratistas para que cada documento saliera solo.",
+      {
+        soloWeb: true,
+        text: "Llegué aquí porque una necesidad me despertó la curiosidad. Había estudiado programación años antes, pero nunca la había aplicado en un trabajo: ni dando clases ni coordinando proyectos humanitarios se me cruzó el problema que la pidiera. Se me cruzó facturando en un hospital, donde se iban las tardes partiendo a mano los PDF escaneados de cada paciente. Sabía la regla —qué documentos pide cada EPS y cómo cambian según el tipo de atención—, así que la puse por escrito, la trabajé con Copilot hasta que salió un script que se llevaba el trabajo pesado, y treinta horas de clasificación pasaron a una.",
+      },
+      {
+        soloWeb: true,
+        text: "Ese fue el primer código mío que resolvió algo de verdad, y ya lo escribí así: dirigiendo una IA con un criterio que era mío. Ahí aprendí lo que sigo haciendo hoy — el cuello de botella no es escribir el código, es entender bien el problema. Lo volví a comprobar en Talento Humano, modelando los datos de más de quinientos contratistas para que cada documento saliera solo.",
+      },
       "Vengo de coordinar equipos y de administrar procesos, y eso es lo que aporto además del código: entiendo el problema desde dentro antes de proponer nada. Primero me meto en el dolor, luego construyo la solución.",
     ],
 
@@ -110,6 +151,23 @@ export const CV_DATA = {
         // onboarding que hice está detrás del registro.
         href: "https://directo-ia.vercel.app",
         role: "Responsable del flujo de onboarding",
+        /**
+         * `period` solo sale en el PDF. Un sistema de selección calcula los
+         * años de experiencia leyendo fechas; sin ellas puede puntuar como si
+         * no hubiera ninguna. En la web no hace falta: ahí la lista va por
+         * impacto y la cronología distraería.
+         *
+         * Mismo formato que las fechas de `otherExperience`, para que todo el
+         * documento tenga un solo patrón que reconocer.
+         */
+        period: "jun 2026 — actualidad",
+        /**
+         * La misma fecha en formato AAAA-MM. `period` es para leer; `start` es
+         * para ordenar: con este formato, comparar dos fechas es comparar dos
+         * textos, sin convertir nada. Las entradas sin `start` se quedan al
+         * final del PDF, en el orden en que estén.
+         */
+        start: "2026-06",
         about: "Venta por WhatsApp con IA para restaurantes · mi trabajo hoy",
         work: [
           "El restaurante que se da de alta va a trabajar con una IA todos los días, así que propuse que el registro se pareciera a eso: una conversación, y no un formulario de pasos como el de cualquier otra web. Al dueño del producto le gustó la idea y el onboarding se rehízo con esa forma.",
@@ -128,6 +186,8 @@ export const CV_DATA = {
         // como redirección de login y cambiarlo rompe el acceso.
         href: "https://chesspwa.netlify.app",
         role: "Internacionalización y traducción sin conexión",
+        period: "jun 2026",
+        start: "2026-06",
         about:
           "PWA para aprender ajedrez sin conexión: lecciones, tablero y puzzles",
         work: [
@@ -142,6 +202,8 @@ export const CV_DATA = {
         name: "honest-english",
         href: "https://gibson1987r.github.io/honest-english/",
         role: "Producto propio, de la idea al despliegue",
+        period: "may 2026",
+        start: "2026-05",
         about:
           "Rastreador de aprendizaje de inglés que se niega a gamificar",
         work: [
@@ -164,6 +226,8 @@ export const CV_DATA = {
         // vivo a propósito: es el enlace que se repartió a los invitados.
         href: "https://fiestas-app.vercel.app",
         role: "Servicio propio de punta a punta",
+        period: "feb 2026",
+        start: "2026-02",
         about:
           "Páginas para fiestas infantiles: la invitación, la confirmación en vivo y la galería",
         work: [
@@ -179,6 +243,8 @@ export const CV_DATA = {
         // Repo de Sebastián y sobre sus cuentas: no hay nada público que
         // enlazar, y por eso esta entrada va sin `href`.
         role: "Automatización en producción sobre dinero real",
+        period: "jun 2026",
+        start: "2026-06",
         about:
           "Las alertas del banco se convierten solas en movimientos registrados",
         work: [
@@ -208,23 +274,6 @@ export const CV_DATA = {
         end: "2023-12",
         startLabel: "sep 2021",
         endLabel: "dic 2023",
-        /**
-         * El "collage": las cifras dibujadas antes de contarlas.
-         * `bars` se dibujan proporcionales al valor más alto del grupo, y
-         * `display` es lo que se lee (la cifra con su unidad). El número vivo
-         * siempre está en el texto: las barras son decoración encima del dato,
-         * nunca el único sitio donde está.
-         */
-        viz: {
-          title: "58 personas coordinadas en territorio",
-          bars: [
-            { label: "acompañantes", value: 21, display: "21" },
-            { label: "promotores", value: 16, display: "16" },
-            { label: "operadores logísticos", value: 10, display: "10" },
-            { label: "ingenieros de agua", value: 6, display: "6" },
-            { label: "proveedores", value: 5, display: "5" },
-          ],
-        },
         achievements: [
           "Coordiné a 58 personas en territorio: 21 acompañantes que verificaban el cumplimiento de los menús, 16 promotores, 10 operadores logísticos, 6 ingenieros y técnicos de agua y 5 proveedores. Repartí las tareas, armé los cronogramas y sostuve el seguimiento de lo que cada quien tenía que entregar.",
           "Articulé a comunidades indígenas, equipos técnicos e instituciones aliadas para que una actividad pudiera ocurrir. Sin ese acuerdo previo, en terreno no se ejecuta nada.",
@@ -239,14 +288,6 @@ export const CV_DATA = {
         end: "2025-10",
         startLabel: "feb 2025",
         endLabel: "oct 2025",
-        viz: {
-          title: "Clasificar los soportes de un lote de glosas",
-          bars: [
-            { label: "a mano", value: 30, display: "30 h" },
-            { label: "con el script", value: 1, display: "1 h" },
-          ],
-          stats: [{ figure: "×100", caption: "casos en el mismo tiempo" }],
-        },
         achievements: [
           "Cada EPS pide un juego distinto de documentos y cambia según el tipo de atención: facturar era partir a mano un PDF escaneado, hoja por hoja. Ordené primero la recepción, para que cada escaneo saliera siempre igual.",
           "Sobre ese orden, escribí con Copilot un script que identificaba EPS, factura y tipo de atención y dejaba las carpetas ya divididas y renombradas en todas las combinaciones posibles; yo solo borraba las que no aplicaban. De unas 30 horas a una, y cien casos costaban lo mismo que uno.",
@@ -260,17 +301,6 @@ export const CV_DATA = {
         end: "2026-03",
         startLabel: "nov 2025",
         endLabel: "mar 2026",
-        viz: {
-          title: "Emitir un documento de contratista",
-          bars: [
-            { label: "a mano", value: 30, display: "30 min" },
-            { label: "desde la base", value: 5, display: "5 min" },
-          ],
-          stats: [
-            { figure: "+500", caption: "contratistas" },
-            { figure: "4", caption: "municipios" },
-          ],
-        },
         achievements: [
           "Modelé en Excel la base de más de 500 contratistas de cuatro municipios, contando que una misma persona puede tener varios perfiles si está en más de un programa: datos personales, rol y cargo, fecha de inicio y de cierre.",
           "La conecté con Word por combinación de correspondencia, tratando la hoja como una tabla de entidad-relación: cada plantilla consulta los campos que necesita y se rellena sola. Emitir un documento pasó de 20 o 30 minutos a 4 o 5.",
@@ -285,14 +315,6 @@ export const CV_DATA = {
         end: "2021-07",
         startLabel: "sep 2012",
         endLabel: "jul 2021",
-        /* Sin barras: aquí no hay partes que comparar, solo escala. */
-        viz: {
-          title: "Cada año, un grupo nuevo",
-          stats: [
-            { figure: "200–300", caption: "estudiantes por año" },
-            { figure: "9", caption: "años en aula" },
-          ],
-        },
         achievements: [
           "Enseñé matemáticas nueve años a entre 200 y 300 estudiantes por año, y reformulé la misma explicación tantas veces como hizo falta hasta dar con la que le servía a cada uno.",
           "Sostuve la comunicación con familias y comunidad educativa para que el acompañamiento no terminara en la puerta del aula.",
@@ -370,27 +392,18 @@ export const CV_DATA = {
     ],
 
     /**
-     * Dos titulaciones. Ni una más.
+     * El orden es el mismo criterio que rige `sections`: lo de programación
+     * primero. Quien lee un CV de desarrollador busca formación técnica; las
+     * titulaciones formales son de otra carrera y explican de dónde viene,
+     * no a qué aspira. Van al final, que es donde se leen como contexto.
      *
-     * Ojo con la segunda: es UN solo título, no dos. Se cursó en Venezuela
+     * Ojo con la última: es UN solo título, no dos. Se cursó en Venezuela
      * como "Técnico Superior Universitario en Administración de Recursos
      * Humanos" y en Colombia se convalida como "Tecnólogo en Gestión de
      * Talento Humano". Los CV anteriores lo listaban por separado y parecían
      * dos estudios.
      */
     education: [
-      {
-        title: "Licenciado en Educación, mención Campesina y Rural",
-        institution: "Venezuela",
-        year: "",
-      },
-      {
-        title:
-          "Técnico Superior Universitario en Administración de Recursos Humanos",
-        institution:
-          "Convalidado en Colombia como Tecnólogo en Gestión de Talento Humano",
-        year: "",
-      },
       /**
        * Los 44 diplomas de Platzi están descargados en
        * ~/Documents/Currículum/Certificados. Aquí NO se listan uno a uno: nadie
@@ -413,6 +426,18 @@ export const CV_DATA = {
           "«Think Python» · Visual Studio Code (Udemy) · desarrollo web sobre proyectos reales",
         year: "2026",
       },
+      {
+        title: "Licenciado en Educación, mención Campesina y Rural",
+        institution: "Venezuela",
+        year: "",
+      },
+      {
+        title:
+          "Técnico Superior Universitario en Administración de Recursos Humanos",
+        institution:
+          "Convalidado en Colombia como Tecnólogo en Gestión de Talento Humano",
+        year: "",
+      },
     ],
 
     /**
@@ -424,31 +449,60 @@ export const CV_DATA = {
      * cualquier otra cosa. Los cargos anteriores dicen "profesor" y
      * "facturador"; si eso es lo primero que se lee, nadie llega al código.
      */
+    /**
+     * `titlePrint` es el nombre de la sección EN EL PDF. Existe porque ese
+     * archivo lo lee primero un programa que busca encabezados de su lista:
+     * "Otras experiencias" no le dice nada, y justo ahí están los dos únicos
+     * empleos con contrato. En pantalla no cambia nada — sigue mandando el
+     * comando `$ cat`— y un lector de pantalla sigue oyendo el título corto.
+     */
     sections: [
-      { id: "about", title: "Sobre mí", file: "sobre-mi.md", type: "about" },
+      {
+        id: "about",
+        title: "Sobre mí",
+        titlePrint: "Perfil profesional",
+        file: "sobre-mi.md",
+        type: "about",
+      },
       {
         id: "experience",
         title: "Experiencia",
+        titlePrint: "Experiencia en desarrollo de software",
         file: "experiencia.md",
         type: "experience",
       },
       {
         id: "otherExperience",
         title: "Otras experiencias",
+        titlePrint: "Experiencia profesional previa",
         file: "otras-experiencias.md",
         type: "otherExperience",
       },
-      { id: "skills", title: "Skills", file: "skills.json", type: "skills" },
+      {
+        id: "skills",
+        title: "Skills",
+        titlePrint: "Habilidades técnicas",
+        file: "skills.json",
+        type: "skills",
+      },
       {
         id: "education",
         title: "Formación",
+        titlePrint: "Formación académica",
         file: "formacion.md",
         type: "education",
       },
     ],
 
+    /**
+     * `note` es la línea con el `$` del pie. Está desactivada: decía "hecho a
+     * mano", y eso contradecía el resto del CV, que dice que Gibson construye
+     * dirigiendo agentes de IA. Se guarda por si algún día vuelve a hacer
+     * falta — para reactivarla, descomenta la clave aquí y en el bloque `en`.
+     * Sin `note`, render.js no pinta el párrafo: no queda un `$` suelto.
+     */
     footer: {
-      note: "Hecho a mano con HTML, CSS y JavaScript. Sin frameworks, sin analítica, sin cookies.",
+      // note: "Hecho a mano con HTML, CSS y JavaScript. Sin frameworks, sin analítica, sin cookies.",
       updated: "Última actualización: agosto de 2026",
     },
 
@@ -525,30 +579,35 @@ export const CV_DATA = {
     identity: {
       name: "Gibson Rosales",
       role: "Developer building with AI",
-      tagline:
-        "From maths teacher to developer. I automate what I used to do by hand.",
+      /* Ver la nota del bloque `es`: el título que busca un reclutador. */
+      rolePrint: "Web Developer · JavaScript, React, Next.js",
       location: "Medellín, Antioquia, Colombia",
-      status: "Looking for my first developer role",
+      status: "Available · remote or on-site",
+      /* Ver la nota del bloque `es` sobre `icon` y sobre el enlace de WhatsApp. */
       links: [
         {
           label: "GitHub",
           text: "github.com/Gibson1987R",
           href: "https://github.com/Gibson1987R",
+          icon: "github",
         },
         {
           label: "LinkedIn",
           text: "linkedin.com/in/gibson-rosales-fuenmayor-7b2201176",
           href: "https://www.linkedin.com/in/gibson-rosales-fuenmayor-7b2201176",
+          icon: "linkedin",
+        },
+        {
+          label: "WhatsApp",
+          text: "+57 310 552 8854",
+          href: "https://wa.me/573105528854",
+          icon: "whatsapp",
         },
         {
           label: "Email",
           text: "gibsonrosales@gmail.com",
           href: "mailto:gibsonrosales@gmail.com",
-        },
-        {
-          label: "Phone",
-          text: "+57 310 552 8854",
-          href: "tel:+573105528854",
+          icon: "email",
         },
       ],
 
@@ -558,10 +617,17 @@ export const CV_DATA = {
       },
     },
 
+    /* Ver la nota del bloque `es`: los dos de en medio no van al PDF. */
     about: [
       "I build web products by directing AI agents: I write the spec, review the code that comes out, test it and put it online. Today I do that for directo-ia, a WhatsApp sales product for restaurants, where I own the onboarding flow.",
-      "I got here because a need woke up my curiosity. I had studied programming years earlier but had never applied it at work: neither teaching nor coordinating humanitarian projects ever threw up the problem that called for it. Hospital billing did, where the afternoons went into splitting scanned PDFs by hand, patient by patient. I knew the rule — which documents each insurer asks for and how they change with the type of visit — so I wrote that logic down, worked it through with Copilot until a script came out that took the heavy lifting, and thirty hours of sorting came down to one.",
-      "That was the first code of mine that solved something real, and I already wrote it this way: directing an AI with judgement that was mine. It taught me what I still do today — the bottleneck is not writing the code, it is understanding the problem. I saw it again in Human Resources, modelling the records of more than five hundred contractors so each document generated itself.",
+      {
+        soloWeb: true,
+        text: "I got here because a need woke up my curiosity. I had studied programming years earlier but had never applied it at work: neither teaching nor coordinating humanitarian projects ever threw up the problem that called for it. Hospital billing did, where the afternoons went into splitting scanned PDFs by hand, patient by patient. I knew the rule — which documents each insurer asks for and how they change with the type of visit — so I wrote that logic down, worked it through with Copilot until a script came out that took the heavy lifting, and thirty hours of sorting came down to one.",
+      },
+      {
+        soloWeb: true,
+        text: "That was the first code of mine that solved something real, and I already wrote it this way: directing an AI with judgement that was mine. It taught me what I still do today — the bottleneck is not writing the code, it is understanding the problem. I saw it again in Human Resources, modelling the records of more than five hundred contractors so each document generated itself.",
+      },
       "I come from coordinating teams and running administrative processes, and that is what I bring on top of the code: I understand the problem from the inside before proposing anything. First I get into the pain, then I build the solution.",
     ],
 
@@ -573,6 +639,9 @@ export const CV_DATA = {
         // repo (privado y ajeno).
         href: "https://directo-ia.vercel.app",
         role: "Owner of the onboarding flow",
+        /* Ver la nota del bloque `es`: `period` se lee, `start` ordena. */
+        period: "Jun 2026 — Present",
+        start: "2026-06",
         about: "AI sales over WhatsApp for restaurants · my job today",
         work: [
           "A restaurant signing up is going to work with an AI every day, so I proposed that the sign-up should feel like that: a conversation, not the step-by-step form every other site uses. The product owner liked the idea and the onboarding was rebuilt around it.",
@@ -587,6 +656,8 @@ export const CV_DATA = {
         // Ver la nota del bloque `es` sobre por qué se enlaza Netlify y no GitHub.
         href: "https://chesspwa.netlify.app",
         role: "Internationalization and offline translation",
+        period: "Jun 2026",
+        start: "2026-06",
         about: "A PWA for learning chess offline: lessons, board and puzzles",
         work: [
           "The content existed in one language only and translating it by hand was not viable. I built a translation that happens in the browser itself, respects chess vocabulary (a «torre» is not a tower), keeps the lesson images, and stores what is already translated so the work is never repeated and no connection is wasted.",
@@ -600,6 +671,8 @@ export const CV_DATA = {
         name: "honest-english",
         href: "https://gibson1987r.github.io/honest-english/",
         role: "My own product, from idea to deploy",
+        period: "May 2026",
+        start: "2026-05",
         about: "An English learning tracker that refuses to gamify",
         work: [
           "I decided the product against the obvious: the counter shows the days I have gone WITHOUT practising, not the streak. A streak rewards not breaking it; the gap shows you where you gave up.",
@@ -615,6 +688,8 @@ export const CV_DATA = {
         // con el nombre del repo.
         href: "https://fiestas-app.vercel.app",
         role: "A service of my own, end to end",
+        period: "Feb 2026",
+        start: "2026-02",
         about:
           "Pages for children's parties: the invitation, the live RSVP and the gallery",
         work: [
@@ -629,6 +704,8 @@ export const CV_DATA = {
         name: "bancolombia-lunchmoney",
         // Ver la nota del bloque `es`: no hay nada público que enlazar.
         role: "An automation in production over real money",
+        period: "Jun 2026",
+        start: "2026-06",
         about: "Bank alerts turn themselves into recorded transactions",
         work: [
           "A client kept losing track of his spending because nobody writes down every purchase. I automated the whole record: the bank alert arrives by email and comes out as a classified transaction, with nobody typing anything.",
@@ -650,17 +727,6 @@ export const CV_DATA = {
         end: "2023-12",
         startLabel: "Sep 2021",
         endLabel: "Dec 2023",
-        /* Ver la nota del bloque `es` sobre cómo se dibuja `viz`. */
-        viz: {
-          title: "58 people coordinated in the field",
-          bars: [
-            { label: "meal monitors", value: 21, display: "21" },
-            { label: "promoters", value: 16, display: "16" },
-            { label: "logistics operators", value: 10, display: "10" },
-            { label: "water engineers", value: 6, display: "6" },
-            { label: "suppliers", value: 5, display: "5" },
-          ],
-        },
         achievements: [
           "I coordinated 58 people in the field: 21 monitors checking that the meal plans were met, 16 promoters, 10 logistics operators, 6 water engineers and technicians, and 5 suppliers. I split the tasks, built the schedules and kept track of what each of them had to deliver.",
           "I brought together indigenous communities, technical teams and partner institutions so an activity could happen at all. Without that agreement up front, nothing gets done on the ground.",
@@ -675,14 +741,6 @@ export const CV_DATA = {
         end: "2025-10",
         startLabel: "Feb 2025",
         endLabel: "Oct 2025",
-        viz: {
-          title: "Sorting the documents of a batch of claims",
-          bars: [
-            { label: "by hand", value: 30, display: "30 h" },
-            { label: "with the script", value: 1, display: "1 h" },
-          ],
-          stats: [{ figure: "×100", caption: "cases in the same time" }],
-        },
         achievements: [
           "Every insurer asks for a different set of documents, and it changes again with the type of visit: billing meant splitting a scanned PDF by hand, page by page. I fixed the intake first, so every scan came out the same.",
           "On top of that order, I wrote a script with Copilot that identified the insurer, the invoice and the type of visit, and left the folders already split and renamed in every possible combination; all I did was delete the ones that did not apply. From about 30 hours down to one, and a hundred cases cost the same as one.",
@@ -696,17 +754,6 @@ export const CV_DATA = {
         end: "2026-03",
         startLabel: "Nov 2025",
         endLabel: "Mar 2026",
-        viz: {
-          title: "Issuing one contractor document",
-          bars: [
-            { label: "by hand", value: 30, display: "30 min" },
-            { label: "from the database", value: 5, display: "5 min" },
-          ],
-          stats: [
-            { figure: "+500", caption: "contractors" },
-            { figure: "4", caption: "municipalities" },
-          ],
-        },
         achievements: [
           "I modelled in Excel the records of more than 500 contractors across four municipalities, accounting for the fact that one person can hold several profiles if they work in more than one programme: personal data, role and position, start and end dates.",
           "I connected it to Word through mail merge, treating the sheet as an entity-relationship table: each template pulls the fields it needs and fills itself in. Issuing a document went from 20 or 30 minutes down to 4 or 5.",
@@ -721,13 +768,6 @@ export const CV_DATA = {
         end: "2021-07",
         startLabel: "Sep 2012",
         endLabel: "Jul 2021",
-        viz: {
-          title: "A new group every year",
-          stats: [
-            { figure: "200–300", caption: "students a year" },
-            { figure: "9", caption: "years teaching" },
-          ],
-        },
         achievements: [
           "I taught maths for nine years to between 200 and 300 students a year, and reworked the same explanation as many times as it took to find the one that worked for each of them.",
           "I kept up the communication with families and the school community so the support did not end at the classroom door.",
@@ -800,18 +840,8 @@ export const CV_DATA = {
       },
     ],
 
+    /* Ver la nota del bloque `es`: programación primero, titulaciones al final. */
     education: [
-      {
-        title: "Bachelor's degree in Education — Rural and Farming Communities",
-        institution: "Venezuela",
-        year: "",
-      },
-      {
-        title: "Higher University Technician in Human Resources Administration",
-        institution:
-          "Recognized in Colombia as Tecnólogo en Gestión de Talento Humano",
-        year: "",
-      },
       /* Ver la nota del bloque `es`: el titular y el enlace, no los 44 diplomas. */
       {
         title: "Programming — Platzi",
@@ -829,33 +859,61 @@ export const CV_DATA = {
           "«Think Python» · Visual Studio Code (Udemy) · web development on real projects",
         year: "2026",
       },
+      {
+        title: "Bachelor's degree in Education — Rural and Farming Communities",
+        institution: "Venezuela",
+        year: "",
+      },
+      {
+        title: "Higher University Technician in Human Resources Administration",
+        institution:
+          "Recognized in Colombia as Tecnólogo en Gestión de Talento Humano",
+        year: "",
+      },
     ],
 
+    /* Ver la nota del bloque `es`: `titlePrint` es el encabezado del PDF. */
     sections: [
-      { id: "about", title: "About me", file: "about-me.md", type: "about" },
+      {
+        id: "about",
+        title: "About me",
+        titlePrint: "Professional summary",
+        file: "about-me.md",
+        type: "about",
+      },
       {
         id: "experience",
         title: "Experience",
+        titlePrint: "Software development experience",
         file: "experience.md",
         type: "experience",
       },
       {
         id: "otherExperience",
         title: "Other experience",
+        titlePrint: "Previous professional experience",
         file: "other-experience.md",
         type: "otherExperience",
       },
-      { id: "skills", title: "Skills", file: "skills.json", type: "skills" },
+      {
+        id: "skills",
+        title: "Skills",
+        titlePrint: "Technical skills",
+        file: "skills.json",
+        type: "skills",
+      },
       {
         id: "education",
         title: "Education",
+        titlePrint: "Education",
         file: "education.md",
         type: "education",
       },
     ],
 
     footer: {
-      note: "Hand-written in HTML, CSS and JavaScript. No frameworks, no analytics, no cookies.",
+      /* Ver la nota del bloque `es`: desactivada, se descomentan las dos a la vez. */
+      // note: "Hand-written in HTML, CSS and JavaScript. No frameworks, no analytics, no cookies.",
       updated: "Last updated: August 2026",
     },
 

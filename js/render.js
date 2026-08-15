@@ -9,6 +9,7 @@
  */
 
 import { datos, ui, otroIdioma } from "./i18n.js";
+import { icono } from "./icons.js";
 
 /** Escapa el texto antes de meterlo en HTML. Datos y marcado no se mezclan. */
 export const esc = (valor) =>
@@ -33,50 +34,55 @@ const enlaceExterno = (href) =>
   href.startsWith("mailto:") ? "" : ' target="_blank" rel="noopener noreferrer"';
 
 /**
- * El "collage" de cifras de una experiencia. Dos piezas, ambas opcionales:
- *   stats → cifras sueltas, sin comparación posible (200-300 estudiantes)
- *   bars  → valores comparables entre sí, dibujados proporcionales al mayor
+ * Un párrafo o una viñeta puede escribirse de dos formas en data.js:
  *
- * Las barras son `aria-hidden` a propósito: el número ya está escrito al lado
- * en texto, así que repetirlo en el lector de pantalla solo estorba. La barra
- * nunca es el único sitio donde vive el dato.
+ *   "texto"                        → sale en la web y en el PDF
+ *   { text: "texto", soloWeb: true } → solo en la web
+ *
+ * Lo segundo existe para el PDF: ahí manda la brevedad, porque lo lee un
+ * programa de selección y luego alguien con prisa. Lo que en la web es
+ * narrativa, en dos páginas de papel puede ser repetición.
+ *
+ * Devuelve el texto ya escapado y la clase que le toca, si le toca alguna.
  */
-const viz = (v) => {
-  if (!v) return "";
-  const mayor = v.bars?.length ? Math.max(...v.bars.map((b) => b.value)) : 0;
-  return `
-  <figure class="viz">
-    ${v.title ? `<figcaption class="viz__title">${esc(v.title)}</figcaption>` : ""}
-    ${
-      v.stats?.length
-        ? `<ul class="viz__stats">
-      ${v.stats
-        .map(
-          (s) => `<li class="viz__stat">
-        <span class="viz__figure">${esc(s.figure)}</span>
-        <span class="viz__caption">${esc(s.caption)}</span>
-      </li>`,
-        )
-        .join("")}
-    </ul>`
-        : ""
-    }
-    ${
-      v.bars?.length
-        ? `<ul class="viz__bars">
-      ${v.bars
-        .map(
-          (b) => `<li class="viz__row">
-        <span class="viz__label">${esc(b.label)}</span>
-        <span class="viz__track" aria-hidden="true"><span class="viz__fill" style="width:${Math.round((b.value / mayor) * 100)}%"></span></span>
-        <span class="viz__value">${esc(b.display)}</span>
-      </li>`,
-        )
-        .join("")}
-    </ul>`
-        : ""
-    }
-  </figure>`;
+const trozo = (valor) =>
+  typeof valor === "string"
+    ? { texto: esc(valor), clase: "" }
+    : { texto: esc(valor.text), clase: valor.soloWeb ? ' class="webOnly"' : "" };
+
+/** El periodo de una entrada, solo para el PDF. Sin `period`, no pinta nada. */
+const periodo = (valor) =>
+  valor ? `<span class="printOnly"> · ${esc(valor)}</span>` : "";
+
+/**
+ * Calcula en qué posición va cada entrada CUANDO SE IMPRIME: de la más
+ * reciente a la más antigua, que es como un sistema de selección espera leer
+ * una trayectoria y como la lee cualquier reclutador.
+ *
+ * En pantalla el orden no cambia — ahí manda el impacto, no el calendario —,
+ * así que no se toca el array: se devuelve una lista de posiciones que el CSS
+ * de impresión aplica con `order`. El HTML sale igual para los dos medios y
+ * cada uno lo coloca a su manera.
+ *
+ * Ordena por `start` ("2025-11"), que al ser AAAA-MM se compara como texto sin
+ * convertir nada a fecha. Las entradas sin `start` se quedan al final en el
+ * orden en que están: sin fecha no hay nada que ordenar, y `sort` en JavaScript
+ * respeta el orden original cuando se le dice que dos elementos empatan.
+ */
+const ordenCronologico = (entradas) => {
+  const posiciones = [];
+  entradas
+    .map((entrada, indice) => ({ indice, start: entrada.start ?? "" }))
+    .sort((a, b) => {
+      if (!a.start && !b.start) return 0;
+      if (!a.start) return 1;
+      if (!b.start) return -1;
+      return b.start.localeCompare(a.start);
+    })
+    .forEach((entrada, posicion) => {
+      posiciones[entrada.indice] = posicion;
+    });
+  return posiciones;
 };
 
 /* --- Un renderizador por tipo de sección --------------------------------- */
@@ -84,18 +90,25 @@ const viz = (v) => {
 const renderizadores = {
   about: (parrafos) => `
     <div class="prose">
-      ${parrafos.map((p) => `<p>${esc(p)}</p>`).join("")}
+      ${parrafos
+        .map((p) => {
+          const { texto, clase } = trozo(p);
+          return `<p${clase}>${texto}</p>`;
+        })
+        .join("")}
     </div>`,
 
   /* Experiencia en programación. Da igual si el repo es mío o ajeno: lo que
      importa es el producto, mi papel dentro de él y qué resolvió. Cada tarjeta
      es una historia STAR (about → role → work[] → result). Ver star.md. */
-  experience: (entradas) => `
+  experience: (entradas) => {
+    const orden = ordenCronologico(entradas);
+    return `
     <ul class="entries entries--cards">
       ${entradas
         .map(
-          (entrada) => `
-        <li class="entry entry--card">
+          (entrada, indice) => `
+        <li class="entry entry--card" style="--print-order: ${orden[indice]}">
           <!-- El rol va ENCIMA del nombre: primero qué fui, después dónde. -->
           <h3 class="entry__title">
             <span class="entry__roleTag">${esc(entrada.role)}</span>
@@ -106,14 +119,21 @@ const renderizadores = {
                 entrada.href
                   ? `<a href="${esc(entrada.href)}"${enlaceExterno(entrada.href)}>${esc(entrada.name)}</a>`
                   : esc(entrada.name)
-              }
+              }<!-- El periodo va aquí, en la primera línea del bloque: un
+                   lector automático asocia puesto, sitio y fechas cuando van
+                   juntos. Al final, después de las viñetas, ya no las liga. -->${periodo(entrada.period)}
             </span>
           </h3>
           <p class="entry__meta">${esc(entrada.about)}</p>
           ${
             entrada.work?.length
               ? `<ul class="bullets">
-            ${entrada.work.map((linea) => `<li>${esc(linea)}</li>`).join("")}
+            ${entrada.work
+              .map((linea) => {
+                const { texto, clase } = trozo(linea);
+                return `<li${clase}>${texto}</li>`;
+              })
+              .join("")}
           </ul>`
               : ""
           }
@@ -127,15 +147,18 @@ const renderizadores = {
         </li>`,
         )
         .join("")}
-    </ul>`,
+    </ul>`;
+  },
 
   /* Los empleos anteriores a la programación. Estos sí llevan fechas. */
-  otherExperience: (puestos) => `
+  otherExperience: (puestos) => {
+    const orden = ordenCronologico(puestos);
+    return `
     <ol class="entries">
       ${puestos
         .map(
-          (puesto) => `
-        <li class="entry">
+          (puesto, indice) => `
+        <li class="entry" style="--print-order: ${orden[indice]}">
           <h3 class="entry__title">
             <span class="entry__role">${esc(puesto.role)}</span>
             <span class="entry__at" aria-hidden="true">@</span>
@@ -151,24 +174,28 @@ const renderizadores = {
             <span class="entry__dot" aria-hidden="true">·</span>
             ${esc(puesto.context)}
           </p>
-          ${viz(puesto.viz)}
-          <!-- Plegado por defecto: la cabecera y las cifras se ven siempre, el
-               relato se abre al tocarlo. Es un details nativo, sin JS: funciona
-               con teclado y con lector de pantalla. Ojo, summary solo admite
-               texto y titulos, por eso el collage se queda fuera. -->
+          <!-- Plegado por defecto: solo se ve el cargo y las fechas; el relato
+               se abre al tocarlo. Es un details nativo, sin JS: funciona con
+               teclado y con lector de pantalla. -->
           <details class="fold">
             <summary class="fold__toggle">
               <span class="fold__open">${esc(ui().foldOpen)}</span>
               <span class="fold__close">${esc(ui().foldClose)}</span>
             </summary>
             <ul class="bullets">
-              ${puesto.achievements.map((logro) => `<li>${esc(logro)}</li>`).join("")}
+              ${puesto.achievements
+                .map((logro) => {
+                  const { texto, clase } = trozo(logro);
+                  return `<li${clase}>${texto}</li>`;
+                })
+                .join("")}
             </ul>
           </details>
         </li>`,
         )
         .join("")}
-    </ol>`,
+    </ol>`;
+  },
 
   skills: (grupos) => `
     <ul class="skills">
@@ -222,7 +249,7 @@ const renderizadores = {
 /* --- Bloques de la página ------------------------------------------------ */
 
 function renderCabecera() {
-  const { name, role, tagline, location, status, links, soloImpresion } =
+  const { name, role, rolePrint, location, status, links, soloImpresion } =
     datos().identity;
 
   // Datos que solo deben salir en el PDF (documento, etc.). Si `mostrar` es
@@ -248,9 +275,13 @@ function renderCabecera() {
     <p class="hero__role">
       <!-- --ch = número de caracteres: la animación de tecleo lo necesita
            para saber cuánto ancho recorrer (funciona porque la fuente es monoespaciada) -->
-      <span class="typing" style="--ch: ${role.length}">${esc(role)}</span>
+      <span class="typing${rolePrint ? " webOnly" : ""}" style="--ch: ${role.length}">${esc(role)}</span>${
+        // El PDF lleva el puesto con el nombre que se busca en un portal de
+        // empleo, más el stack. Va en la segunda línea del documento porque es
+        // lo primero que mira tanto un filtro como una persona.
+        rolePrint ? `<span class="printOnly">${esc(rolePrint)}</span>` : ""
+      }
     </p>
-    <p class="hero__tagline">${esc(tagline)}</p>
     <p class="hero__meta">
       ${esc(location)}
       <span class="entry__dot" aria-hidden="true">·</span>
@@ -259,11 +290,18 @@ function renderCabecera() {
     <ul class="hero__links">
       ${links
         .map(
+          // El icono va DENTRO del enlace: así también es zona clicable, que en
+          // un móvil son unos milímetros más de blanco al que apuntar. Y sustituye
+          // a la etiqueta escrita ("GitHub:"), que decía lo mismo ocupando más.
+          // El `sr-only` la mantiene para quien no ve el icono.
+          // El texto va envuelto en su propio span porque en pantallas
+          // estrechas se esconde y solo queda el icono. Un trozo de texto
+          // suelto dentro del enlace no se puede ocultar con CSS: hay que
+          // poder apuntarle con un selector.
           (enlace) => `
         <li>
-          <span class="hero__linkLabel" aria-hidden="true">${esc(enlace.label)}:</span>
           <a href="${esc(enlace.href)}"${enlaceExterno(enlace.href)}>
-            <span class="sr-only">${esc(enlace.label)}: </span>${esc(enlace.text)}
+            ${icono(enlace.icon)}<span class="sr-only">${esc(enlace.label)}: </span><span class="hero__linkText">${esc(enlace.text)}</span>
           </a>
         </li>`,
         )
@@ -288,11 +326,23 @@ function renderSecciones() {
                  aria-labelledby="${esc(seccion.id)}-title" data-reveal>
           <h2 class="section__title" id="${esc(seccion.id)}-title" tabindex="-1">
             <!-- En pantalla se ve el comando; el lector de pantalla y el PDF
-                 leen el título de verdad. -->
+                 leen el título de verdad. titlePrint existe para el PDF: un
+                 filtro de selección busca encabezados que conoce, y "Otras
+                 experiencias" no le dice nada. Sin titlePrint se usa el
+                 título normal y no cambia nada. -->
             <span class="section__cmd" aria-hidden="true">
               <span class="prompt">$</span> cat <span class="section__file">${esc(seccion.file)}</span>
             </span>
-            <span class="section__plain">${esc(seccion.title)}</span>
+            ${
+              // Con `titlePrint` se pintan los dos y cada medio esconde el que
+              // no le toca. No vale con sustituir uno por otro: este mismo
+              // elemento es el que oye un lector de pantalla en la web, y ahí
+              // el título bueno es el corto.
+              seccion.titlePrint
+                ? `<span class="section__plain webOnly">${esc(seccion.title)}</span>
+                   <span class="section__plain printOnly">${esc(seccion.titlePrint)}</span>`
+                : `<span class="section__plain">${esc(seccion.title)}</span>`
+            }
           </h2>
           ${renderizar(cv[seccion.id])}
         </section>`;
@@ -301,12 +351,44 @@ function renderSecciones() {
 }
 
 function renderPie() {
-  const { footer } = datos();
+  const { footer, identity } = datos();
 
+  /**
+   * Los mismos enlaces de la cabecera, otra vez al final y solo como iconos.
+   * No es duplicar por duplicar: esta página se lee de arriba abajo, y quien
+   * termina abajo tendría que volver a subir para encontrarte. Aquí no hay
+   * texto porque no hace falta leer la URL — solo tocarla.
+   *
+   * `aria-label` es obligatorio: sin él, un enlace cuyo único contenido es un
+   * SVG decorativo se anuncia como "enlace" y nada más. `title` da lo mismo
+   * en forma de globito al pasar el ratón.
+   */
+  const contacto = `
+    <ul class="site-footer__contact">
+      ${identity.links
+        .map(
+          (enlace) => `
+        <li>
+          <a class="site-footer__icon" href="${esc(enlace.href)}"${enlaceExterno(enlace.href)}
+             aria-label="${esc(enlace.label)}" title="${esc(enlace.label)}">
+            ${icono(enlace.icon)}
+          </a>
+        </li>`,
+        )
+        .join("")}
+    </ul>`;
+
+  // `note` es opcional: si no está en data.js no se pinta el párrafo, porque
+  // un `$` sin comando detrás parece un fallo de render, no una decisión.
   document.querySelector(".site-footer").innerHTML = `
-    <p class="site-footer__note">
+    ${contacto}
+    ${
+      footer.note
+        ? `<p class="site-footer__note">
       <span class="prompt" aria-hidden="true">$</span> ${esc(footer.note)}
-    </p>
+    </p>`
+        : ""
+    }
     <p class="site-footer__updated">${esc(footer.updated)}</p>`;
 }
 

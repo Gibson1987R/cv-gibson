@@ -60,12 +60,6 @@
   }
 }
 
-.hero__tagline {
-  margin-top: var(--space-3);
-  max-width: var(--measure);
-  font-size: var(--text-lg);
-}
-
 .hero__meta {
   margin-top: var(--space-3);
   color: var(--text-muted);
@@ -76,16 +70,96 @@
   color: var(--accent);
 }
 
+/* Rejilla y no flex a propósito. Con `flex-wrap` cada enlace empieza donde
+   acaba el anterior, así que la segunda fila nunca cae bajo la primera y el
+   bloque se lee torcido. Con dos columnas, las cuatro entradas arrancan en dos
+   verticales fijas.
+
+   `max-content` = cada columna mide lo que mide su enlace más largo, sin
+   partirlo en dos líneas. Con `1fr` se repartirían el ancho a partes iguales y
+   la columna corta quedaría con un hueco enorme al lado. */
+/* Un punto más grande que el resto de la letra pequeña de la cabecera. Los
+   iconos miden 1em, así que suben con el texto en vez de por su cuenta: si se
+   agrandara solo el dibujo, sobresaldría de la línea y empujaría el renglón. */
 .hero__links {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
   gap: var(--space-2) var(--space-5);
   margin-top: var(--space-4);
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
+}
+
+/* Debajo de 48rem las dos columnas no caben: la URL de LinkedIn sola ya llena
+   la pantalla. Una sola columna, y esta vez `minmax(0, 1fr)` en vez de
+   `max-content`: una URL no tiene espacios, así que `max-content` la deja
+   entera y la saca por el borde derecho. Con `1fr` la columna se limita al
+   ancho disponible y `anywhere` autoriza a partirla donde haga falta. */
+/* Por debajo de 47rem las dos columnas ya no caben: piden 729 px entre las dos
+   URLs y el hueco del medio. En vez de apilarlas y arrastrar una URL de 49
+   caracteres por media pantalla, se esconde el texto y quedan los cuatro
+   iconos en fila, como en el pie.
+
+   El número sale de medir, no de redondear: 47rem son 752 px, los 729 que se
+   necesitan más un margen. Si algún día se acorta la URL de LinkedIn, las dos
+   columnas caben antes y este número puede bajar. */
+/* El corte está medido, no elegido: con la letra a 16px las dos columnas piden
+   791 px entre las dos URLs y el hueco del medio. Por debajo de 50rem (800 px)
+   la segunda se saldría, así que ahí se pasa a los cuatro iconos.
+   Si algún día se acorta la URL de LinkedIn —hoy son 49 caracteres— este
+   número baja a unas 46rem y las columnas caben en pantallas más pequeñas.
+
+   `screen and` no sobra: al imprimir, el área útil de un A4 mide unos 680 px,
+   o sea menos que este corte, así que sin la palabra `screen` el PDF saldría
+   con el diseño de móvil — iconos grandes y sin las direcciones escritas. */
+@media screen and (max-width: 50rem) {
+  .hero__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    /* Alinea el primer icono con el texto de arriba, no su zona de toque */
+    margin-left: calc(var(--space-3) * -1);
+  }
+
+  .hero__linkText {
+    display: none;
+  }
+
+  /* Mismas medidas que .site-footer__icon: 44 px es la zona mínima que un dedo
+     acierta sin fallar, y el dibujo crece porque ya no tiene texto al lado que
+     lo acompañe. */
+  .hero__links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: var(--space-3);
+    border-radius: var(--radius);
+  }
+
+  .hero__links .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0;
+  }
 }
 
 .hero__linkLabel {
   color: var(--text-muted);
+}
+
+/* Glifo de un enlace de contacto.
+   1em = exactamente la altura del texto que lleva al lado, así que crece y
+   mengua con él sin tocar nada. `currentColor` hace lo mismo con el color:
+   verde junto al texto verde, negro en el PDF, correcto en los dos temas sin
+   una sola regla extra. El desplazamiento vertical lo baja hasta la línea
+   base; sin él, el icono flota por encima de las letras. */
+.icon {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  vertical-align: -0.125em;
+  margin-right: var(--space-1);
 }
 
 /* --- Secciones --- */
@@ -121,6 +195,53 @@
 }
 
 /* --- Piezas comunes --- */
+
+/**
+ * Justificado con partición automática de palabras.
+ *
+ * Las dos propiedades van SIEMPRE juntas. Justificar sin `hyphens` deja que el
+ * navegador estire los espacios hasta cuadrar el margen derecho, y en una
+ * fuente monoespaciada —donde todos los caracteres miden igual— esos huecos se
+ * vuelven canales blancos que cruzan el párrafo. Con `hyphens` puede partir
+ * palabras al final de línea y los espacios se quedan casi normales.
+ *
+ * El silabeo lo hace el navegador según el idioma del documento, y ese idioma
+ * lo fija render.js en <html lang> al pintar. Por eso el texto se corta bien
+ * tanto en español como en inglés sin configurar nada más: si `lang` mintiera,
+ * partiría por donde no toca.
+ */
+.prose p,
+.bullets li,
+.entry__result {
+  text-align: justify;
+  -webkit-hyphens: auto; /* Safari lo pide con prefijo */
+  hyphens: auto;
+}
+
+/**
+ * Excepción para pantallas estrechas: se vuelve a la izquierda.
+ *
+ * El justificado reparte el sobrante de cada línea entre sus espacios, así que
+ * cuantas menos palabras hay, más le toca a cada hueco. Por debajo de 40rem
+ * caben unos 60 caracteres por línea y el reparto empieza a abrir huecos que
+ * se ven; por encima hay palabras de sobra donde disimularlo.
+ *
+ * Es una excepción y no al revés (justificar solo en pantallas anchas) para
+ * que el PDF conserve el justificado: el papel no es `screen`, así que no
+ * entra aquí. Y ahí se ve mejor todavía, porque la fuente impresa no es
+ * monoespaciada y el sobrante se reparte en espacios más pequeños.
+ *
+ * Los guiones se quedan: con el texto a la izquierda ya no cuadran el margen,
+ * pero siguen evitando que el borde derecho quede en diente de sierra cuando
+ * toca una palabra larga ("humanitarios", "responsable").
+ */
+@media screen and (max-width: 40rem) {
+  .prose p,
+  .bullets li,
+  .entry__result {
+    text-align: left;
+  }
+}
 
 .prose {
   max-width: var(--measure);
@@ -220,7 +341,7 @@
    entienda sin leer. */
 .entry__roleTag {
   display: block;
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   color: var(--accent);
   font-weight: 700;
 }
@@ -233,90 +354,7 @@
 .entry__result {
   margin-top: var(--space-2);
   max-width: var(--measure);
-  font-size: var(--text-sm);
-}
-
-/* --- Collage de cifras (Otras experiencias) --- */
-
-.viz {
-  margin-top: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-  background: var(--bg-soft);
-  border-left: 2px solid var(--accent);
-  border-radius: 0 var(--radius) var(--radius) 0;
-  max-width: var(--measure);
-}
-
-.viz__title {
-  font-size: var(--text-xs);
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-/* Cifras sueltas: el número grande, la etiqueta debajo y pequeña */
-.viz__stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-5);
-  margin-top: var(--space-2);
-}
-
-.viz__figure {
-  display: block;
-  font-size: var(--text-xl);
-  font-weight: 700;
-  color: var(--accent);
-  line-height: 1.1;
-}
-
-.viz__caption {
-  display: block;
-  font-size: var(--text-xs);
-  color: var(--text-muted);
-}
-
-/* Barras: etiqueta · barra · valor, en tres columnas alineadas */
-.viz__bars {
-  margin-top: var(--space-3);
-  display: grid;
-  gap: var(--space-2);
-}
-
-.viz__row {
-  display: grid;
-  /* 12rem es lo que mide la etiqueta más larga ("operadores logísticos") sin
-     partirse; el mínimo deja sitio a la barra cuando la pantalla es estrecha. */
-  grid-template-columns: minmax(5.5rem, 12rem) 1fr auto;
-  align-items: center;
-  gap: var(--space-3);
-  font-size: var(--text-sm);
-}
-
-.viz__label {
-  color: var(--text-muted);
-}
-
-.viz__track {
-  height: 10px;
-  background: var(--border);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.viz__fill {
-  display: block;
-  height: 100%;
-  /* Sin el mínimo, un valor muy pequeño frente al mayor (1 h contra 30 h)
-     se queda en una barra invisible y parece un fallo de render. */
-  min-width: 3px;
-  background: var(--accent);
-  border-radius: 999px;
-}
-
-.viz__value {
-  font-variant-numeric: tabular-nums;
-  font-weight: 700;
+  font-size: var(--text-base);
 }
 
 /* --- Desplegable de «Otras experiencias» --- */
@@ -380,6 +418,12 @@
 
 /* Datos que solo se imprimen (documento, etc.): en pantalla no ocupan sitio */
 .hero__printOnly {
+  display: none;
+}
+
+/* Lo que solo existe en el PDF. Ver la nota de print.css: el PDF lo lee un
+   programa antes que una persona, y necesita datos que en la web estorban. */
+.printOnly {
   display: none;
 }
 

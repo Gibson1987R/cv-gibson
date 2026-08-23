@@ -27,28 +27,63 @@ export const esc = (valor) =>
 
 const chips = (items, etiqueta) => `
   <ul class="chips" aria-label="${esc(etiqueta)}">
-    ${items.map((item) => `<li class="chip">${esc(item)}</li>`).join("")}
+    ${items
+      .flatMap((item) => trozo(item))
+      .map(({ texto, clases }) => `<li${attrClase("chip", clases)}>${texto}</li>`)
+      .join("")}
   </ul>`;
 
 const enlaceExterno = (href) =>
   href.startsWith("mailto:") ? "" : ' target="_blank" rel="noopener noreferrer"';
 
 /**
- * Un párrafo o una viñeta puede escribirse de dos formas en data.js:
+ * Un párrafo o una viñeta puede escribirse de tres formas en data.js:
  *
- *   "texto"                        → sale en la web y en el PDF
- *   { text: "texto", soloWeb: true } → solo en la web
+ *   "texto"                            → sale en la web y en el PDF
+ *   { text: "texto", soloWeb: true }   → solo en la web
+ *   { text: "largo", pdf: "corto" }    → la web lee el largo, el PDF el corto
  *
- * Lo segundo existe para el PDF: ahí manda la brevedad, porque lo lee un
+ * Las dos últimas existen por el PDF: ahí manda la brevedad, porque lo lee un
  * programa de selección y luego alguien con prisa. Lo que en la web es
- * narrativa, en dos páginas de papel puede ser repetición.
+ * narrativa, en una hoja de papel es lo que impide que quepa.
  *
- * Devuelve el texto ya escapado y la clase que le toca, si le toca alguna.
+ * `pdf` no es un segundo CV: es el mismo hecho dicho en una línea. Se pintan
+ * las dos redacciones y cada medio esconde la que no le toca, igual que hacen
+ * `rolePrint` y `titlePrint`.
+ *
+ * Devuelve SIEMPRE una lista —una pieza, o dos cuando hay versión de papel—
+ * con el texto ya escapado y el nombre de la clase que le toca, si le toca.
  */
-const trozo = (valor) =>
-  typeof valor === "string"
-    ? { texto: esc(valor), clase: "" }
-    : { texto: esc(valor.text), clase: valor.soloWeb ? ' class="webOnly"' : "" };
+const trozo = (valor) => {
+  if (typeof valor === "string") return [{ texto: esc(valor), clases: "" }];
+  if (valor.soloWeb) return [{ texto: esc(valor.text), clases: "webOnly" }];
+  if (valor.pdf)
+    return [
+      { texto: esc(valor.text), clases: "webOnly" },
+      { texto: esc(valor.pdf), clases: "printOnly" },
+    ];
+  return [{ texto: esc(valor.text), clases: "" }];
+};
+
+/**
+ * Une las clases propias del elemento con la que decide en qué medio sale, y
+ * devuelve el atributo entero o nada. Sin esto, un elemento que ya tiene clase
+ * (`entry__result`) no podría además llevar la del medio.
+ */
+const attrClase = (...nombres) => {
+  const lista = nombres.filter(Boolean).join(" ");
+  return lista ? ` class="${lista}"` : "";
+};
+
+/**
+ * El stack de una entrada, solo en el PDF. Un sistema de selección busca
+ * "React" o "Python" dentro del puesto donde se usaron: un término que solo
+ * aparece en la lista de habilidades del final no cuenta como experiencia con
+ * esa tecnología. En la web sobra —ahí se lee el producto, no la herramienta—,
+ * y por eso vive en la misma línea del `about` y no en una propia.
+ */
+const stackPrint = (valor) =>
+  valor ? `<span class="printOnly"> · ${esc(valor)}</span>` : "";
 
 /** El periodo de una entrada, solo para el PDF. Sin `period`, no pinta nada. */
 const periodo = (valor) =>
@@ -91,10 +126,8 @@ const renderizadores = {
   about: (parrafos) => `
     <div class="prose">
       ${parrafos
-        .map((p) => {
-          const { texto, clase } = trozo(p);
-          return `<p${clase}>${texto}</p>`;
-        })
+        .flatMap((p) => trozo(p))
+        .map(({ texto, clases }) => `<p${attrClase(clases)}>${texto}</p>`)
         .join("")}
     </div>`,
 
@@ -124,24 +157,26 @@ const renderizadores = {
                    juntos. Al final, después de las viñetas, ya no las liga. -->${periodo(entrada.period)}
             </span>
           </h3>
-          <p class="entry__meta">${esc(entrada.about)}</p>
+          <p class="entry__meta">${esc(entrada.about)}${stackPrint(entrada.stack)}</p>
           ${
             entrada.work?.length
               ? `<ul class="bullets">
             ${entrada.work
-              .map((linea) => {
-                const { texto, clase } = trozo(linea);
-                return `<li${clase}>${texto}</li>`;
-              })
+              .flatMap((linea) => trozo(linea))
+              .map(({ texto, clases }) => `<li${attrClase(clases)}>${texto}</li>`)
               .join("")}
           </ul>`
               : ""
           }
           ${
             entrada.result
-              ? `<p class="entry__result">
-            <span class="entry__resultLabel">${esc(ui().resultLabel)}</span> ${esc(entrada.result)}
-          </p>`
+              ? trozo(entrada.result)
+                  .map(
+                    ({ texto, clases }) => `<p${attrClase("entry__result", clases)}>
+            <span class="entry__resultLabel">${esc(ui().resultLabel)}</span> ${texto}
+          </p>`,
+                  )
+                  .join("")
               : ""
           }
         </li>`,
@@ -172,7 +207,7 @@ const renderizadores = {
             <span class="sr-only">${esc(ui().srTo)}</span>
             <time datetime="${esc(puesto.end)}">${esc(puesto.endLabel)}</time>
             <span class="entry__dot" aria-hidden="true">·</span>
-            ${esc(puesto.context)}
+            ${esc(puesto.context)}${stackPrint(puesto.stack)}
           </p>
           <!-- Plegado por defecto: solo se ve el cargo y las fechas; el relato
                se abre al tocarlo. Es un details nativo, sin JS: funciona con
@@ -184,10 +219,8 @@ const renderizadores = {
             </summary>
             <ul class="bullets">
               ${puesto.achievements
-                .map((logro) => {
-                  const { texto, clase } = trozo(logro);
-                  return `<li${clase}>${texto}</li>`;
-                })
+                .flatMap((logro) => trozo(logro))
+                .map(({ texto, clases }) => `<li${attrClase(clases)}>${texto}</li>`)
                 .join("")}
             </ul>
           </details>
@@ -216,9 +249,16 @@ const renderizadores = {
         .map(
           (estudio) => `
         <li class="entry entry--compact">
-          <h3 class="entry__title">${esc(estudio.title)}</h3>
+          <!-- El título y el centro admiten versión de papel, igual que una
+               viñeta: los nombres oficiales completos son correctos en la web
+               y en el PDF ocupan dos líneas cada uno. -->
+          ${trozo(estudio.title)
+            .map(({ texto, clases }) => `<h3${attrClase("entry__title", clases)}>${texto}</h3>`)
+            .join("")}
           <p class="entry__meta">
-            ${esc(estudio.institution)}
+            ${trozo(estudio.institution)
+              .map(({ texto, clases }) => `<span${attrClase(clases)}>${texto}</span>`)
+              .join("")}
             ${
               // Sin año no se pinta ni el punto separador ni un <time> vacío.
               // Y solo es <time> si es un año suelto: "2017-2020" es un rango y
@@ -237,7 +277,7 @@ const renderizadores = {
             // El enlace de verificación: sin él, "35 cursos" es una afirmación;
             // con él, es algo que el lector puede comprobar en diez segundos.
             estudio.link
-              ? `<p class="entry__verify"><a href="${esc(estudio.link.href)}"${enlaceExterno(estudio.link.href)}>${esc(estudio.link.text)}</a></p>`
+              ? `<p${attrClase("entry__verify", estudio.link.soloWeb ? "webOnly" : "")}><a href="${esc(estudio.link.href)}"${enlaceExterno(estudio.link.href)}>${esc(estudio.link.text)}</a></p>`
               : ""
           }
         </li>`,

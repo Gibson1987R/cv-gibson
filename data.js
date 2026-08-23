@@ -117,7 +117,10 @@ export const CV_DATA = {
      * hace hoy) y el último (qué aporta) se quedan en los dos.
      */
     about: [
-      "Construyo producto web dirigiendo agentes de IA: escribo la especificación, reviso el código que sale, lo pruebo y lo pongo en línea. Hoy lo hago para directo-ia, un producto de venta por WhatsApp para restaurantes, donde soy responsable del flujo de onboarding.",
+      {
+        text: "Construyo producto web dirigiendo agentes de IA: escribo la especificación, reviso el código que sale, lo pruebo y lo pongo en línea. Hoy lo hago para directo-ia, un producto de venta por WhatsApp para restaurantes, donde soy responsable del flujo de onboarding.",
+        pdf: "Desarrollador web: JavaScript, TypeScript, React y Next.js. Construyo producto dirigiendo agentes de IA: escribo la especificación, reviso el código y lo despliego. Hoy, el onboarding de directo-ia (venta por WhatsApp con IA). Antes, nueve años de docencia y coordinación de equipos de 58 personas.",
+      },
       {
         soloWeb: true,
         text: "Llegué aquí porque una necesidad me despertó la curiosidad. Había estudiado programación años antes, pero nunca la había aplicado en un trabajo: ni dando clases ni coordinando proyectos humanitarios se me cruzó el problema que la pidiera. Se me cruzó facturando en un hospital, donde se iban las tardes partiendo a mano los PDF escaneados de cada paciente. Sabía la regla —qué documentos pide cada EPS y cómo cambian según el tipo de atención—, así que la puse por escrito, la trabajé con Copilot hasta que salió un script que se llevaba el trabajo pesado, y treinta horas de clasificación pasaron a una.",
@@ -126,7 +129,10 @@ export const CV_DATA = {
         soloWeb: true,
         text: "Ese fue el primer código mío que resolvió algo de verdad, y ya lo escribí así: dirigiendo una IA con un criterio que era mío. Ahí aprendí lo que sigo haciendo hoy — el cuello de botella no es escribir el código, es entender bien el problema. Lo volví a comprobar en Talento Humano, modelando los datos de más de quinientos contratistas para que cada documento saliera solo.",
       },
-      "Vengo de coordinar equipos y de administrar procesos, y eso es lo que aporto además del código: entiendo el problema desde dentro antes de proponer nada. Primero me meto en el dolor, luego construyo la solución.",
+      {
+        text: "Vengo de coordinar equipos y de administrar procesos, y eso es lo que aporto además del código: entiendo el problema desde dentro antes de proponer nada. Primero me meto en el dolor, luego construyo la solución.",
+        soloWeb: true,
+      },
     ],
 
     /**
@@ -169,13 +175,25 @@ export const CV_DATA = {
          */
         start: "2026-06",
         about: "Venta por WhatsApp con IA para restaurantes · mi trabajo hoy",
+        stack: "Next.js · React · TypeScript · Vercel",
         work: [
-          "El restaurante que se da de alta va a trabajar con una IA todos los días, así que propuse que el registro se pareciera a eso: una conversación, y no un formulario de pasos como el de cualquier otra web. Al dueño del producto le gustó la idea y el onboarding se rehízo con esa forma.",
-          "Construí ese flujo: cada paso pregunta lo que necesita cuando toca, avisa en el punto exacto donde falta algo y no te deja seguir con secciones a medias sin que lo sepas.",
-          "Lo dejé usable solo con teclado y aguantando nombres largos, pantallas bajas y móvil, porque quien da de alta un restaurante lo hace desde el celular y en medio del servicio.",
+          {
+            text: "El restaurante que se da de alta va a trabajar con una IA todos los días, así que propuse que el registro se pareciera a eso: una conversación, y no un formulario de pasos como el de cualquier otra web. Al dueño del producto le gustó la idea y el onboarding se rehízo con esa forma.",
+            pdf: "Propuse y construí el alta como conversación con la IA del producto; sustituyó al formulario y está en producción.",
+          },
+          {
+            text: "Construí ese flujo: cada paso pregunta lo que necesita cuando toca, avisa en el punto exacto donde falta algo y no te deja seguir con secciones a medias sin que lo sepas.",
+            soloWeb: true,
+          },
+          {
+            soloWeb: true,
+            text: "Lo dejé usable solo con teclado y aguantando nombres largos, pantallas bajas y móvil, porque quien da de alta un restaurante lo hace desde el celular y en medio del servicio.",
+          },
         ],
-        result:
-          "Hoy un restaurante se da de alta conversando con la misma IA que va a usar después, en vez de rellenando un formulario. Ese cambio de forma salió de mi propuesta.",
+        result: {
+          soloWeb: true,
+          text: "Hoy un restaurante se da de alta conversando con la misma IA que va a usar después, en vez de rellenando un formulario. Ese cambio de forma salió de mi propuesta.",
+        },
       },
       {
         name: "chess-lab",
@@ -190,13 +208,25 @@ export const CV_DATA = {
         start: "2026-06",
         about:
           "PWA para aprender ajedrez sin conexión: lecciones, tablero y puzzles",
+        stack: "React · TypeScript · PWA · Dexie · Supabase",
         work: [
-          "El contenido estaba en un solo idioma y traducirlo a mano era inviable. Monté una traducción que ocurre en el propio navegador, respeta el vocabulario de ajedrez (una torre no es una «tower»), conserva las imágenes de las lecciones y guarda lo ya traducido para no repetir el trabajo ni gastar conexión.",
-          "Dejé la aplicación entera en tres idiomas, de modo que el mismo curso sirve a tres públicos sin duplicar contenido.",
-          "Añadí el inicio de sesión opcional: quien quiera conservar su progreso puede, y quien no, sigue jugando sin cuenta. Y arreglé la navegación entre puzzles, que dejaba al usuario atascado.",
+          {
+            text: "El contenido estaba en un solo idioma y traducirlo a mano era inviable. Monté una traducción que ocurre en el propio navegador, respeta el vocabulario de ajedrez (una torre no es una «tower»), conserva las imágenes de las lecciones y guarda lo ya traducido para no repetir el trabajo ni gastar conexión.",
+            pdf: "Traducción en el navegador con vocabulario de ajedrez y caché en IndexedDB; app entera en tres idiomas.",
+          },
+          {
+            text: "Dejé la aplicación entera en tres idiomas, de modo que el mismo curso sirve a tres públicos sin duplicar contenido.",
+            soloWeb: true,
+          },
+          {
+            soloWeb: true,
+            text: "Añadí el inicio de sesión opcional: quien quiera conservar su progreso puede, y quien no, sigue jugando sin cuenta. Y arreglé la navegación entre puzzles, que dejaba al usuario atascado.",
+          },
         ],
-        result:
-          "Un estudiante puede hacer el curso entero en su idioma y sin conexión; antes el contenido existía en uno solo. Todo lo que entregué entró tras la revisión del dueño del repo.",
+        result: {
+          soloWeb: true,
+          text: "Un estudiante puede hacer el curso entero en su idioma y sin conexión; antes el contenido existía en uno solo. Todo lo que entregué entró tras la revisión del dueño del repo.",
+        },
       },
       {
         name: "honest-english",
@@ -206,13 +236,25 @@ export const CV_DATA = {
         start: "2026-05",
         about:
           "Rastreador de aprendizaje de inglés que se niega a gamificar",
+        stack: "JavaScript · HTML · CSS · sin dependencias",
         work: [
-          "Decidí el producto en contra de lo obvio: el contador muestra los días que llevo SIN practicar, no la racha. La racha premia no romperla; el hueco te enseña dónde abandonaste.",
-          "Escribí un feedback de escritura que no adula: si el texto está mal, lo dice. Un producto que te felicita por todo no te enseña inglés.",
-          "Me impuse una restricción que ningún cliente exigía —cero dependencias— y la sostuve con una lista de revisión propia que la impide.",
+          {
+            text: "Decidí el producto en contra de lo obvio: el contador muestra los días que llevo SIN practicar, no la racha. La racha premia no romperla; el hueco te enseña dónde abandonaste.",
+            pdf: "Producto propio de la idea al despliegue, con cero dependencias autoimpuestas; en línea y en uso.",
+          },
+          {
+            soloWeb: true,
+            text: "Escribí un feedback de escritura que no adula: si el texto está mal, lo dice. Un producto que te felicita por todo no te enseña inglés.",
+          },
+          {
+            soloWeb: true,
+            text: "Me impuse una restricción que ningún cliente exigía —cero dependencias— y la sostuve con una lista de revisión propia que la impide.",
+          },
         ],
-        result:
-          "En línea y en uso: es la herramienta con la que sigo mi propio inglés, sin racha que mantener ni elogios de adorno.",
+        result: {
+          soloWeb: true,
+          text: "En línea y en uso: es la herramienta con la que sigo mi propio inglés, sin racha que mantener ni elogios de adorno.",
+        },
       },
       {
         name: "fiestas-web",
@@ -230,13 +272,25 @@ export const CV_DATA = {
         start: "2026-02",
         about:
           "Páginas para fiestas infantiles: la invitación, la confirmación en vivo y la galería",
+        stack: "React · Firebase/Firestore · Vite · Vercel",
         work: [
-          "Nació de un dolor concreto: organizar el cumpleaños de mi hijo sin saber cuánta gente iba a llegar. En vez de resolver esa fiesta, lo convertí en servicio: cada cliente es una entrada de configuración con su propia ruta y su lista de invitados aislada, así que dar de alta una fiesta nueva ya no es volver a programar.",
-          "Cerré la edición y el borrado con permisos de administrador: los invitados confirman, y nadie más toca la lista.",
-          "Publiqué una demo abierta con una fiesta inventada, porque a un cliente no le vendes una captura: le enseñas la lista actualizándose en su propio teléfono.",
+          {
+            text: "Nació de un dolor concreto: organizar el cumpleaños de mi hijo sin saber cuánta gente iba a llegar. En vez de resolver esa fiesta, lo convertí en servicio: cada cliente es una entrada de configuración con su propia ruta y su lista de invitados aislada, así que dar de alta una fiesta nueva ya no es volver a programar.",
+            pdf: "Servicio multi-cliente en Firestore, con confirmación en vivo y demo pública; usado en una fiesta real.",
+          },
+          {
+            soloWeb: true,
+            text: "Cerré la edición y el borrado con permisos de administrador: los invitados confirman, y nadie más toca la lista.",
+          },
+          {
+            soloWeb: true,
+            text: "Publiqué una demo abierta con una fiesta inventada, porque a un cliente no le vendes una captura: le enseñas la lista actualizándose en su propio teléfono.",
+          },
         ],
-        result:
-          "Usado en una fiesta real y con demo pública donde cualquiera puede confirmar y ver la lista actualizarse en vivo.",
+        result: {
+          soloWeb: true,
+          text: "Usado en una fiesta real y con demo pública donde cualquiera puede confirmar y ver la lista actualizarse en vivo.",
+        },
       },
       {
         name: "bancolombia-lunchmoney",
@@ -247,13 +301,25 @@ export const CV_DATA = {
         start: "2026-06",
         about:
           "Las alertas del banco se convierten solas en movimientos registrados",
+        stack: "JavaScript · Google Apps Script · API REST",
         work: [
-          "Un cliente perdía el rastro de sus gastos porque nadie apunta cada compra. Automaticé el registro entero: la alerta del banco entra al correo y sale como movimiento clasificado, sin que nadie escriba nada.",
-          "Es dinero de otra persona, así que no improviso: cada cambio en la lectura de los correos lo pruebo antes contra correos reales guardados.",
-          "La opero y la mantengo yo. Cuando el banco cambia el formato del mensaje, el que lo arregla soy yo.",
+          {
+            text: "Un cliente perdía el rastro de sus gastos porque nadie apunta cada compra. Automaticé el registro entero: la alerta del banco entra al correo y sale como movimiento clasificado, sin que nadie escriba nada.",
+            pdf: "La alerta del banco entra por Gmail y sale como movimiento clasificado vía API; en producción para un cliente.",
+          },
+          {
+            soloWeb: true,
+            text: "Es dinero de otra persona, así que no improviso: cada cambio en la lectura de los correos lo pruebo antes contra correos reales guardados.",
+          },
+          {
+            soloWeb: true,
+            text: "La opero y la mantengo yo. Cuando el banco cambia el formato del mensaje, el que lo arregla soy yo.",
+          },
         ],
-        result:
-          "En producción sobre las cuentas reales de un cliente: sus gastos quedan registrados sin que él apunte nada.",
+        result: {
+          soloWeb: true,
+          text: "En producción sobre las cuentas reales de un cliente: sus gastos quedan registrados sin que él apunte nada.",
+        },
       },
     ],
 
@@ -275,36 +341,62 @@ export const CV_DATA = {
         startLabel: "sep 2021",
         endLabel: "dic 2023",
         achievements: [
-          "Coordiné a 58 personas en territorio: 21 acompañantes que verificaban el cumplimiento de los menús, 16 promotores, 10 operadores logísticos, 6 ingenieros y técnicos de agua y 5 proveedores. Repartí las tareas, armé los cronogramas y sostuve el seguimiento de lo que cada quien tenía que entregar.",
-          "Articulé a comunidades indígenas, equipos técnicos e instituciones aliadas para que una actividad pudiera ocurrir. Sin ese acuerdo previo, en terreno no se ejecuta nada.",
-          "Mantuve la trazabilidad de todo lo ejecutado con reportes y organización documental: un proyecto humanitario que no puede demostrar lo que hizo, no se renueva.",
+          {
+            text: "Coordiné a 58 personas en territorio: 21 acompañantes que verificaban el cumplimiento de los menús, 16 promotores, 10 operadores logísticos, 6 ingenieros y técnicos de agua y 5 proveedores. Repartí las tareas, armé los cronogramas y sostuve el seguimiento de lo que cada quien tenía que entregar.",
+            pdf: "Coordiné 58 personas en territorio: cronogramas, delegación, seguimiento y trazabilidad documental.",
+          },
+          {
+            soloWeb: true,
+            text: "Articulé a comunidades indígenas, equipos técnicos e instituciones aliadas para que una actividad pudiera ocurrir. Sin ese acuerdo previo, en terreno no se ejecuta nada.",
+          },
+          {
+            soloWeb: true,
+            text: "Mantuve la trazabilidad de todo lo ejecutado con reportes y organización documental: un proyecto humanitario que no puede demostrar lo que hizo, no se renueva.",
+          },
         ],
       },
       {
         role: "Tecnólogo en Caja y Facturación",
         company: "Hospital Departamental San Juan de Dios E.S.E.",
         context: "Colombia · Aquí escribí mi primer código útil",
+        stack: "Python · automatización documental",
         start: "2025-02",
         end: "2025-10",
         startLabel: "feb 2025",
         endLabel: "oct 2025",
         achievements: [
-          "Cada EPS pide un juego distinto de documentos y cambia según el tipo de atención: facturar era partir a mano un PDF escaneado, hoja por hoja. Ordené primero la recepción, para que cada escaneo saliera siempre igual.",
-          "Sobre ese orden, escribí con Copilot un script que identificaba EPS, factura y tipo de atención y dejaba las carpetas ya divididas y renombradas en todas las combinaciones posibles; yo solo borraba las que no aplicaban. De unas 30 horas a una, y cien casos costaban lo mismo que uno.",
+          {
+            soloWeb: true,
+            text: "Cada EPS pide un juego distinto de documentos y cambia según el tipo de atención: facturar era partir a mano un PDF escaneado, hoja por hoja. Ordené primero la recepción, para que cada escaneo saliera siempre igual.",
+          },
+          {
+            text: "Sobre ese orden, escribí con Copilot un script que identificaba EPS, factura y tipo de atención y dejaba las carpetas ya divididas y renombradas en todas las combinaciones posibles; yo solo borraba las que no aplicaban. De unas 30 horas a una, y cien casos costaban lo mismo que uno.",
+            pdf: "Script en Python que clasificaba y dividía los PDF de facturación por EPS y tipo de atención: de ~30 horas a 1.",
+          },
         ],
       },
       {
         role: "Tecnólogo para el área de Talento Humano",
         company: "Hospital Departamental San Juan de Dios E.S.E.",
         context: "Colombia · Contratación y control documental",
+        stack: "Excel · modelado de datos",
         start: "2025-11",
         end: "2026-03",
         startLabel: "nov 2025",
         endLabel: "mar 2026",
         achievements: [
-          "Modelé en Excel la base de más de 500 contratistas de cuatro municipios, contando que una misma persona puede tener varios perfiles si está en más de un programa: datos personales, rol y cargo, fecha de inicio y de cierre.",
-          "La conecté con Word por combinación de correspondencia, tratando la hoja como una tabla de entidad-relación: cada plantilla consulta los campos que necesita y se rellena sola. Emitir un documento pasó de 20 o 30 minutos a 4 o 5.",
-          "Revisé hojas de vida, soportes y expedientes verificando que cada requisito y cada título estuvieran donde debían antes de la validación jurídica, y llevé el seguimiento del plan de mejora y del mapa de riesgos que exige la Contraloría.",
+          {
+            text: "Modelé en Excel la base de más de 500 contratistas de cuatro municipios, contando que una misma persona puede tener varios perfiles si está en más de un programa: datos personales, rol y cargo, fecha de inicio y de cierre.",
+            pdf: "Modelé la base de 500+ contratistas y la conecté con Word: emitir un documento pasó de 20-30 min a 4-5.",
+          },
+          {
+            soloWeb: true,
+            text: "La conecté con Word por combinación de correspondencia, tratando la hoja como una tabla de entidad-relación: cada plantilla consulta los campos que necesita y se rellena sola. Emitir un documento pasó de 20 o 30 minutos a 4 o 5.",
+          },
+          {
+            soloWeb: true,
+            text: "Revisé hojas de vida, soportes y expedientes verificando que cada requisito y cada título estuvieran donde debían antes de la validación jurídica, y llevé el seguimiento del plan de mejora y del mapa de riesgos que exige la Contraloría.",
+          },
         ],
       },
       {
@@ -316,9 +408,18 @@ export const CV_DATA = {
         startLabel: "sep 2012",
         endLabel: "jul 2021",
         achievements: [
-          "Enseñé matemáticas nueve años a entre 200 y 300 estudiantes por año, y reformulé la misma explicación tantas veces como hizo falta hasta dar con la que le servía a cada uno.",
-          "Sostuve la comunicación con familias y comunidad educativa para que el acompañamiento no terminara en la puerta del aula.",
-          "Es la habilidad que más uso programando: leer algo ajeno, entenderlo y poder contarlo.",
+          {
+            text: "Enseñé matemáticas nueve años a entre 200 y 300 estudiantes por año, y reformulé la misma explicación tantas veces como hizo falta hasta dar con la que le servía a cada uno.",
+            pdf: "Nueve años enseñando matemáticas a entre 200 y 300 estudiantes por año.",
+          },
+          {
+            soloWeb: true,
+            text: "Sostuve la comunicación con familias y comunidad educativa para que el acompañamiento no terminara en la puerta del aula.",
+          },
+          {
+            soloWeb: true,
+            text: "Es la habilidad que más uso programando: leer algo ajeno, entenderlo y poder contarlo.",
+          },
         ],
       },
     ],
@@ -342,7 +443,7 @@ export const CV_DATA = {
           "PWA y offline",
           "Accesibilidad",
           "Internacionalización",
-          "CSS sin frameworks",
+          { text: "CSS sin frameworks", soloWeb: true },
         ],
       },
       {
@@ -353,7 +454,7 @@ export const CV_DATA = {
           "IndexedDB / Dexie",
           "Google Apps Script",
           "APIs REST",
-          "Autenticación y roles",
+          { text: "Autenticación y roles", soloWeb: true },
         ],
       },
       {
@@ -361,8 +462,8 @@ export const CV_DATA = {
         items: [
           "Git",
           "GitHub",
-          "Pull requests",
-          "Issues",
+          { text: "Pull requests", soloWeb: true },
+          { text: "Issues", soloWeb: true },
           "Revisión de código",
           "GitHub Actions",
           "Despliegue continuo (Vercel, Netlify)",
@@ -380,13 +481,13 @@ export const CV_DATA = {
         category: "Gestión y equipo",
         items: [
           "Coordinación de equipos",
-          "Delegación y seguimiento",
-          "Comunicación con cliente",
+          { text: "Delegación y seguimiento", soloWeb: true },
+          { text: "Comunicación con cliente", soloWeb: true },
           "Excel y Google Sheets",
           "Modelado de datos en tablas",
-          "Combinación de correspondencia",
-          "Tableros Kanban (Trello, Notion, Asana)",
-          "Documentación y trazabilidad",
+          { text: "Combinación de correspondencia", soloWeb: true },
+          { text: "Tableros Kanban (Trello, Notion, Asana)", soloWeb: true },
+          { text: "Documentación y trazabilidad", soloWeb: true },
         ],
       },
     ],
@@ -413,11 +514,15 @@ export const CV_DATA = {
       {
         title: "Formación en programación — Platzi",
         institution:
-          "Carrera de JavaScript · ~35 cursos entre JavaScript, React, Node y maquetación · Curso Práctico de Python: creación de un CRUD (21 h)",
+          {
+            text: "Carrera de JavaScript · ~35 cursos entre JavaScript, React, Node y maquetación · Curso Práctico de Python: creación de un CRUD (21 h)",
+            pdf: "Carrera de JavaScript · ~35 cursos de JS, React y Node · Python: CRUD (21 h)",
+          },
         year: "2017–2020",
         link: {
           text: "platzi.com/@GibsonR",
           href: "https://platzi.com/@GibsonR",
+          soloWeb: true,
         },
       },
       {
@@ -432,10 +537,14 @@ export const CV_DATA = {
         year: "",
       },
       {
-        title:
-          "Técnico Superior Universitario en Administración de Recursos Humanos",
-        institution:
-          "Convalidado en Colombia como Tecnólogo en Gestión de Talento Humano",
+        title: {
+          text: "Técnico Superior Universitario en Administración de Recursos Humanos",
+          pdf: "T.S.U. en Administración de Recursos Humanos",
+        },
+        institution: {
+          text: "Convalidado en Colombia como Tecnólogo en Gestión de Talento Humano",
+          pdf: "Convalidado como Tecnólogo en Gestión de Talento Humano",
+        },
         year: "",
       },
     ],
@@ -619,7 +728,10 @@ export const CV_DATA = {
 
     /* Ver la nota del bloque `es`: los dos de en medio no van al PDF. */
     about: [
-      "I build web products by directing AI agents: I write the spec, review the code that comes out, test it and put it online. Today I do that for directo-ia, a WhatsApp sales product for restaurants, where I own the onboarding flow.",
+      {
+        text: "I build web products by directing AI agents: I write the spec, review the code that comes out, test it and put it online. Today I do that for directo-ia, a WhatsApp sales product for restaurants, where I own the onboarding flow.",
+        pdf: "Web developer: JavaScript, TypeScript, React and Next.js. I build products by directing AI agents: I write the spec, review the code and ship it. Today, the onboarding flow at directo-ia (WhatsApp sales with AI). Before that, nine years teaching and coordinating teams of 58 people.",
+      },
       {
         soloWeb: true,
         text: "I got here because a need woke up my curiosity. I had studied programming years earlier but had never applied it at work: neither teaching nor coordinating humanitarian projects ever threw up the problem that called for it. Hospital billing did, where the afternoons went into splitting scanned PDFs by hand, patient by patient. I knew the rule — which documents each insurer asks for and how they change with the type of visit — so I wrote that logic down, worked it through with Copilot until a script came out that took the heavy lifting, and thirty hours of sorting came down to one.",
@@ -628,7 +740,10 @@ export const CV_DATA = {
         soloWeb: true,
         text: "That was the first code of mine that solved something real, and I already wrote it this way: directing an AI with judgement that was mine. It taught me what I still do today — the bottleneck is not writing the code, it is understanding the problem. I saw it again in Human Resources, modelling the records of more than five hundred contractors so each document generated itself.",
       },
-      "I come from coordinating teams and running administrative processes, and that is what I bring on top of the code: I understand the problem from the inside before proposing anything. First I get into the pain, then I build the solution.",
+      {
+        soloWeb: true,
+        text: "I come from coordinating teams and running administrative processes, and that is what I bring on top of the code: I understand the problem from the inside before proposing anything. First I get into the pain, then I build the solution.",
+      },
     ],
 
     /* Ver la nota del bloque `es`: una sola lista, ordenada por impacto. */
@@ -643,13 +758,25 @@ export const CV_DATA = {
         period: "Jun 2026 — Present",
         start: "2026-06",
         about: "AI sales over WhatsApp for restaurants · my job today",
+        stack: "Next.js · React · TypeScript · Vercel",
         work: [
-          "A restaurant signing up is going to work with an AI every day, so I proposed that the sign-up should feel like that: a conversation, not the step-by-step form every other site uses. The product owner liked the idea and the onboarding was rebuilt around it.",
-          "I built that flow: each step asks for what it needs when it needs it, flags the exact point where something is missing, and does not let you carry on with half-finished sections without knowing.",
-          "I made it usable with the keyboard alone, and able to hold up with long names, short screens and mobile, because whoever signs up a restaurant does it from a phone in the middle of service.",
+          {
+            text: "A restaurant signing up is going to work with an AI every day, so I proposed that the sign-up should feel like that: a conversation, not the step-by-step form every other site uses. The product owner liked the idea and the onboarding was rebuilt around it.",
+            pdf: "I proposed and built sign-up as a conversation with the product's own AI; it replaced the form and is in production.",
+          },
+          {
+            soloWeb: true,
+            text: "I built that flow: each step asks for what it needs when it needs it, flags the exact point where something is missing, and does not let you carry on with half-finished sections without knowing.",
+          },
+          {
+            soloWeb: true,
+            text: "I made it usable with the keyboard alone, and able to hold up with long names, short screens and mobile, because whoever signs up a restaurant does it from a phone in the middle of service.",
+          },
         ],
-        result:
-          "A restaurant now signs up by talking to the same AI it will use afterwards, instead of filling in a form. That change of shape came from my proposal.",
+        result: {
+          soloWeb: true,
+          text: "A restaurant now signs up by talking to the same AI it will use afterwards, instead of filling in a form. That change of shape came from my proposal.",
+        },
       },
       {
         name: "chess-lab",
@@ -659,13 +786,25 @@ export const CV_DATA = {
         period: "Jun 2026",
         start: "2026-06",
         about: "A PWA for learning chess offline: lessons, board and puzzles",
+        stack: "React · TypeScript · PWA · Dexie · Supabase",
         work: [
-          "The content existed in one language only and translating it by hand was not viable. I built a translation that happens in the browser itself, respects chess vocabulary (a «torre» is not a tower), keeps the lesson images, and stores what is already translated so the work is never repeated and no connection is wasted.",
-          "I left the whole application in three languages, so the same course serves three audiences without duplicating content.",
-          "I added optional sign-in: those who want to keep their progress can, and those who do not keep playing without an account. And I fixed the navigation between puzzles, which left users stuck.",
+          {
+            text: "The content existed in one language only and translating it by hand was not viable. I built a translation that happens in the browser itself, respects chess vocabulary (a «torre» is not a tower), keeps the lesson images, and stores what is already translated so the work is never repeated and no connection is wasted.",
+            pdf: "In-browser translation that respects chess vocabulary and caches to IndexedDB; whole app in three languages.",
+          },
+          {
+            soloWeb: true,
+            text: "I left the whole application in three languages, so the same course serves three audiences without duplicating content.",
+          },
+          {
+            soloWeb: true,
+            text: "I added optional sign-in: those who want to keep their progress can, and those who do not keep playing without an account. And I fixed the navigation between puzzles, which left users stuck.",
+          },
         ],
-        result:
-          "A student can now take the whole course in their own language and with no connection; before, the content existed in one language only. Everything I delivered went in after review by the repository owner.",
+        result: {
+          soloWeb: true,
+          text: "A student can now take the whole course in their own language and with no connection; before, the content existed in one language only. Everything I delivered went in after review by the repository owner.",
+        },
       },
       {
         name: "honest-english",
@@ -674,13 +813,25 @@ export const CV_DATA = {
         period: "May 2026",
         start: "2026-05",
         about: "An English learning tracker that refuses to gamify",
+        stack: "JavaScript · HTML · CSS · zero dependencies",
         work: [
-          "I decided the product against the obvious: the counter shows the days I have gone WITHOUT practising, not the streak. A streak rewards not breaking it; the gap shows you where you gave up.",
-          "I wrote writing feedback that does not flatter: if the text is bad, it says so. A product that congratulates you for everything does not teach you English.",
-          "I imposed a constraint no client asked for — zero dependencies — and held it with a review checklist of my own that blocks them.",
+          {
+            text: "I decided the product against the obvious: the counter shows the days I have gone WITHOUT practising, not the streak. A streak rewards not breaking it; the gap shows you where you gave up.",
+            pdf: "My own product from idea to deploy, with zero dependencies self-imposed; online and in use.",
+          },
+          {
+            soloWeb: true,
+            text: "I wrote writing feedback that does not flatter: if the text is bad, it says so. A product that congratulates you for everything does not teach you English.",
+          },
+          {
+            soloWeb: true,
+            text: "I imposed a constraint no client asked for — zero dependencies — and held it with a review checklist of my own that blocks them.",
+          },
         ],
-        result:
-          "Online and in use: it is the tool I track my own English with, no streak to keep and no praise for decoration.",
+        result: {
+          soloWeb: true,
+          text: "Online and in use: it is the tool I track my own English with, no streak to keep and no praise for decoration.",
+        },
       },
       {
         name: "fiestas-web",
@@ -692,13 +843,25 @@ export const CV_DATA = {
         start: "2026-02",
         about:
           "Pages for children's parties: the invitation, the live RSVP and the gallery",
+        stack: "React · Firebase/Firestore · Vite · Vercel",
         work: [
-          "It came from a concrete pain: organizing my son's birthday without knowing how many people would show up. Instead of solving that one party, I turned it into a service: each client is one config entry with its own route and its own isolated guest list, so adding a new party is no longer programming again.",
-          "I locked editing and deleting behind admin permissions: guests confirm, and nobody else touches the list.",
-          "I published an open demo with a made-up party, because you do not sell a client a screenshot: you show them the list updating on their own phone.",
+          {
+            text: "It came from a concrete pain: organizing my son's birthday without knowing how many people would show up. Instead of solving that one party, I turned it into a service: each client is one config entry with its own route and its own isolated guest list, so adding a new party is no longer programming again.",
+            pdf: "Multi-client service on Firestore, with live RSVP and a public demo; used at a real party.",
+          },
+          {
+            soloWeb: true,
+            text: "I locked editing and deleting behind admin permissions: guests confirm, and nobody else touches the list.",
+          },
+          {
+            soloWeb: true,
+            text: "I published an open demo with a made-up party, because you do not sell a client a screenshot: you show them the list updating on their own phone.",
+          },
         ],
-        result:
-          "Used at a real party, with a public demo where anyone can RSVP and watch the list update live.",
+        result: {
+          soloWeb: true,
+          text: "Used at a real party, with a public demo where anyone can RSVP and watch the list update live.",
+        },
       },
       {
         name: "bancolombia-lunchmoney",
@@ -707,13 +870,25 @@ export const CV_DATA = {
         period: "Jun 2026",
         start: "2026-06",
         about: "Bank alerts turn themselves into recorded transactions",
+        stack: "JavaScript · Google Apps Script · REST API",
         work: [
-          "A client kept losing track of his spending because nobody writes down every purchase. I automated the whole record: the bank alert arrives by email and comes out as a classified transaction, with nobody typing anything.",
-          "It is someone else's money, so I do not improvise: every change to how the emails are read is tested first against real saved emails.",
-          "I run it and I maintain it. When the bank changes the format of the message, I am the one who fixes it.",
+          {
+            text: "A client kept losing track of his spending because nobody writes down every purchase. I automated the whole record: the bank alert arrives by email and comes out as a classified transaction, with nobody typing anything.",
+            pdf: "The bank alert arrives via Gmail and comes out as a classified transaction through an API; in production for a client.",
+          },
+          {
+            soloWeb: true,
+            text: "It is someone else's money, so I do not improvise: every change to how the emails are read is tested first against real saved emails.",
+          },
+          {
+            soloWeb: true,
+            text: "I run it and I maintain it. When the bank changes the format of the message, I am the one who fixes it.",
+          },
         ],
-        result:
-          "In production over a client's real accounts: his spending gets recorded without him writing down a thing.",
+        result: {
+          soloWeb: true,
+          text: "In production over a client's real accounts: his spending gets recorded without him writing down a thing.",
+        },
       },
     ],
 
@@ -728,36 +903,62 @@ export const CV_DATA = {
         startLabel: "Sep 2021",
         endLabel: "Dec 2023",
         achievements: [
-          "I coordinated 58 people in the field: 21 monitors checking that the meal plans were met, 16 promoters, 10 logistics operators, 6 water engineers and technicians, and 5 suppliers. I split the tasks, built the schedules and kept track of what each of them had to deliver.",
-          "I brought together indigenous communities, technical teams and partner institutions so an activity could happen at all. Without that agreement up front, nothing gets done on the ground.",
-          "I kept everything delivered traceable through reports and document management: a humanitarian project that cannot prove what it did does not get renewed.",
+          {
+            text: "I coordinated 58 people in the field: 21 monitors checking that the meal plans were met, 16 promoters, 10 logistics operators, 6 water engineers and technicians, and 5 suppliers. I split the tasks, built the schedules and kept track of what each of them had to deliver.",
+            pdf: "I coordinated 58 people in the field: schedules, delegation, follow-up and full document traceability.",
+          },
+          {
+            soloWeb: true,
+            text: "I brought together indigenous communities, technical teams and partner institutions so an activity could happen at all. Without that agreement up front, nothing gets done on the ground.",
+          },
+          {
+            soloWeb: true,
+            text: "I kept everything delivered traceable through reports and document management: a humanitarian project that cannot prove what it did does not get renewed.",
+          },
         ],
       },
       {
         role: "Cash desk and billing officer",
         company: "Hospital Departamental San Juan de Dios E.S.E.",
         context: "Colombia · Where I wrote my first useful code",
+        stack: "Python · document automation",
         start: "2025-02",
         end: "2025-10",
         startLabel: "Feb 2025",
         endLabel: "Oct 2025",
         achievements: [
-          "Every insurer asks for a different set of documents, and it changes again with the type of visit: billing meant splitting a scanned PDF by hand, page by page. I fixed the intake first, so every scan came out the same.",
-          "On top of that order, I wrote a script with Copilot that identified the insurer, the invoice and the type of visit, and left the folders already split and renamed in every possible combination; all I did was delete the ones that did not apply. From about 30 hours down to one, and a hundred cases cost the same as one.",
+          {
+            soloWeb: true,
+            text: "Every insurer asks for a different set of documents, and it changes again with the type of visit: billing meant splitting a scanned PDF by hand, page by page. I fixed the intake first, so every scan came out the same.",
+          },
+          {
+            text: "On top of that order, I wrote a script with Copilot that identified the insurer, the invoice and the type of visit, and left the folders already split and renamed in every possible combination; all I did was delete the ones that did not apply. From about 30 hours down to one, and a hundred cases cost the same as one.",
+            pdf: "A Python script that sorted and split billing PDFs by insurer and type of visit: from ~30 hours down to 1.",
+          },
         ],
       },
       {
         role: "Human resources officer",
         company: "Hospital Departamental San Juan de Dios E.S.E.",
         context: "Colombia · Hiring paperwork and document control",
+        stack: "Excel · data modelling",
         start: "2025-11",
         end: "2026-03",
         startLabel: "Nov 2025",
         endLabel: "Mar 2026",
         achievements: [
-          "I modelled in Excel the records of more than 500 contractors across four municipalities, accounting for the fact that one person can hold several profiles if they work in more than one programme: personal data, role and position, start and end dates.",
-          "I connected it to Word through mail merge, treating the sheet as an entity-relationship table: each template pulls the fields it needs and fills itself in. Issuing a document went from 20 or 30 minutes down to 4 or 5.",
-          "I reviewed CVs, supporting files and contractor records, checking that every requirement and every qualification was in place before legal validation, and followed up on the improvement plan and the risk map required by the public audit office.",
+          {
+            text: "I modelled in Excel the records of more than 500 contractors across four municipalities, accounting for the fact that one person can hold several profiles if they work in more than one programme: personal data, role and position, start and end dates.",
+            pdf: "I modelled the records of 500+ contractors and wired them to Word: issuing a document went from 20-30 min to 4-5.",
+          },
+          {
+            soloWeb: true,
+            text: "I connected it to Word through mail merge, treating the sheet as an entity-relationship table: each template pulls the fields it needs and fills itself in. Issuing a document went from 20 or 30 minutes down to 4 or 5.",
+          },
+          {
+            soloWeb: true,
+            text: "I reviewed CVs, supporting files and contractor records, checking that every requirement and every qualification was in place before legal validation, and followed up on the improvement plan and the risk map required by the public audit office.",
+          },
         ],
       },
       {
@@ -769,9 +970,18 @@ export const CV_DATA = {
         startLabel: "Sep 2012",
         endLabel: "Jul 2021",
         achievements: [
-          "I taught maths for nine years to between 200 and 300 students a year, and reworked the same explanation as many times as it took to find the one that worked for each of them.",
-          "I kept up the communication with families and the school community so the support did not end at the classroom door.",
-          "It is the skill I use most when I program: reading something written by someone else, understanding it and being able to explain it.",
+          {
+            text: "I taught maths for nine years to between 200 and 300 students a year, and reworked the same explanation as many times as it took to find the one that worked for each of them.",
+            pdf: "Nine years teaching maths to between 200 and 300 students a year.",
+          },
+          {
+            soloWeb: true,
+            text: "I kept up the communication with families and the school community so the support did not end at the classroom door.",
+          },
+          {
+            soloWeb: true,
+            text: "It is the skill I use most when I program: reading something written by someone else, understanding it and being able to explain it.",
+          },
         ],
       },
     ],
@@ -791,7 +1001,7 @@ export const CV_DATA = {
           "PWA and offline",
           "Accessibility",
           "Internationalization",
-          "CSS without frameworks",
+          { text: "CSS without frameworks", soloWeb: true },
         ],
       },
       {
@@ -802,7 +1012,7 @@ export const CV_DATA = {
           "IndexedDB / Dexie",
           "Google Apps Script",
           "REST APIs",
-          "Authentication and roles",
+          { text: "Authentication and roles", soloWeb: true },
         ],
       },
       {
@@ -810,8 +1020,8 @@ export const CV_DATA = {
         items: [
           "Git",
           "GitHub",
-          "Pull requests",
-          "Issues",
+          { text: "Pull requests", soloWeb: true },
+          { text: "Issues", soloWeb: true },
           "Code review",
           "GitHub Actions",
           "Continuous deployment (Vercel, Netlify)",
@@ -829,13 +1039,13 @@ export const CV_DATA = {
         category: "Management and teams",
         items: [
           "Team coordination",
-          "Delegation and follow-up",
-          "Client communication",
+          { text: "Delegation and follow-up", soloWeb: true },
+          { text: "Client communication", soloWeb: true },
           "Excel and Google Sheets",
           "Data modelling in tables",
-          "Mail merge",
-          "Kanban boards (Trello, Notion, Asana)",
-          "Documentation and traceability",
+          { text: "Mail merge", soloWeb: true },
+          { text: "Kanban boards (Trello, Notion, Asana)", soloWeb: true },
+          { text: "Documentation and traceability", soloWeb: true },
         ],
       },
     ],
@@ -846,11 +1056,15 @@ export const CV_DATA = {
       {
         title: "Programming — Platzi",
         institution:
-          "JavaScript career path · ~35 courses across JavaScript, React, Node and markup · Practical Python course: building a CRUD (21 h)",
+          {
+            text: "JavaScript career path · ~35 courses across JavaScript, React, Node and markup · Practical Python course: building a CRUD (21 h)",
+            pdf: "JavaScript career path · ~35 courses in JS, React and Node · Python: CRUD (21 h)",
+          },
         year: "2017–2020",
         link: {
           text: "platzi.com/@GibsonR",
           href: "https://platzi.com/@GibsonR",
+          soloWeb: true,
         },
       },
       {
@@ -860,14 +1074,19 @@ export const CV_DATA = {
         year: "2026",
       },
       {
-        title: "Bachelor's degree in Education — Rural and Farming Communities",
+        title: {
+          text: "Bachelor's degree in Education — Rural and Farming Communities",
+          pdf: "Bachelor's degree in Education (Rural Communities)",
+        },
         institution: "Venezuela",
         year: "",
       },
       {
-        title: "Higher University Technician in Human Resources Administration",
-        institution:
-          "Recognized in Colombia as Tecnólogo en Gestión de Talento Humano",
+        title: {
+          text: "Higher University Technician in Human Resources Administration",
+          pdf: "Higher University Technician in Human Resources",
+        },
+        institution: "Recognized in Colombia as Tecnólogo en Gestión de Talento Humano",
         year: "",
       },
     ],

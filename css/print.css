@@ -8,7 +8,7 @@
      ni una palabra del CV se pierde por ganar una página. */
   @page {
     size: A4;
-    margin: 12mm 13mm;
+    margin: 9mm 10mm;
   }
 
   :root {
@@ -28,8 +28,8 @@
     /* 9.8pt es el suelo cómodo para Georgia impresa; por debajo se lee con
        esfuerzo y un CV que cansa se deja a medias. El interlineado baja a 1.3:
        es donde más se gana, porque afecta a todas las líneas del documento. */
-    font-size: 9.8pt;
-    line-height: 1.3;
+    font-size: 9.3pt;
+    line-height: 1.2;
   }
 
   /* Fuera todo lo que solo existe en pantalla */
@@ -76,7 +76,7 @@
   /* --- Cabecera --- */
 
   .hero {
-    padding-bottom: 4pt;
+    padding-bottom: 3pt;
     border-bottom: 1pt solid #000;
   }
 
@@ -86,7 +86,7 @@
 
   .hero__name {
     margin: 0;
-    font-size: 20pt;
+    font-size: 17pt;
     letter-spacing: 0;
   }
 
@@ -118,12 +118,23 @@
      sección con nombres que reconoce— sobra en la web, y al revés. Estas dos
      clases son el interruptor: el contenido vive una sola vez en data.js y
      cada medio muestra su versión. */
+  /* `revert` y no `inline`: estas dos clases ya no marcan solo trozos de texto
+     dentro de una línea, también viñetas enteras, párrafos de resultado y
+     habilidades sueltas. Fijar `inline` los sacaba de su caja y pegaba una
+     viñeta con la siguiente. `revert` devuelve a cada etiqueta el display que
+     le corresponde —list-item a un li, block a un p, inline a un span— sin
+     tener que enumerarlas. */
   .printOnly {
-    display: inline;
+    display: revert;
   }
 
+  /* `!important` porque este interruptor tiene que ganar siempre. Sin él,
+     cualquier regla de componente que venga más abajo en este mismo archivo y
+     fije su propio display —`.chip { display: inline }`, por ejemplo— vuelve a
+     enseñar en papel lo que se había apartado, y con la misma especificidad
+     gana la última. El medio manda sobre el componente. */
   .webOnly {
-    display: none;
+    display: none !important;
   }
 
   /* Sin partir palabras en papel.
@@ -142,13 +153,13 @@
   /* --- Secciones --- */
 
   .section {
-    padding-block: 5pt 0;
+    padding-block: 2pt 0;
     border-top: 0;
     break-inside: auto;
   }
 
   .section__title {
-    margin-bottom: 4pt;
+    margin-bottom: 3pt;
     font-size: 11pt;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -167,7 +178,7 @@
   }
 
   .entries {
-    gap: 4pt;
+    gap: 2pt;
   }
 
   /* Orden cronológico inverso, solo en papel.
@@ -234,8 +245,23 @@
 
   .entry__title,
   .entry--compact .entry__title {
-    font-size: 11pt;
+    font-size: 10.5pt;
     break-after: avoid;
+  }
+
+  /* En pantalla el rol va encima del proyecto, en dos líneas: primero qué fui,
+     después dónde. En papel van en la misma, separados por un punto. Son cinco
+     entradas: cinco líneas que no dicen nada nuevo y que decidían si el CV
+     cabía en una hoja o en dos. */
+  .entry--card .entry__title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 5pt;
+  }
+
+  .entry--card .entry__roleTag::after {
+    content: " ·";
   }
 
   .entry__meta,
@@ -250,7 +276,7 @@
   }
 
   .bullets {
-    margin-top: 2pt;
+    margin-top: 1pt;
   }
 
   .bullets li + li {
@@ -276,12 +302,25 @@
     content: " · ";
   }
 
+  /* En pantalla cada grupo es un bloque con su título encima. En papel el
+     título va en la misma línea que su lista: seis títulos sueltos son seis
+     líneas gastadas en decir "Frontend", y esa es justo la hoja que falta. */
   .skills {
-    gap: 4pt 18pt;
+    gap: 2pt 18pt;
   }
 
   .skills__category {
-    font-size: 9.5pt;
+    display: inline;
+    font-size: 9pt;
+  }
+
+  .skills__category::after {
+    content: ":";
+  }
+
+  .chips {
+    display: inline;
+    margin-top: 0;
   }
 
   /* Enlaces en negro y sin subrayado: en papel el subrayado no lleva a
@@ -300,9 +339,10 @@
   }
 
   /* En papel no se toca nada: unos iconos sin URL debajo no llevan a ningún
-     sitio, y el contacto completo ya está impreso en la cabecera. */
-  .site-footer__note,
-  .site-footer__contact {
+     sitio, y el contacto completo ya está impreso en la cabecera. La fecha de
+     actualización tampoco: en una hoja que tiene que caber entera, un pie que
+     nadie busca cuesta las dos líneas que le faltan al contenido. */
+  .site-footer {
     display: none;
   }
 }

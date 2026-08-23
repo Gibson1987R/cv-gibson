@@ -13,6 +13,8 @@ The site uses Vite only for development and production build, not as a frontend 
   - Section `id` values must match the keys in `CV_DATA.es` and `CV_DATA.en`.
   - Section ids are identical across languages so fragment links like `#experience` work in both.
   - `experience` is the programming track (cards, no dates, ordered by impact); `otherExperience` is the earlier non-programming jobs (with dates). Both are written following [star.md](./star.md).
+  - Any paragraph, bullet, skill, education title or institution can carry a print-only rewrite: `{ text: "long, for the web", pdf: "one line, for the PDF" }`, or `{ text: "…", soloWeb: true }` to keep it off the page entirely. Both versions are rendered and CSS hides the wrong one. The PDF must stay one A4 page, so anything added to an entry has to earn its line.
+  - `stack` on an entry is print-only too: the technologies used in that job. It exists because an applicant tracking system does not credit a technology that only shows up in the skills list at the end.
 - `main.js` orchestrates page initialization, rendering, theme, motion and palette behavior.
 - `js/i18n.js` decides the active language.
 - `js/render.js` maps `data.js` into DOM structure.

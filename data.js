@@ -119,7 +119,7 @@ export const CV_DATA = {
     about: [
       {
         text: "Construyo producto web dirigiendo agentes de IA: escribo la especificación, reviso el código que sale, lo pruebo y lo pongo en línea. Hoy lo hago para directo-ia, un producto de venta por WhatsApp para restaurantes, donde soy responsable del flujo de onboarding.",
-        pdf: "Desarrollador web: JavaScript, TypeScript, React y Next.js. Construyo producto dirigiendo agentes de IA: escribo la especificación, reviso el código y lo despliego. Hoy, el onboarding de directo-ia (venta por WhatsApp con IA). Antes, nueve años de docencia y coordinación de equipos de 58 personas.",
+        pdf: "Construyo producto web dirigiendo agentes de IA: escribo la especificación, reviso el código que sale, lo pruebo y lo pongo en línea. Hoy lo hago para directo-ia, un producto de venta por WhatsApp para restaurantes, donde soy responsable del flujo de onboarding. Vengo de coordinar equipos y de administrar procesos: entiendo el problema desde dentro antes de proponer nada.",
       },
       {
         soloWeb: true,
@@ -179,7 +179,7 @@ export const CV_DATA = {
         work: [
           {
             text: "El restaurante que se da de alta va a trabajar con una IA todos los días, así que propuse que el registro se pareciera a eso: una conversación, y no un formulario de pasos como el de cualquier otra web. Al dueño del producto le gustó la idea y el onboarding se rehízo con esa forma.",
-            pdf: "Propuse y construí el alta como conversación con la IA del producto; sustituyó al formulario y está en producción.",
+            pdf: "Propuso que el registro fuera una conversación (no un formulario por pasos), porque el restaurante trabajará con una IA a diario; la propuesta fue aceptada y el onboarding se rehízo así.",
           },
           {
             text: "Construí ese flujo: cada paso pregunta lo que necesita cuando toca, avisa en el punto exacto donde falta algo y no te deja seguir con secciones a medias sin que lo sepas.",
@@ -212,11 +212,11 @@ export const CV_DATA = {
         work: [
           {
             text: "El contenido estaba en un solo idioma y traducirlo a mano era inviable. Monté una traducción que ocurre en el propio navegador, respeta el vocabulario de ajedrez (una torre no es una «tower»), conserva las imágenes de las lecciones y guarda lo ya traducido para no repetir el trabajo ni gastar conexión.",
-            pdf: "Traducción en el navegador con vocabulario de ajedrez y caché en IndexedDB; app entera en tres idiomas.",
+            pdf: "Traducción en el propio navegador que respeta vocabulario de ajedrez, conserva imágenes y cachea lo traducido.",
           },
           {
             text: "Dejé la aplicación entera en tres idiomas, de modo que el mismo curso sirve a tres públicos sin duplicar contenido.",
-            soloWeb: true,
+            pdf: "Aplicación entera en 3 idiomas sin duplicar contenido; login opcional; arregló navegación entre puzzles.",
           },
           {
             soloWeb: true,
@@ -240,7 +240,7 @@ export const CV_DATA = {
         work: [
           {
             text: "Decidí el producto en contra de lo obvio: el contador muestra los días que llevo SIN practicar, no la racha. La racha premia no romperla; el hueco te enseña dónde abandonaste.",
-            pdf: "Producto propio de la idea al despliegue, con cero dependencias autoimpuestas; en línea y en uso.",
+            pdf: "Contador de días SIN practicar (anti-racha); feedback de escritura que no adula; cero dependencias autoimpuesto.",
           },
           {
             soloWeb: true,
@@ -276,7 +276,7 @@ export const CV_DATA = {
         work: [
           {
             text: "Nació de un dolor concreto: organizar el cumpleaños de mi hijo sin saber cuánta gente iba a llegar. En vez de resolver esa fiesta, lo convertí en servicio: cada cliente es una entrada de configuración con su propia ruta y su lista de invitados aislada, así que dar de alta una fiesta nueva ya no es volver a programar.",
-            pdf: "Servicio multi-cliente en Firestore, con confirmación en vivo y demo pública; usado en una fiesta real.",
+            pdf: "Multi-cliente por configuración (cada fiesta con su ruta y lista aislada); permisos de administrador; demo pública.",
           },
           {
             soloWeb: true,
@@ -305,7 +305,7 @@ export const CV_DATA = {
         work: [
           {
             text: "Un cliente perdía el rastro de sus gastos porque nadie apunta cada compra. Automaticé el registro entero: la alerta del banco entra al correo y sale como movimiento clasificado, sin que nadie escriba nada.",
-            pdf: "La alerta del banco entra por Gmail y sale como movimiento clasificado vía API; en producción para un cliente.",
+            pdf: "Alertas del banco → correo → movimiento clasificado, sin escribir nada.",
           },
           {
             soloWeb: true,
@@ -343,7 +343,7 @@ export const CV_DATA = {
         achievements: [
           {
             text: "Coordiné a 58 personas en territorio: 21 acompañantes que verificaban el cumplimiento de los menús, 16 promotores, 10 operadores logísticos, 6 ingenieros y técnicos de agua y 5 proveedores. Repartí las tareas, armé los cronogramas y sostuve el seguimiento de lo que cada quien tenía que entregar.",
-            pdf: "Coordiné 58 personas en territorio: cronogramas, delegación, seguimiento y trazabilidad documental.",
+            pdf: "Coordinó 58 personas en territorio (21 acompañantes, 16 promotores, 10 operadores logísticos, 6 ingenieros/técnicos de agua, 5 proveedores); cronogramas y seguimiento.",
           },
           {
             soloWeb: true,
@@ -371,7 +371,7 @@ export const CV_DATA = {
           },
           {
             text: "Sobre ese orden, escribí con Copilot un script que identificaba EPS, factura y tipo de atención y dejaba las carpetas ya divididas y renombradas en todas las combinaciones posibles; yo solo borraba las que no aplicaban. De unas 30 horas a una, y cien casos costaban lo mismo que uno.",
-            pdf: "Script en Python que clasificaba y dividía los PDF de facturación por EPS y tipo de atención: de ~30 horas a 1.",
+            pdf: "Ordenó la recepción para estandarizar escaneos; script (con Copilot) que identificaba EPS, factura y tipo de atención y dividía/renombraba carpetas: de ~30 horas a 1.",
           },
         ],
       },
@@ -387,7 +387,7 @@ export const CV_DATA = {
         achievements: [
           {
             text: "Modelé en Excel la base de más de 500 contratistas de cuatro municipios, contando que una misma persona puede tener varios perfiles si está en más de un programa: datos personales, rol y cargo, fecha de inicio y de cierre.",
-            pdf: "Modelé la base de 500+ contratistas y la conecté con Word: emitir un documento pasó de 20-30 min a 4-5.",
+            pdf: "Modeló en Excel la base de 500+ contratistas de 4 municipios; combinación de correspondencia con Word: de 20-30 min a 4-5 por documento.",
           },
           {
             soloWeb: true,
@@ -410,7 +410,7 @@ export const CV_DATA = {
         achievements: [
           {
             text: "Enseñé matemáticas nueve años a entre 200 y 300 estudiantes por año, y reformulé la misma explicación tantas veces como hizo falta hasta dar con la que le servía a cada uno.",
-            pdf: "Nueve años enseñando matemáticas a entre 200 y 300 estudiantes por año.",
+            pdf: "9 años, entre 200 y 300 estudiantes por año; comunicación con familias y comunidad educativa.",
           },
           {
             soloWeb: true,

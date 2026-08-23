@@ -8,7 +8,7 @@
      ni una palabra del CV se pierde por ganar una página. */
   @page {
     size: A4;
-    margin: 9mm 10mm;
+    margin: 8mm 9mm;
   }
 
   :root {
@@ -28,8 +28,8 @@
     /* 9.8pt es el suelo cómodo para Georgia impresa; por debajo se lee con
        esfuerzo y un CV que cansa se deja a medias. El interlineado baja a 1.3:
        es donde más se gana, porque afecta a todas las líneas del documento. */
-    font-size: 9.3pt;
-    line-height: 1.2;
+    font-size: 8.5pt;
+    line-height: 1.12;
   }
 
   /* Fuera todo lo que solo existe en pantalla */
@@ -86,7 +86,7 @@
 
   .hero__name {
     margin: 0;
-    font-size: 17pt;
+    font-size: 15pt;
     letter-spacing: 0;
   }
 
@@ -191,6 +191,15 @@
     order: var(--print-order, 0);
   }
 
+  /* Formación, en papel, a dos columnas como las habilidades: son cuatro
+     entradas cortas y a una sola columna cada una arrastraba su segunda línea.
+     Es lo último que separa el CV de caber en la hoja. */
+  #education .entries {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 18pt;
+  }
+
   /* Formación: título y centro en la misma línea. Cuatro estudios en cuatro
      bloques de dos líneas gastaban media hoja para nada. */
   .entry--compact {
@@ -245,7 +254,7 @@
 
   .entry__title,
   .entry--compact .entry__title {
-    font-size: 10.5pt;
+    font-size: 9.8pt;
     break-after: avoid;
   }
 

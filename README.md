@@ -10,7 +10,7 @@ en inglés.
 
 [![Captura del CV en su tema oscuro](docs/captura.png)](https://cv-gibson-rosales.netlify.app)
 
-**Autor:** [Gibson Rosales](https://www.linkedin.com/in/gibson-rosales-fuenmayor-7b2201176) · [gibsonrosales@gmail.com](mailto:gibsonrosales@gmail.com)
+**Autor:** [Gibson Rosales](https://www.linkedin.com/in/gibson-rosales-fuenmayor) · [gibsonrosales@gmail.com](mailto:gibsonrosales@gmail.com)
 
 > _My CV as a single page: bilingual, keyboard-driven, zero runtime dependencies,
 > plain HTML, CSS and JavaScript. Switch the language with the **EN/ES** button

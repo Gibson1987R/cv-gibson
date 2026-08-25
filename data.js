@@ -64,11 +64,11 @@ export const CV_DATA = {
         },
         {
           label: "LinkedIn",
-          // El "7b2201176" del final es el sufijo que LinkedIn pone solo. Se
-          // puede quitar desde el perfil (Editar URL pública). Si lo cambias
-          // allí, cámbialo en los dos bloques de idioma.
-          text: "linkedin.com/in/gibson-rosales-fuenmayor-7b2201176",
-          href: "https://www.linkedin.com/in/gibson-rosales-fuenmayor-7b2201176",
+          // URL personalizada, sin el sufijo que LinkedIn pone solo (se quitó
+          // el 2026-08-25 desde Editar URL pública). Si la cambias allí,
+          // cámbiala en los dos bloques de idioma.
+          text: "linkedin.com/in/gibson-rosales-fuenmayor",
+          href: "https://www.linkedin.com/in/gibson-rosales-fuenmayor",
           icon: "linkedin",
         },
         /**
@@ -333,17 +333,21 @@ export const CV_DATA = {
      */
     otherExperience: [
       {
-        role: "Coordinador de proyecto",
+        role: "Coordinador regional — Estado Amazonas",
         company: "A.C. Construyendo Futuros / socio de UNICEF",
-        context: "Amazonas, Venezuela · Educación, protección, agua y saneamiento",
+        context: "Amazonas, Venezuela · Tres programas: alimentación escolar, agua y saneamiento, y medios de vida",
         start: "2021-09",
         end: "2023-12",
         startLabel: "sep 2021",
         endLabel: "dic 2023",
         achievements: [
           {
-            text: "Coordiné a 58 personas en territorio: 21 acompañantes que verificaban el cumplimiento de los menús, 16 promotores, 10 operadores logísticos, 6 ingenieros y técnicos de agua y 5 proveedores. Repartí las tareas, armé los cronogramas y sostuve el seguimiento de lo que cada quien tenía que entregar.",
-            pdf: "Coordinó 58 personas en territorio (21 acompañantes, 16 promotores, 10 operadores logísticos, 6 ingenieros/técnicos de agua, 5 proveedores); cronogramas y seguimiento.",
+            text: "Coordiné tres programas seguidos en el estado Amazonas: «AliMentes», de alimentación escolar (sep 2021 – ago 2022); el de agua, higiene y saneamiento en las escuelas del municipio Atures (jul – oct 2022); y «Manos Que Construyen» (2023), de medios de vida para empoderar a adolescentes y mujeres frente a las desigualdades de género. Los dos primeros los llevé en paralelo durante julio y agosto de 2022.",
+            pdf: "Coordinó tres programas en Amazonas: alimentación escolar «AliMentes», agua y saneamiento (WASH) y «Manos Que Construyen» (medios de vida); dos de ellos solapados.",
+          },
+          {
+            text: "Coordiné a 58 personas en territorio: en AliMentes, 21 acompañantes que verificaban el cumplimiento de los menús y 10 operadores logísticos; en el de agua y saneamiento, 6 ingenieros y técnicos con sus promotores asignados y un almacenista; más los proveedores de cada programa. Repartí las tareas, armé los cronogramas y sostuve el seguimiento de lo que cada quien tenía que entregar.",
+            pdf: "Coordinó 58 personas en territorio (acompañantes, promotores, operadores logísticos, ingenieros/técnicos de agua, almacenista y proveedores); cronogramas y seguimiento.",
           },
           {
             soloWeb: true,
@@ -359,7 +363,7 @@ export const CV_DATA = {
         role: "Tecnólogo en Caja y Facturación",
         company: "Hospital Departamental San Juan de Dios E.S.E.",
         context: "Colombia · Aquí escribí mi primer código útil",
-        stack: "Python · automatización documental",
+        stack: "Python · Xenco · automatización documental",
         start: "2025-02",
         end: "2025-10",
         startLabel: "feb 2025",
@@ -367,7 +371,7 @@ export const CV_DATA = {
         achievements: [
           {
             soloWeb: true,
-            text: "Cada EPS pide un juego distinto de documentos y cambia según el tipo de atención: facturar era partir a mano un PDF escaneado, hoja por hoja. Ordené primero la recepción, para que cada escaneo saliera siempre igual.",
+            text: "Facturaba a diario en Xenco, el sistema de información del hospital. Cada EPS pide un juego distinto de documentos y cambia según el tipo de atención: facturar era además partir a mano un PDF escaneado, hoja por hoja. Ordené primero la recepción, para que cada escaneo saliera siempre igual.",
           },
           {
             text: "Sobre ese orden, escribí con Copilot un script que identificaba EPS, factura y tipo de atención y dejaba las carpetas ya divididas y renombradas en todas las combinaciones posibles; yo solo borraba las que no aplicaban. De unas 30 horas a una, y cien casos costaban lo mismo que uno.",
@@ -702,8 +706,8 @@ export const CV_DATA = {
         },
         {
           label: "LinkedIn",
-          text: "linkedin.com/in/gibson-rosales-fuenmayor-7b2201176",
-          href: "https://www.linkedin.com/in/gibson-rosales-fuenmayor-7b2201176",
+          text: "linkedin.com/in/gibson-rosales-fuenmayor",
+          href: "https://www.linkedin.com/in/gibson-rosales-fuenmayor",
           icon: "linkedin",
         },
         {
@@ -895,16 +899,20 @@ export const CV_DATA = {
     /* Ver la nota del bloque `es`: también por impacto, y estas sí con fechas. */
     otherExperience: [
       {
-        role: "Project coordinator",
+        role: "Regional coordinator — Amazonas state",
         company: "A.C. Construyendo Futuros / UNICEF partner",
-        context: "Amazonas, Venezuela · Education, protection, water and sanitation",
+        context: "Amazonas, Venezuela · Three programmes: school feeding, water and sanitation, and livelihoods",
         start: "2021-09",
         end: "2023-12",
         startLabel: "Sep 2021",
         endLabel: "Dec 2023",
         achievements: [
           {
-            text: "I coordinated 58 people in the field: 21 monitors checking that the meal plans were met, 16 promoters, 10 logistics operators, 6 water engineers and technicians, and 5 suppliers. I split the tasks, built the schedules and kept track of what each of them had to deliver.",
+            text: "I coordinated three consecutive programmes in Amazonas state: «AliMentes», school feeding (Sep 2021 – Aug 2022); the water, hygiene and sanitation (WASH) programme in the schools of Atures municipality (Jul – Oct 2022); and «Manos Que Construyen» (2023), a livelihoods programme empowering adolescent girls and women against gender inequality. I ran the first two in parallel through July and August 2022.",
+            pdf: "Coordinated three programmes in Amazonas: school feeding, WASH, and a livelihoods programme; two of them running in parallel.",
+          },
+          {
+            text: "I coordinated 58 people in the field: on AliMentes, 21 monitors checking that the meal plans were met and 10 logistics operators; on WASH, 6 water engineers and technicians with their assigned promoters and a storekeeper; plus the suppliers of each programme. I split the tasks, built the schedules and kept track of what each of them had to deliver.",
             pdf: "I coordinated 58 people in the field: schedules, delegation, follow-up and full document traceability.",
           },
           {
@@ -921,7 +929,7 @@ export const CV_DATA = {
         role: "Cash desk and billing officer",
         company: "Hospital Departamental San Juan de Dios E.S.E.",
         context: "Colombia · Where I wrote my first useful code",
-        stack: "Python · document automation",
+        stack: "Python · Xenco · document automation",
         start: "2025-02",
         end: "2025-10",
         startLabel: "Feb 2025",
@@ -929,7 +937,7 @@ export const CV_DATA = {
         achievements: [
           {
             soloWeb: true,
-            text: "Every insurer asks for a different set of documents, and it changes again with the type of visit: billing meant splitting a scanned PDF by hand, page by page. I fixed the intake first, so every scan came out the same.",
+            text: "I billed daily in Xenco, the hospital information system. Every insurer asks for a different set of documents, and it changes again with the type of visit: billing also meant splitting a scanned PDF by hand, page by page. I fixed the intake first, so every scan came out the same.",
           },
           {
             text: "On top of that order, I wrote a script with Copilot that identified the insurer, the invoice and the type of visit, and left the folders already split and renamed in every possible combination; all I did was delete the ones that did not apply. From about 30 hours down to one, and a hundred cases cost the same as one.",

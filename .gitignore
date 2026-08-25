@@ -4,3 +4,6 @@ dist/
 
 # Local Netlify folder
 .netlify
+
+# Neurona de memoria local (no forma parte del proyecto)
+/cv-gibson.md

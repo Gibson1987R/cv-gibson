@@ -25,7 +25,7 @@ la misma hoja en inglés.
 **Desarrollador Web · JavaScript, React, Next.js**
 
 Medellín, Antioquia, Colombia · Disponible · remoto o presencial
-github.com/Gibson1987R · linkedin.com/in/gibson-rosales-fuenmayor-7b2201176
+github.com/Gibson1987R · linkedin.com/in/gibson-rosales-fuenmayor
 +57 310 552 8854 · gibsonrosales@gmail.com
 
 ## Perfil profesional
@@ -64,11 +64,12 @@ nov 2025 — mar 2026 · Colombia · Contratación y control documental · Excel
 - Modelé la base de 500+ contratistas y la conecté con Word: emitir un documento pasó de 20-30 min a 4-5.
 
 **Tecnólogo en Caja y Facturación @ Hospital Departamental San Juan de Dios E.S.E.**
-feb 2025 — oct 2025 · Colombia · Aquí escribí mi primer código útil · Python · automatización documental
+feb 2025 — oct 2025 · Colombia · Aquí escribí mi primer código útil · Python · Xenco · automatización documental
 - Script en Python que clasificaba y dividía los PDF de facturación por EPS y tipo de atención: de ~30 horas a 1.
 
-**Coordinador de proyecto @ A.C. Construyendo Futuros / socio de UNICEF**
-sep 2021 — dic 2023 · Amazonas, Venezuela · Educación, protección, agua y saneamiento
+**Coordinador regional (Estado Amazonas) @ A.C. Construyendo Futuros / socio de UNICEF**
+sep 2021 — dic 2023 · Amazonas, Venezuela · Alimentación escolar, agua y saneamiento, medios de vida
+- Coordiné tres programas: «AliMentes» de alimentación escolar (sep 2021 – ago 2022), agua, higiene y saneamiento (WASH) en las escuelas de Atures (jul – oct 2022) y «Manos Que Construyen» (2023), de medios de vida para adolescentes y mujeres; los dos primeros en paralelo.
 - Coordiné 58 personas en territorio: cronogramas, delegación, seguimiento y trazabilidad documental.
 
 **Profesor de matemáticas y educación básica @ Ministerio de Educación**

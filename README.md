@@ -3,7 +3,13 @@
 Mi currículum, hecho a mano. Una sola página, bilingüe (español / inglés), con
 estética de editor de código y sin una sola dependencia en el navegador.
 
-**En línea:** https://cv-gibson-rosales.netlify.app
+### ▶ Ábrelo: **<https://cv-gibson-rosales.netlify.app>**
+
+Pulsa <kbd>⌘K</kbd> para la paleta de comandos, o el botón **EN/ES** para verlo
+en inglés.
+
+[![Captura del CV en su tema oscuro](docs/captura.png)](https://cv-gibson-rosales.netlify.app)
+
 **Autor:** [Gibson Rosales](https://www.linkedin.com/in/gibson-rosales-fuenmayor-7b2201176) · [gibsonrosales@gmail.com](mailto:gibsonrosales@gmail.com)
 
 > _My CV as a single page: bilingual, keyboard-driven, zero runtime dependencies,

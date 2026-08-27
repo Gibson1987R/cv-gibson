@@ -8,7 +8,7 @@
  * basta con volver a llamar a renderCV().
  */
 
-import { datos, ui, otroIdioma } from "./i18n.js";
+import { datos, ui, otroIdioma, idioma } from "./i18n.js";
 import { icono } from "./icons.js";
 
 /** Escapa el texto antes de meterlo en HTML. Datos y marcado no se mezclan. */
@@ -480,6 +480,36 @@ function renderInterfaz() {
       <kbd>esc</kbd> ${esc(t.hintClose)}`;
   }
 }
+
+/**
+ * Chrome bautiza el PDF con el `document.title`, así que el archivo salía como
+ * «Gibson Rosales · Desarrollador con IA.pdf»: con espacios, con acentos y con
+ * un punto medio. elempleo rechaza de plano cualquier nombre que no sea letras
+ * y números, y el punto medio es el mismo carácter que Computrabajo no admite
+ * en sus formularios. Subir el CV obligaba a renombrarlo a mano cada vez.
+ *
+ * Se cambia el título justo antes de imprimir y se devuelve al terminar, que es
+ * el único momento en que Chrome lo lee para nombrar el archivo. Así el PDF sale
+ * ya con un nombre que pasa en los tres portales y la pestaña del navegador
+ * sigue diciendo lo que tiene que decir.
+ *
+ * `afterprint` dispara también cuando se cancela el diálogo, de modo que el
+ * título vuelve tanto si se guarda como si no.
+ */
+const NOMBRE_PDF = { es: "GibsonRosalesDesarrolladorWeb", en: "GibsonRosalesWebDeveloper" };
+
+function nombrarElPDF() {
+  let titulo = "";
+  addEventListener("beforeprint", () => {
+    titulo = document.title;
+    document.title = NOMBRE_PDF[idioma()] || NOMBRE_PDF.es;
+  });
+  addEventListener("afterprint", () => {
+    if (titulo) document.title = titulo;
+  });
+}
+
+nombrarElPDF();
 
 /** Pinta el CV entero en el idioma activo. */
 export function renderCV() {

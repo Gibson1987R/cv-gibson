@@ -203,7 +203,12 @@ const renderizadores = {
             <!-- datetime lleva la fecha legible por máquina (2025-11); el texto,
                  la legible por personas (nov 2025) -->
             <time datetime="${esc(puesto.start)}">${esc(puesto.startLabel)}</time>
-            <span aria-hidden="true">—</span>
+            <!-- Guion normal, NO raya larga (—). Un ATS busca el patron
+                 "mmm AAAA - mmm AAAA" para calcular los anos de experiencia;
+                 con raya larga el patron no casa y puede puntuar como si no
+                 hubiera experiencia. Verificado el 2026-08-27 con
+                 verificar-ats.py, que fallaba las seis fechas por esto. -->
+            <span aria-hidden="true">-</span>
             <span class="sr-only">${esc(ui().srTo)}</span>
             <time datetime="${esc(puesto.end)}">${esc(puesto.endLabel)}</time>
             <span class="entry__dot" aria-hidden="true">·</span>

@@ -166,7 +166,7 @@ export const CV_DATA = {
          * Mismo formato que las fechas de `otherExperience`, para que todo el
          * documento tenga un solo patrón que reconocer.
          */
-        period: "jun 2026 — actualidad",
+        period: "jun 2026 - actualidad",
         /**
          * La misma fecha en formato AAAA-MM. `period` es para leer; `start` es
          * para ordenar: con este formato, comparar dos fechas es comparar dos
@@ -183,15 +183,12 @@ export const CV_DATA = {
           },
           {
             text: "Construí ese flujo: cada paso pregunta lo que necesita cuando toca, avisa en el punto exacto donde falta algo y no te deja seguir con secciones a medias sin que lo sepas.",
-            soloWeb: true,
           },
           {
-            soloWeb: true,
             text: "Lo dejé usable solo con teclado y aguantando nombres largos, pantallas bajas y móvil, porque quien da de alta un restaurante lo hace desde el celular y en medio del servicio.",
           },
         ],
         result: {
-          soloWeb: true,
           text: "Hoy un restaurante se da de alta conversando con la misma IA que va a usar después, en vez de rellenando un formulario. Ese cambio de forma salió de mi propuesta.",
         },
       },
@@ -219,12 +216,10 @@ export const CV_DATA = {
             pdf: "Aplicación entera en 3 idiomas sin duplicar contenido; login opcional; arregló navegación entre puzzles.",
           },
           {
-            soloWeb: true,
             text: "Añadí el inicio de sesión opcional: quien quiera conservar su progreso puede, y quien no, sigue jugando sin cuenta. Y arreglé la navegación entre puzzles, que dejaba al usuario atascado.",
           },
         ],
         result: {
-          soloWeb: true,
           text: "Un estudiante puede hacer el curso entero en su idioma y sin conexión; antes el contenido existía en uno solo. Todo lo que entregué entró tras la revisión del dueño del repo.",
         },
       },
@@ -243,16 +238,13 @@ export const CV_DATA = {
             pdf: "Contador de días SIN practicar (anti-racha); feedback de escritura que no adula; cero dependencias autoimpuesto.",
           },
           {
-            soloWeb: true,
             text: "Escribí un feedback de escritura que no adula: si el texto está mal, lo dice. Un producto que te felicita por todo no te enseña inglés.",
           },
           {
-            soloWeb: true,
             text: "Me impuse una restricción que ningún cliente exigía —cero dependencias— y la sostuve con una lista de revisión propia que la impide.",
           },
         ],
         result: {
-          soloWeb: true,
           text: "En línea y en uso: es la herramienta con la que sigo mi propio inglés, sin racha que mantener ni elogios de adorno.",
         },
       },
@@ -279,16 +271,13 @@ export const CV_DATA = {
             pdf: "Multi-cliente por configuración (cada fiesta con su ruta y lista aislada); permisos de administrador; demo pública.",
           },
           {
-            soloWeb: true,
             text: "Cerré la edición y el borrado con permisos de administrador: los invitados confirman, y nadie más toca la lista.",
           },
           {
-            soloWeb: true,
             text: "Publiqué una demo abierta con una fiesta inventada, porque a un cliente no le vendes una captura: le enseñas la lista actualizándose en su propio teléfono.",
           },
         ],
         result: {
-          soloWeb: true,
           text: "Usado en una fiesta real y con demo pública donde cualquiera puede confirmar y ver la lista actualizarse en vivo.",
         },
       },
@@ -308,16 +297,13 @@ export const CV_DATA = {
             pdf: "Alertas del banco → correo → movimiento clasificado, sin escribir nada.",
           },
           {
-            soloWeb: true,
             text: "Es dinero de otra persona, así que no improviso: cada cambio en la lectura de los correos lo pruebo antes contra correos reales guardados.",
           },
           {
-            soloWeb: true,
             text: "La opero y la mantengo yo. Cuando el banco cambia el formato del mensaje, el que lo arregla soy yo.",
           },
         ],
         result: {
-          soloWeb: true,
           text: "En producción sobre las cuentas reales de un cliente: sus gastos quedan registrados sin que él apunte nada.",
         },
       },
@@ -350,11 +336,9 @@ export const CV_DATA = {
             pdf: "Coordinó 58 personas en territorio (acompañantes, promotores, operadores logísticos, ingenieros/técnicos de agua, almacenista y proveedores); cronogramas y seguimiento.",
           },
           {
-            soloWeb: true,
             text: "Articulé a comunidades indígenas, equipos técnicos e instituciones aliadas para que una actividad pudiera ocurrir. Sin ese acuerdo previo, en terreno no se ejecuta nada.",
           },
           {
-            soloWeb: true,
             text: "Mantuve la trazabilidad de todo lo ejecutado con reportes y organización documental: un proyecto humanitario que no puede demostrar lo que hizo, no se renueva.",
           },
         ],
@@ -370,7 +354,6 @@ export const CV_DATA = {
         endLabel: "oct 2025",
         achievements: [
           {
-            soloWeb: true,
             text: "Facturaba a diario en Xenco, el sistema de información del hospital. Cada EPS pide un juego distinto de documentos y cambia según el tipo de atención: facturar era además partir a mano un PDF escaneado, hoja por hoja. Ordené primero la recepción, para que cada escaneo saliera siempre igual.",
           },
           {
@@ -394,11 +377,9 @@ export const CV_DATA = {
             pdf: "Modeló en Excel la base de 500+ contratistas de 4 municipios; combinación de correspondencia con Word: de 20-30 min a 4-5 por documento.",
           },
           {
-            soloWeb: true,
             text: "La conecté con Word por combinación de correspondencia, tratando la hoja como una tabla de entidad-relación: cada plantilla consulta los campos que necesita y se rellena sola. Emitir un documento pasó de 20 o 30 minutos a 4 o 5.",
           },
           {
-            soloWeb: true,
             text: "Revisé hojas de vida, soportes y expedientes verificando que cada requisito y cada título estuvieran donde debían antes de la validación jurídica, y llevé el seguimiento del plan de mejora y del mapa de riesgos que exige la Contraloría.",
           },
         ],
@@ -417,11 +398,9 @@ export const CV_DATA = {
             pdf: "9 años, entre 200 y 300 estudiantes por año; comunicación con familias y comunidad educativa.",
           },
           {
-            soloWeb: true,
             text: "Sostuve la comunicación con familias y comunidad educativa para que el acompañamiento no terminara en la puerta del aula.",
           },
           {
-            soloWeb: true,
             text: "Es la habilidad que más uso programando: leer algo ajeno, entenderlo y poder contarlo.",
           },
         ],
@@ -447,7 +426,7 @@ export const CV_DATA = {
           "PWA y offline",
           "Accesibilidad",
           "Internacionalización",
-          { text: "CSS sin frameworks", soloWeb: true },
+          { text: "CSS sin frameworks" },
         ],
       },
       {
@@ -458,7 +437,7 @@ export const CV_DATA = {
           "IndexedDB / Dexie",
           "Google Apps Script",
           "APIs REST",
-          { text: "Autenticación y roles", soloWeb: true },
+          { text: "Autenticación y roles" },
         ],
       },
       {
@@ -466,8 +445,8 @@ export const CV_DATA = {
         items: [
           "Git",
           "GitHub",
-          { text: "Pull requests", soloWeb: true },
-          { text: "Issues", soloWeb: true },
+          { text: "Pull requests" },
+          { text: "Issues" },
           "Revisión de código",
           "GitHub Actions",
           "Despliegue continuo (Vercel, Netlify)",
@@ -485,13 +464,13 @@ export const CV_DATA = {
         category: "Gestión y equipo",
         items: [
           "Coordinación de equipos",
-          { text: "Delegación y seguimiento", soloWeb: true },
-          { text: "Comunicación con cliente", soloWeb: true },
+          { text: "Delegación y seguimiento" },
+          { text: "Comunicación con cliente" },
           "Excel y Google Sheets",
           "Modelado de datos en tablas",
-          { text: "Combinación de correspondencia", soloWeb: true },
-          { text: "Tableros Kanban (Trello, Notion, Asana)", soloWeb: true },
-          { text: "Documentación y trazabilidad", soloWeb: true },
+          { text: "Combinación de correspondencia" },
+          { text: "Tableros Kanban (Trello, Notion, Asana)" },
+          { text: "Documentación y trazabilidad" },
         ],
       },
     ],
@@ -526,7 +505,6 @@ export const CV_DATA = {
         link: {
           text: "platzi.com/@GibsonR",
           href: "https://platzi.com/@GibsonR",
-          soloWeb: true,
         },
       },
       {
@@ -759,7 +737,7 @@ export const CV_DATA = {
         href: "https://directo-ia.vercel.app",
         role: "Owner of the onboarding flow",
         /* Ver la nota del bloque `es`: `period` se lee, `start` ordena. */
-        period: "Jun 2026 — Present",
+        period: "Jun 2026 - Present",
         start: "2026-06",
         about: "AI sales over WhatsApp for restaurants · my job today",
         stack: "Next.js · React · TypeScript · Vercel",
@@ -769,16 +747,13 @@ export const CV_DATA = {
             pdf: "I proposed and built sign-up as a conversation with the product's own AI; it replaced the form and is in production.",
           },
           {
-            soloWeb: true,
             text: "I built that flow: each step asks for what it needs when it needs it, flags the exact point where something is missing, and does not let you carry on with half-finished sections without knowing.",
           },
           {
-            soloWeb: true,
             text: "I made it usable with the keyboard alone, and able to hold up with long names, short screens and mobile, because whoever signs up a restaurant does it from a phone in the middle of service.",
           },
         ],
         result: {
-          soloWeb: true,
           text: "A restaurant now signs up by talking to the same AI it will use afterwards, instead of filling in a form. That change of shape came from my proposal.",
         },
       },
@@ -797,16 +772,13 @@ export const CV_DATA = {
             pdf: "In-browser translation that respects chess vocabulary and caches to IndexedDB; whole app in three languages.",
           },
           {
-            soloWeb: true,
             text: "I left the whole application in three languages, so the same course serves three audiences without duplicating content.",
           },
           {
-            soloWeb: true,
             text: "I added optional sign-in: those who want to keep their progress can, and those who do not keep playing without an account. And I fixed the navigation between puzzles, which left users stuck.",
           },
         ],
         result: {
-          soloWeb: true,
           text: "A student can now take the whole course in their own language and with no connection; before, the content existed in one language only. Everything I delivered went in after review by the repository owner.",
         },
       },
@@ -824,16 +796,13 @@ export const CV_DATA = {
             pdf: "My own product from idea to deploy, with zero dependencies self-imposed; online and in use.",
           },
           {
-            soloWeb: true,
             text: "I wrote writing feedback that does not flatter: if the text is bad, it says so. A product that congratulates you for everything does not teach you English.",
           },
           {
-            soloWeb: true,
             text: "I imposed a constraint no client asked for — zero dependencies — and held it with a review checklist of my own that blocks them.",
           },
         ],
         result: {
-          soloWeb: true,
           text: "Online and in use: it is the tool I track my own English with, no streak to keep and no praise for decoration.",
         },
       },
@@ -854,16 +823,13 @@ export const CV_DATA = {
             pdf: "Multi-client service on Firestore, with live RSVP and a public demo; used at a real party.",
           },
           {
-            soloWeb: true,
             text: "I locked editing and deleting behind admin permissions: guests confirm, and nobody else touches the list.",
           },
           {
-            soloWeb: true,
             text: "I published an open demo with a made-up party, because you do not sell a client a screenshot: you show them the list updating on their own phone.",
           },
         ],
         result: {
-          soloWeb: true,
           text: "Used at a real party, with a public demo where anyone can RSVP and watch the list update live.",
         },
       },
@@ -881,16 +847,13 @@ export const CV_DATA = {
             pdf: "The bank alert arrives via Gmail and comes out as a classified transaction through an API; in production for a client.",
           },
           {
-            soloWeb: true,
             text: "It is someone else's money, so I do not improvise: every change to how the emails are read is tested first against real saved emails.",
           },
           {
-            soloWeb: true,
             text: "I run it and I maintain it. When the bank changes the format of the message, I am the one who fixes it.",
           },
         ],
         result: {
-          soloWeb: true,
           text: "In production over a client's real accounts: his spending gets recorded without him writing down a thing.",
         },
       },
@@ -916,11 +879,9 @@ export const CV_DATA = {
             pdf: "I coordinated 58 people in the field: schedules, delegation, follow-up and full document traceability.",
           },
           {
-            soloWeb: true,
             text: "I brought together indigenous communities, technical teams and partner institutions so an activity could happen at all. Without that agreement up front, nothing gets done on the ground.",
           },
           {
-            soloWeb: true,
             text: "I kept everything delivered traceable through reports and document management: a humanitarian project that cannot prove what it did does not get renewed.",
           },
         ],
@@ -936,7 +897,6 @@ export const CV_DATA = {
         endLabel: "Oct 2025",
         achievements: [
           {
-            soloWeb: true,
             text: "I billed daily in Xenco, the hospital information system. Every insurer asks for a different set of documents, and it changes again with the type of visit: billing also meant splitting a scanned PDF by hand, page by page. I fixed the intake first, so every scan came out the same.",
           },
           {
@@ -960,11 +920,9 @@ export const CV_DATA = {
             pdf: "I modelled the records of 500+ contractors and wired them to Word: issuing a document went from 20-30 min to 4-5.",
           },
           {
-            soloWeb: true,
             text: "I connected it to Word through mail merge, treating the sheet as an entity-relationship table: each template pulls the fields it needs and fills itself in. Issuing a document went from 20 or 30 minutes down to 4 or 5.",
           },
           {
-            soloWeb: true,
             text: "I reviewed CVs, supporting files and contractor records, checking that every requirement and every qualification was in place before legal validation, and followed up on the improvement plan and the risk map required by the public audit office.",
           },
         ],
@@ -983,11 +941,9 @@ export const CV_DATA = {
             pdf: "Nine years teaching maths to between 200 and 300 students a year.",
           },
           {
-            soloWeb: true,
             text: "I kept up the communication with families and the school community so the support did not end at the classroom door.",
           },
           {
-            soloWeb: true,
             text: "It is the skill I use most when I program: reading something written by someone else, understanding it and being able to explain it.",
           },
         ],
@@ -1009,7 +965,7 @@ export const CV_DATA = {
           "PWA and offline",
           "Accessibility",
           "Internationalization",
-          { text: "CSS without frameworks", soloWeb: true },
+          { text: "CSS without frameworks" },
         ],
       },
       {
@@ -1020,7 +976,7 @@ export const CV_DATA = {
           "IndexedDB / Dexie",
           "Google Apps Script",
           "REST APIs",
-          { text: "Authentication and roles", soloWeb: true },
+          { text: "Authentication and roles" },
         ],
       },
       {
@@ -1028,8 +984,8 @@ export const CV_DATA = {
         items: [
           "Git",
           "GitHub",
-          { text: "Pull requests", soloWeb: true },
-          { text: "Issues", soloWeb: true },
+          { text: "Pull requests" },
+          { text: "Issues" },
           "Code review",
           "GitHub Actions",
           "Continuous deployment (Vercel, Netlify)",
@@ -1047,13 +1003,13 @@ export const CV_DATA = {
         category: "Management and teams",
         items: [
           "Team coordination",
-          { text: "Delegation and follow-up", soloWeb: true },
-          { text: "Client communication", soloWeb: true },
+          { text: "Delegation and follow-up" },
+          { text: "Client communication" },
           "Excel and Google Sheets",
           "Data modelling in tables",
-          { text: "Mail merge", soloWeb: true },
-          { text: "Kanban boards (Trello, Notion, Asana)", soloWeb: true },
-          { text: "Documentation and traceability", soloWeb: true },
+          { text: "Mail merge" },
+          { text: "Kanban boards (Trello, Notion, Asana)" },
+          { text: "Documentation and traceability" },
         ],
       },
     ],
@@ -1072,7 +1028,6 @@ export const CV_DATA = {
         link: {
           text: "platzi.com/@GibsonR",
           href: "https://platzi.com/@GibsonR",
-          soloWeb: true,
         },
       },
       {

@@ -455,9 +455,20 @@ export const CV_DATA = {
       {
         category: "Trabajo con IA",
         items: [
-          "Dirección de agentes",
+          "Dirección de agentes (Claude y Codex)",
           "Especificación de tareas",
           "Revisión del código generado",
+        ],
+      },
+      {
+        category: "QA y metodologías ágiles",
+        items: [
+          "Análisis de requisitos",
+          "Pruebas manuales y de regresión",
+          "Listas de verificación",
+          "Detección de inconsistencias y documentación de errores",
+          "Fundamentos de Agile y Scrum",
+          "Priorización y seguimiento de entregables",
         ],
       },
       {
@@ -506,6 +517,11 @@ export const CV_DATA = {
           text: "platzi.com/@GibsonR",
           href: "https://platzi.com/@GibsonR",
         },
+      },
+      {
+        title: "QA Engineering — formación en curso",
+        institution: "TripleTen · pruebas manuales, análisis de requisitos y fundamentos de Agile y Scrum",
+        year: "sep 2026 - en curso",
       },
       {
         title: "Formación continua",
@@ -994,9 +1010,20 @@ export const CV_DATA = {
       {
         category: "Working with AI",
         items: [
-          "Directing agents",
+          "Directing agents (Claude and Codex)",
           "Writing task specs",
           "Reviewing generated code",
+        ],
+      },
+      {
+        category: "QA and agile methods",
+        items: [
+          "Requirements analysis",
+          "Manual and regression testing",
+          "Test checklists",
+          "Identifying inconsistencies and documenting bugs",
+          "Agile and Scrum fundamentals",
+          "Prioritization and deliverable tracking",
         ],
       },
       {
@@ -1029,6 +1056,11 @@ export const CV_DATA = {
           text: "platzi.com/@GibsonR",
           href: "https://platzi.com/@GibsonR",
         },
+      },
+      {
+        title: "QA Engineering — in progress",
+        institution: "TripleTen · manual testing, requirements analysis, and Agile and Scrum fundamentals",
+        year: "Sep 2026 - present",
       },
       {
         title: "Ongoing self-study",

@@ -7,3 +7,7 @@ dist/
 
 # Neurona de memoria local (no forma parte del proyecto)
 /cv-gibson.md
+
+# Entregables y comprobaciones locales
+/output/
+/tmp/

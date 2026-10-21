@@ -118,8 +118,8 @@ export const CV_DATA = {
      */
     about: [
       {
-        text: "Construyo producto web dirigiendo agentes de IA: escribo la especificación, reviso el código que sale, lo pruebo y lo pongo en línea. Hoy lo hago para directo-ia, un producto de venta por WhatsApp para restaurantes, donde soy responsable del flujo de onboarding.",
-        pdf: "Construyo producto web dirigiendo agentes de IA: escribo la especificación, reviso el código que sale, lo pruebo y lo pongo en línea. Hoy lo hago para directo-ia, un producto de venta por WhatsApp para restaurantes, donde soy responsable del flujo de onboarding. Vengo de coordinar equipos y de administrar procesos: entiendo el problema desde dentro antes de proponer nada.",
+        text: "Manejo agentes de IA como Codex y Claude para especificar tareas, coordinar el desarrollo asistido y revisar sus resultados. Manejo n8n para integraciones y automatizaciones. Mi experiencia incluye el flujo de onboarding de directo-ia, un producto de venta por WhatsApp para restaurantes.",
+        pdf: "Manejo agentes de IA como Codex y Claude para especificar tareas, coordinar el desarrollo asistido y revisar sus resultados. Manejo n8n para integraciones y automatizaciones. Mi experiencia incluye el flujo de onboarding de directo-ia, un producto de venta por WhatsApp para restaurantes. Vengo de coordinar equipos y de administrar procesos: entiendo el problema desde dentro antes de proponer nada.",
       },
       {
         soloWeb: true,
@@ -166,7 +166,7 @@ export const CV_DATA = {
          * Mismo formato que las fechas de `otherExperience`, para que todo el
          * documento tenga un solo patrón que reconocer.
          */
-        period: "jun 2026 - actualidad",
+        period: "jun 2026 - ago 2026",
         /**
          * La misma fecha en formato AAAA-MM. `period` es para leer; `start` es
          * para ordenar: con este formato, comparar dos fechas es comparar dos
@@ -174,7 +174,7 @@ export const CV_DATA = {
          * final del PDF, en el orden en que estén.
          */
         start: "2026-06",
-        about: "Venta por WhatsApp con IA para restaurantes · mi trabajo hoy",
+        about: "Venta por WhatsApp con IA para restaurantes · desarrollo del onboarding",
         stack: "Next.js · React · TypeScript · Vercel",
         work: [
           {
@@ -189,7 +189,7 @@ export const CV_DATA = {
           },
         ],
         result: {
-          text: "Hoy un restaurante se da de alta conversando con la misma IA que va a usar después, en vez de rellenando un formulario. Ese cambio de forma salió de mi propuesta.",
+          text: "El flujo permitió dar de alta un restaurante conversando con la misma IA que usaría después, en vez de rellenando un formulario. Ese cambio de forma salió de mi propuesta.",
         },
       },
       {
@@ -293,8 +293,8 @@ export const CV_DATA = {
         stack: "JavaScript · Google Apps Script · API REST",
         work: [
           {
-            text: "Un cliente perdía el rastro de sus gastos porque nadie apunta cada compra. Automaticé el registro entero: la alerta del banco entra al correo y sale como movimiento clasificado, sin que nadie escriba nada.",
-            pdf: "Alertas del banco → correo → movimiento clasificado, sin escribir nada.",
+            text: "Un cliente perdía el rastro de sus gastos porque nadie apunta cada compra. Integré las alertas bancarias, el correo y Lunch Money mediante Google Apps Script y API REST, con desarrollo asistido por IA: cada alerta se convierte en un movimiento clasificado.",
+            pdf: "Integré alertas bancarias, correo y Lunch Money mediante Google Apps Script y API REST, con desarrollo asistido por IA.",
           },
           {
             text: "Es dinero de otra persona, así que no improviso: cada cambio en la lectura de los correos lo pruebo antes contra correos reales guardados.",
@@ -453,22 +453,23 @@ export const CV_DATA = {
         ],
       },
       {
-        category: "Trabajo con IA",
+        category: "Agentes de IA, integraciones y automatización",
         items: [
-          "Dirección de agentes (Claude y Codex)",
+          "Manejo de agentes de IA: Codex y Claude",
           "Especificación de tareas",
           "Revisión del código generado",
+          "n8n: integraciones y automatizaciones",
         ],
       },
       {
-        category: "QA y metodologías ágiles",
+        category: "QA y Agile/Scrum — práctica académica",
         items: [
-          "Análisis de requisitos",
-          "Pruebas manuales y de regresión",
-          "Listas de verificación",
-          "Detección de inconsistencias y documentación de errores",
-          "Fundamentos de Agile y Scrum",
-          "Priorización y seguimiento de entregables",
+          "Análisis de requisitos y criterios de aceptación",
+          "Ejecución de pruebas manuales y de regresión",
+          "Checklists de UI en Chrome y Firefox",
+          "Reportes de bugs: pasos, resultado esperado y real, evidencia",
+          "Agile y Scrum: fundamentos de sprints, roles y ceremonias",
+          "DevTools: consulta de solicitudes y códigos HTTP",
         ],
       },
       {
@@ -520,7 +521,7 @@ export const CV_DATA = {
       },
       {
         title: "QA Engineering — formación en curso",
-        institution: "TripleTen · pruebas manuales, análisis de requisitos y fundamentos de Agile y Scrum",
+        institution: "TripleTen · práctica de QA manual en Urban Routes; fundamentos de Agile y Scrum",
         year: "sep 2026 - en curso",
       },
       {
@@ -610,7 +611,7 @@ export const CV_DATA = {
      */
     footer: {
       // note: "Hecho a mano con HTML, CSS y JavaScript. Sin frameworks, sin analítica, sin cookies.",
-      updated: "Última actualización: agosto de 2026",
+      updated: "Última actualización: octubre de 2026",
     },
 
     /**
@@ -727,8 +728,8 @@ export const CV_DATA = {
     /* Ver la nota del bloque `es`: los dos de en medio no van al PDF. */
     about: [
       {
-        text: "I build web products by directing AI agents: I write the spec, review the code that comes out, test it and put it online. Today I do that for directo-ia, a WhatsApp sales product for restaurants, where I own the onboarding flow.",
-        pdf: "Web developer: JavaScript, TypeScript, React and Next.js. I build products by directing AI agents: I write the spec, review the code and ship it. Today, the onboarding flow at directo-ia (WhatsApp sales with AI). Before that, nine years teaching and coordinating teams of 58 people.",
+        text: "I use AI agents such as Codex and Claude to specify tasks, coordinate AI-assisted development and review results. I use n8n for integrations and automation. My experience includes the onboarding flow at directo-ia, a WhatsApp sales product for restaurants.",
+        pdf: "I use Codex and Claude to specify tasks, coordinate AI-assisted development and review results. I use n8n for integrations and automation. My experience includes the onboarding flow at directo-ia (WhatsApp sales with AI). Before that, nine years teaching and coordinating teams of 58 people.",
       },
       {
         soloWeb: true,
@@ -753,9 +754,9 @@ export const CV_DATA = {
         href: "https://directo-ia.vercel.app",
         role: "Owner of the onboarding flow",
         /* Ver la nota del bloque `es`: `period` se lee, `start` ordena. */
-        period: "Jun 2026 - Present",
+        period: "Jun 2026 - Aug 2026",
         start: "2026-06",
-        about: "AI sales over WhatsApp for restaurants · my job today",
+        about: "AI sales over WhatsApp for restaurants · onboarding development",
         stack: "Next.js · React · TypeScript · Vercel",
         work: [
           {
@@ -770,7 +771,7 @@ export const CV_DATA = {
           },
         ],
         result: {
-          text: "A restaurant now signs up by talking to the same AI it will use afterwards, instead of filling in a form. That change of shape came from my proposal.",
+          text: "The flow enabled a restaurant to sign up by talking to the same AI it would use afterwards, instead of filling in a form. That change of shape came from my proposal.",
         },
       },
       {
@@ -859,8 +860,8 @@ export const CV_DATA = {
         stack: "JavaScript · Google Apps Script · REST API",
         work: [
           {
-            text: "A client kept losing track of his spending because nobody writes down every purchase. I automated the whole record: the bank alert arrives by email and comes out as a classified transaction, with nobody typing anything.",
-            pdf: "The bank alert arrives via Gmail and comes out as a classified transaction through an API; in production for a client.",
+            text: "A client kept losing track of his spending because nobody writes down every purchase. I integrated bank alerts, email and Lunch Money through Google Apps Script and a REST API, with AI-assisted development: each alert becomes a classified transaction.",
+            pdf: "I integrated bank alerts, email and Lunch Money through Google Apps Script and a REST API, with AI-assisted development.",
           },
           {
             text: "It is someone else's money, so I do not improvise: every change to how the emails are read is tested first against real saved emails.",
@@ -1008,22 +1009,23 @@ export const CV_DATA = {
         ],
       },
       {
-        category: "Working with AI",
+        category: "AI agents, integrations and automation",
         items: [
-          "Directing agents (Claude and Codex)",
+          "Using AI agents: Codex and Claude",
           "Writing task specs",
           "Reviewing generated code",
+          "n8n: integrations and automation",
         ],
       },
       {
-        category: "QA and agile methods",
+        category: "QA and Agile/Scrum — academic practice",
         items: [
-          "Requirements analysis",
-          "Manual and regression testing",
-          "Test checklists",
-          "Identifying inconsistencies and documenting bugs",
-          "Agile and Scrum fundamentals",
-          "Prioritization and deliverable tracking",
+          "Requirements and acceptance criteria analysis",
+          "Executing manual and regression tests",
+          "UI checklists in Chrome and Firefox",
+          "Bug reports: steps, expected and actual results, evidence",
+          "Agile and Scrum: sprint, role and ceremony fundamentals",
+          "DevTools: inspecting requests and HTTP status codes",
         ],
       },
       {
@@ -1059,7 +1061,7 @@ export const CV_DATA = {
       },
       {
         title: "QA Engineering — in progress",
-        institution: "TripleTen · manual testing, requirements analysis, and Agile and Scrum fundamentals",
+        institution: "TripleTen · manual QA practice on Urban Routes; Agile and Scrum fundamentals",
         year: "Sep 2026 - present",
       },
       {
@@ -1128,7 +1130,7 @@ export const CV_DATA = {
     footer: {
       /* Ver la nota del bloque `es`: desactivada, se descomentan las dos a la vez. */
       // note: "Hand-written in HTML, CSS and JavaScript. No frameworks, no analytics, no cookies.",
-      updated: "Last updated: August 2026",
+      updated: "Last updated: October 2026",
     },
 
     ui: {

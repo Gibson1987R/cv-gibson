@@ -1,7 +1,29 @@
 # cv-gibson
 
-Mi currículum, hecho a mano. Una sola página, bilingüe (español / inglés), con
+Mi currículum web, construido con apoyo de IA. Tres perfiles bilingües (español / inglés), con
 estética de editor de código y sin una sola dependencia en el navegador.
+
+La versión multiperfil está en revisión local; el enlace público de abajo
+conserva la versión publicada hasta completar la revisión y autorización.
+
+## Perfiles y PDF
+
+- `/?perfil=tecnologia&lang=es`: desarrollo web con IA y QA manual y asistido por IA.
+- `/?perfil=talento-humano&lang=es`: Gestión de Talento Humano y administración.
+- `/?perfil=docencia&lang=es`: licenciatura en Educación y experiencia docente.
+
+Los tres enlaces de la cabecera abren páginas con URL propia. El idioma explícito
+de la URL prevalece sobre la preferencia guardada; cambiar de perfil conserva el
+idioma. Los enlaces anteriores sin perfil siguen abriendo Tecnología.
+
+El botón **PDF** abre la impresión del perfil activo: elegir **Guardar como PDF**.
+El nombre incluye perfil e idioma. Tecnología ocupa dos A4; Talento Humano y
+Docencia, una A4 cada uno, según la validación local en Chromium. La paginación
+puede variar en otros motores de impresión. La web conserva experiencia y
+habilidades complementarias que se excluyen del PDF específico.
+
+Las comprobaciones de extracción y del motor ATS local usan claves propias de
+cada perfil; no garantizan compatibilidad con todos los sistemas de selección.
 
 ### ▶ Ábrelo: **<https://cv-gibson-rosales.netlify.app>**
 
@@ -51,6 +73,7 @@ npm install
 npm run dev      # servidor de desarrollo
 npm run build    # compila a dist/
 npm run preview  # sirve dist/ para revisarlo antes de publicar
+npm test         # perfiles, fechas, URLs e idioma sin dependencias adicionales
 ```
 
 Requiere Node 22 o superior.
@@ -60,15 +83,19 @@ Requiere Node 22 o superior.
 Todo vive en **`data.js`**, en dos bloques con la misma estructura:
 
 ```js
-export const CV_DATA = {
-  es: { meta, identity, about, experience, …, ui },
-  en: { meta, identity, about, experience, …, ui },
+export const CV_PROFILES = {
+  es: { tecnologia, "talento-humano": talentoHumano, docencia },
+  en: { tecnologia, "talento-humano": humanResources, docencia: teaching },
 };
 ```
 
-- El contenido del CV va en su clave (`CV_DATA.es.experience`).
-- Los textos de la interfaz —botones, paleta, etiquetas para lectores de
-  pantalla— van en `ui` (`CV_DATA.es.ui.printBtn`).
+- `data.js` comparte puestos, titulaciones, proyectos y herramientas entre los
+  perfiles para evitar versiones contradictorias de un mismo hecho.
+- `PROFILE_CONTENT` selecciona títulos, resumen y secciones; `makeProfile`
+  compone la vista. `CV_DATA.es`/`CV_DATA.en` mantienen el perfil tecnológico
+  como vista predeterminada compatible con las referencias anteriores.
+- Los textos de interfaz —botones, perfiles, paleta y etiquetas accesibles—
+  viven en `SHARED.<idioma>.ui`.
 - **Para cambiar un texto hay que editarlo en los dos bloques.**
 - Si añades un texto visible nuevo y lo pones en `data.js`, queda bilingüe
   automáticamente: no hay que tocar `index.html` ni el JS.
@@ -79,6 +106,10 @@ Dos reglas de estructura que el código da por hechas:
   datos del mismo bloque (`id: "experience"` → `CV_DATA.es.experience`).
 - Los `id` son **iguales en los dos idiomas** a propósito, para que un enlace
   compartido (`#experience`) funcione en ambos.
+- Una sección o tarjeta con `soloWeb: true` conserva contexto en pantalla y no
+  aparece en el PDF. Los textos `{ text, pdf }` mantienen el mismo hecho con
+  una redacción más breve para impresión. `printBreak` marca el salto de página
+  antes de los proyectos del perfil tecnológico.
 
 Hay dos secciones de trayectoria y conviene no confundirlas: `experience` es la
 experiencia en programación (tarjetas, sin fechas, ordenadas por impacto) y
@@ -93,6 +124,7 @@ data.js             TODO el contenido, en los dos idiomas
 main.js             Orquestador: pinta y arranca las features
 js/
   i18n.js           Decide qué idioma está activo. Sin textos dentro
+  profiles.js       Resuelve el perfil y sus enlaces compartibles
   render.js         data.js → DOM. Un renderizador por tipo de sección
   palette.js        Paleta de comandos sobre un <dialog> nativo
   theme.js          Claro / oscuro

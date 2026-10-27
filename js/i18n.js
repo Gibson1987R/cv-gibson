@@ -9,7 +9,8 @@
  * suficiente para que toda la página cambie.
  */
 
-import { CV_DATA } from "../data.js";
+import { CV_DATA, CV_PROFILES } from "../data.js";
+import { perfil } from "./profiles.js";
 
 const CLAVE = "cv-lang";
 const IDIOMAS = Object.keys(CV_DATA); // ["es", "en"]
@@ -19,6 +20,8 @@ const IDIOMAS = Object.keys(CV_DATA); // ["es", "en"]
  * navegador > español. Nunca se le impone un idioma que ya rechazó.
  */
 function inicial() {
+  const explicito = new URL(location.href).searchParams.get("lang");
+  if (IDIOMAS.includes(explicito)) return explicito;
   try {
     const guardado = localStorage.getItem(CLAVE);
     if (IDIOMAS.includes(guardado)) return guardado;
@@ -37,23 +40,39 @@ let actual = inicial();
 export const idioma = () => actual;
 
 /** El bloque de contenido del idioma activo (CV_DATA.es o CV_DATA.en). */
-export const datos = () => CV_DATA[actual];
+export const datos = () => CV_PROFILES[actual][perfil()];
 
 /** Atajo a los textos de interfaz del idioma activo. */
-export const ui = () => CV_DATA[actual].ui;
+export const ui = () => datos().ui;
 
 /** El idioma al que llevaría el botón: con dos idiomas, siempre el otro. */
 export const otroIdioma = () =>
   IDIOMAS[(IDIOMAS.indexOf(actual) + 1) % IDIOMAS.length];
 
 /** Cambia el idioma y lo recuerda. No repinta: de eso se encarga main.js. */
-export function fijarIdioma(nuevo) {
+export function fijarIdioma(nuevo, { actualizarURL = true } = {}) {
   if (!IDIOMAS.includes(nuevo)) return actual;
   actual = nuevo;
+  if (actualizarURL) {
+    const url = new URL(location.href);
+    url.searchParams.set("lang", actual);
+    url.searchParams.set("perfil", perfil());
+    history.pushState({ cvLang: actual }, "", `${url.pathname}${url.search}${url.hash}`);
+  }
   try {
     localStorage.setItem(CLAVE, actual);
   } catch (_) {
     /* modo privado: el idioma dura lo que dure la pestaña */
   }
   return actual;
+}
+
+/** Restaura también el idioma cuando se usa Atrás/Adelante tras traducir. */
+export function restaurarIdioma() {
+  const explicito = new URL(location.href).searchParams.get("lang");
+  const guardado = history.state?.cvLang;
+  const anterior = IDIOMAS.includes(explicito)
+    ? explicito
+    : IDIOMAS.includes(guardado) ? guardado : inicial();
+  return fijarIdioma(anterior, { actualizarURL: false });
 }

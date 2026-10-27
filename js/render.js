@@ -10,6 +10,7 @@
 
 import { datos, ui, otroIdioma, idioma } from "./i18n.js";
 import { icono } from "./icons.js";
+import { perfil, perfiles, urlPerfil } from "./profiles.js";
 
 /** Escapa el texto antes de meterlo en HTML. Datos y marcado no se mezclan. */
 export const esc = (valor) =>
@@ -83,7 +84,7 @@ const attrClase = (...nombres) => {
  * y por eso vive en la misma línea del `about` y no en una propia.
  */
 const stackPrint = (valor) =>
-  valor ? `<span class="printOnly"> · ${esc(valor)}</span>` : "";
+  valor ? `<span class="entry__stack"> · ${esc(valor)}</span>` : "";
 
 /** El periodo de una entrada, solo para el PDF. Sin `period`, no pinta nada. */
 const periodo = (valor) =>
@@ -141,7 +142,7 @@ const renderizadores = {
       ${entradas
         .map(
           (entrada, indice) => `
-        <li class="entry entry--card" style="--print-order: ${orden[indice]}">
+        <li${attrClase("entry entry--card", entrada.soloWeb ? "webOnly" : "")} style="--print-order: ${orden[indice]}">
           <!-- El rol va ENCIMA del nombre: primero qué fui, después dónde. -->
           <h3 class="entry__title">
             <span class="entry__roleTag">${esc(entrada.role)}</span>
@@ -217,7 +218,7 @@ const renderizadores = {
           <!-- Plegado por defecto: solo se ve el cargo y las fechas; el relato
                se abre al tocarlo. Es un details nativo, sin JS: funciona con
                teclado y con lector de pantalla. -->
-          <details class="fold">
+          <details class="fold"${puesto.open ? " open" : ""}>
             <summary class="fold__toggle">
               <span class="fold__open">${esc(ui().foldOpen)}</span>
               <span class="fold__close">${esc(ui().foldClose)}</span>
@@ -320,7 +321,7 @@ function renderCabecera() {
     <p class="hero__role">
       <!-- --ch = número de caracteres: la animación de tecleo lo necesita
            para saber cuánto ancho recorrer (funciona porque la fuente es monoespaciada) -->
-      <span class="typing${rolePrint ? " webOnly" : ""}" style="--ch: ${role.length}">${esc(role)}</span>${
+      <span class="${role.length > 40 ? "hero__roleText" : "typing"}${rolePrint ? " webOnly" : ""}" style="--ch: ${role.length}">${esc(role)}</span>${
         // El PDF lleva el puesto con el nombre que se busca en un portal de
         // empleo, más el stack. Va en la segunda línea del documento porque es
         // lo primero que mira tanto un filtro como una persona.
@@ -329,8 +330,8 @@ function renderCabecera() {
     </p>
     <p class="hero__meta">
       ${esc(location)}
-      <span class="entry__dot" aria-hidden="true">·</span>
-      <span class="hero__status">${esc(status)}</span>
+      ${status ? `<span class="entry__dot" aria-hidden="true">·</span>
+      <span class="hero__status">${esc(status)}</span>` : ""}
     </p>
     <ul class="hero__links">
       ${links
@@ -367,7 +368,7 @@ function renderSecciones() {
       }
 
       return `
-        <section class="section" id="${esc(seccion.id)}"
+        <section${attrClase("section", seccion.soloWeb ? "webOnly" : "", seccion.printBreak ? "section--print-break" : "")} id="${esc(seccion.id)}"
                  aria-labelledby="${esc(seccion.id)}-title" data-reveal>
           <h2 class="section__title" id="${esc(seccion.id)}-title" tabindex="-1">
             <!-- En pantalla se ve el comando; el lector de pantalla y el PDF
@@ -454,6 +455,17 @@ function renderInterfaz() {
   // El idioma del documento. No es cosmético: es lo que hace que un lector
   // de pantalla cambie de voz y no lea el inglés con fonética española.
   document.documentElement.lang = t.lang;
+  document.documentElement.dataset.profile = perfil();
+
+  const etiquetas = [t.profileTechnology, t.profileHR, t.profileTeaching];
+  const navegacion = document.querySelector("#perfiles");
+  navegacion.setAttribute("aria-label", t.profilesLabel);
+  navegacion.innerHTML = perfiles().map((id, i) =>
+    `<a class="profiles__link" href="${esc(urlPerfil(id, idioma()))}"${id === perfil() ? ' aria-current="page"' : ""}>${esc(etiquetas[i])}</a>`,
+  ).join("");
+  poner("#profile-print-help", t.profilePrintHelp);
+  atributo('[data-action="print"]', "aria-label", t.profilePrint);
+  atributo('[data-action="print"]', "aria-describedby", "profile-print-help");
 
   poner(".skip-link", t.skipLink);
   poner('[data-action="open-palette"] .toolbar__label', t.searchBtn);
@@ -496,13 +508,11 @@ function renderInterfaz() {
  * `afterprint` dispara también cuando se cancela el diálogo, de modo que el
  * título vuelve tanto si se guarda como si no.
  */
-const NOMBRE_PDF = { es: "GibsonRosalesDesarrolladorWeb", en: "GibsonRosalesWebDeveloper" };
-
 function nombrarElPDF() {
   let titulo = "";
   addEventListener("beforeprint", () => {
     titulo = document.title;
-    document.title = NOMBRE_PDF[idioma()] || NOMBRE_PDF.es;
+    document.title = datos().meta.pdfName;
   });
   addEventListener("afterprint", () => {
     if (titulo) document.title = titulo;

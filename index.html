@@ -17,7 +17,10 @@
         if (tema === "light" || tema === "dark") {
           document.documentElement.dataset.theme = tema;
         }
-        const idioma = localStorage.getItem("cv-lang");
+        const explicito = new URL(location.href).searchParams.get("lang");
+        const idioma = ["es", "en"].includes(explicito)
+          ? explicito
+          : localStorage.getItem("cv-lang");
         if (idioma === "es" || idioma === "en") {
           document.documentElement.lang = idioma;
         }
@@ -73,6 +76,9 @@
           </button>
         </div>
       </div>
+
+      <nav id="perfiles" class="profiles"></nav>
+      <p id="profile-print-help" class="profiles__hint"></p>
 
       <!-- Header, main y footer los rellena render.js a partir de data.js -->
       <header class="hero" id="cabecera"></header>

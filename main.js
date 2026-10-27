@@ -7,10 +7,14 @@ import { renderCV } from "./js/render.js";
 import { initTheme } from "./js/theme.js";
 import { initPalette } from "./js/palette.js";
 import { initMotion } from "./js/motion.js";
-import { fijarIdioma, otroIdioma } from "./js/i18n.js";
+import { fijarIdioma, otroIdioma, restaurarIdioma, idioma } from "./js/i18n.js";
 
 // 1. Primero el contenido: todo lo demás necesita que el DOM ya exista
 renderCV();
+
+// Atrás debe recuperar el idioma original incluso si la entrada era la raíz
+// sin ?lang y desde entonces cambió la preferencia de localStorage.
+history.replaceState({ ...history.state, cvLang: idioma() }, "", location.href);
 
 // 2. Tema (devuelve `alternar`, que la paleta ofrece como comando)
 const tema = initTheme();
@@ -43,6 +47,14 @@ function alternarIdioma() {
 // 3. Paleta de comandos
 const paleta = initPalette({ alternarTema: tema.alternar, alternarIdioma });
 
+addEventListener("popstate", () => {
+  restaurarIdioma();
+  renderCV();
+  tema.refrescar();
+  paleta.refrescar();
+  initMotion({ animar: false });
+});
+
 // 4. Botones de la barra que no gestiona nadie más
 document
   .querySelector('[data-action="print"]')
@@ -74,6 +86,6 @@ initMotion();
 // Si se entra con un ancla en la URL (#experience), el contenido aún no existía
 // cuando el navegador intentó saltar. Lo repetimos ahora.
 if (location.hash) {
-  const destino = document.querySelector(location.hash);
+  const destino = document.getElementById(location.hash.slice(1));
   destino?.scrollIntoView({ block: "start" });
 }

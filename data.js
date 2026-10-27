@@ -1,1184 +1,1278 @@
 /**
- * TODO el contenido del CV vive aquí, en los dos idiomas. Es el único fichero
- * que hay que tocar para cambiar el currículum: ni index.html ni el JS
- * contienen texto visible.
- *
- * ── Regla del bilingüe ───────────────────────────────────────────────────
- * Un solo fichero, dos bloques con la MISMA estructura: CV_DATA.es y
- * CV_DATA.en. Para cambiar un texto, edita la clave en LOS DOS bloques
- * (o solo en el que te indiquen).
- *
- *   el nombre  → CV_DATA.es.identity.name  y  CV_DATA.en.identity.name
- *   los botones→ CV_DATA.<idioma>.ui       (ui.printBtn, ui.paletteEmpty…)
- *
- * Si añades un texto visible nuevo, va aquí: en el bloque de contenido si es
- * del CV, o en `ui` si es de la interfaz. Queda bilingüe automáticamente.
- *
- * ── Regla de estructura ──────────────────────────────────────────────────
- * El `id` de cada entrada de `sections` tiene que coincidir con la clave de
- * datos del mismo bloque (id "experience" → cv.experience), y su `type` con un
- * renderizador de js/render.js. Los `id` son iguales en los dos idiomas a
- * propósito: así un enlace compartido (#experience) funciona en ambos.
+ * Contenido único del CV: tres perfiles, en español e inglés.
+ * Cada perfil conserva los ids de sección entre idiomas y los mismos hechos.
+ * `soloWeb` en una sección/entrada conserva contexto fuera del PDF de candidatura.
+ * Las tecnologías de un proyecto no representan dominio de programación manual.
+ * Respaldo editorial: output/pdf/2026-10-27-tres-perfiles/registro-respaldo.csv.
  */
+export const PROFILES = ["tecnologia", "talento-humano", "docencia"];
 
+const SHARED = {
+  "es": {
+    "identity": {
+      "name": "Gibson Samuel Rosales Fuenmayor",
+      "location": "Medellín, Antioquia, Colombia",
+      "status": "",
+      "links": [
+        {
+          "label": "GitHub",
+          "text": "github.com/Gibson1987R",
+          "href": "https://github.com/Gibson1987R",
+          "icon": "github"
+        },
+        {
+          "label": "LinkedIn",
+          "text": "linkedin.com/in/gibson-rosales-fuenmayor",
+          "href": "https://www.linkedin.com/in/gibson-rosales-fuenmayor",
+          "icon": "linkedin"
+        },
+        {
+          "label": "WhatsApp",
+          "text": "+57 310 552 8854",
+          "href": "https://wa.me/573105528854",
+          "icon": "whatsapp"
+        },
+        {
+          "label": "Email",
+          "text": "gibsonrosales@gmail.com",
+          "href": "mailto:gibsonrosales@gmail.com",
+          "icon": "email"
+        }
+      ],
+      "soloImpresion": {
+        "mostrar": false,
+        "campos": []
+      }
+    },
+    "ui": {
+      "lang": "es",
+      "langBtn": "EN",
+      "langBtnLabel": "Switch to English",
+      "skipLink": "Saltar al contenido",
+      "searchBtn": "Buscar",
+      "printBtn": "PDF",
+      "themeBtn": "Tema",
+      "themeToLight": "Cambiar a tema claro",
+      "themeToDark": "Cambiar a tema oscuro",
+      "paletteLabel": "Paleta de comandos",
+      "paletteInputLabel": "Buscar sección o acción",
+      "palettePlaceholder": "Ir a una sección o ejecutar una acción…",
+      "paletteListLabel": "Comandos",
+      "paletteEmpty": "Sin resultados.",
+      "resultOne": "resultado",
+      "resultMany": "resultados",
+      "hintMove": "moverse",
+      "hintRun": "ejecutar",
+      "hintClose": "cerrar",
+      "goTo": "Ir a",
+      "open": "Abrir",
+      "cmdTop": "Ir al inicio",
+      "cmdTopHint": "cabecera",
+      "cmdTopWords": [
+        "inicio",
+        "arriba",
+        "top",
+        "cabecera"
+      ],
+      "cmdTheme": "Cambiar tema claro / oscuro",
+      "cmdThemeHint": "tema",
+      "cmdThemeWords": [
+        "tema",
+        "theme",
+        "oscuro",
+        "claro",
+        "dark",
+        "light"
+      ],
+      "cmdPrint": "Descargar / imprimir en PDF",
+      "cmdPrintHint": "imprimir",
+      "cmdPrintWords": [
+        "pdf",
+        "imprimir",
+        "print",
+        "descargar"
+      ],
+      "cmdCopyEmail": "Copiar email al portapapeles",
+      "cmdCopyWords": [
+        "copiar",
+        "email",
+        "correo",
+        "mail"
+      ],
+      "cmdLang": "Switch to English",
+      "cmdLangHint": "idioma",
+      "cmdLangWords": [
+        "idioma",
+        "language",
+        "ingles",
+        "english",
+        "lang"
+      ],
+      "emailCopied": "Email copiado:",
+      "foldOpen": "Ver lo que hice",
+      "foldClose": "Ocultar",
+      "resultLabel": "Resultado:",
+      "srTo": "a",
+      "profilesLabel": "Versiones del CV",
+      "profileTechnology": "Tecnología",
+      "profileHR": "Talento Humano",
+      "profileTeaching": "Docencia",
+      "profilePrint": "Guardar este perfil en PDF",
+      "profilePrintHelp": "Selecciona PDF y elige Guardar como PDF en el diálogo de impresión."
+    },
+    "footer": {
+      "updated": "Última actualización: octubre de 2026"
+    }
+  },
+  "en": {
+    "identity": {
+      "name": "Gibson Samuel Rosales Fuenmayor",
+      "location": "Medellín, Antioquia, Colombia",
+      "status": "",
+      "links": [
+        {
+          "label": "GitHub",
+          "text": "github.com/Gibson1987R",
+          "href": "https://github.com/Gibson1987R",
+          "icon": "github"
+        },
+        {
+          "label": "LinkedIn",
+          "text": "linkedin.com/in/gibson-rosales-fuenmayor",
+          "href": "https://www.linkedin.com/in/gibson-rosales-fuenmayor",
+          "icon": "linkedin"
+        },
+        {
+          "label": "WhatsApp",
+          "text": "+57 310 552 8854",
+          "href": "https://wa.me/573105528854",
+          "icon": "whatsapp"
+        },
+        {
+          "label": "Email",
+          "text": "gibsonrosales@gmail.com",
+          "href": "mailto:gibsonrosales@gmail.com",
+          "icon": "email"
+        }
+      ],
+      "soloImpresion": {
+        "mostrar": false,
+        "campos": []
+      }
+    },
+    "ui": {
+      "lang": "en",
+      "langBtn": "ES",
+      "langBtnLabel": "Cambiar a español",
+      "skipLink": "Skip to content",
+      "searchBtn": "Search",
+      "printBtn": "PDF",
+      "themeBtn": "Theme",
+      "themeToLight": "Switch to light theme",
+      "themeToDark": "Switch to dark theme",
+      "paletteLabel": "Command palette",
+      "paletteInputLabel": "Search a section or an action",
+      "palettePlaceholder": "Go to a section or run an action…",
+      "paletteListLabel": "Commands",
+      "paletteEmpty": "No results.",
+      "resultOne": "result",
+      "resultMany": "results",
+      "hintMove": "move",
+      "hintRun": "run",
+      "hintClose": "close",
+      "goTo": "Go to",
+      "open": "Open",
+      "cmdTop": "Go to top",
+      "cmdTopHint": "header",
+      "cmdTopWords": [
+        "top",
+        "up",
+        "start",
+        "header"
+      ],
+      "cmdTheme": "Toggle light / dark theme",
+      "cmdThemeHint": "theme",
+      "cmdThemeWords": [
+        "theme",
+        "dark",
+        "light",
+        "tema"
+      ],
+      "cmdPrint": "Download / print as PDF",
+      "cmdPrintHint": "print",
+      "cmdPrintWords": [
+        "pdf",
+        "print",
+        "download"
+      ],
+      "cmdCopyEmail": "Copy email to clipboard",
+      "cmdCopyWords": [
+        "copy",
+        "email",
+        "mail"
+      ],
+      "cmdLang": "Cambiar a español",
+      "cmdLangHint": "language",
+      "cmdLangWords": [
+        "language",
+        "idioma",
+        "spanish",
+        "español",
+        "lang"
+      ],
+      "emailCopied": "Email copied:",
+      "foldOpen": "See what I did",
+      "foldClose": "Hide",
+      "resultLabel": "Result:",
+      "srTo": "to",
+      "profilesLabel": "CV versions",
+      "profileTechnology": "Technology",
+      "profileHR": "Human Resources",
+      "profileTeaching": "Teaching",
+      "profilePrint": "Save this profile as PDF",
+      "profilePrintHelp": "Select PDF and choose Save as PDF in the print dialog."
+    },
+    "footer": {
+      "updated": "Last updated: October 2026"
+    }
+  }
+};
+
+const JOBS = {
+  "es": [
+    {
+      "role": "Coordinador del Estado Amazonas / Coordinador regional",
+      "company": "A.C. Construyendo Futuros · organización socia de UNICEF",
+      "context": "Amazonas, Venezuela · Por proyectos; programas con periodos solapados",
+      "start": "2021-09",
+      "end": "2023-12",
+      "startLabel": "sep 2021",
+      "endLabel": "dic 2023",
+      "achievements": [
+        "Coordiné AliMentes (sep 2021 - ago 2022), el programa de agua, higiene y saneamiento en escuelas de Atures (jul - oct 2022) y Manos Que Construyen (culminación en dic 2023).",
+        "Coordiné a 58 personas en territorio: organicé tareas, cronogramas y seguimiento de entregas, y articulé equipos técnicos, comunidades e instituciones aliadas.",
+        {
+          "text": "Mantuve la trazabilidad de lo ejecutado mediante reportes y organización documental. Mi vinculación fue con la asociación; los periodos agrupan proyectos y no suponen continuidad contractual.",
+          "pdf": "Mantuve la trazabilidad de lo ejecutado mediante reportes y organización documental."
+        }
+      ]
+    },
+    {
+      "role": "Tecnólogo en caja y facturación",
+      "company": "Hospital Departamental San Juan de Dios E.S.E.",
+      "context": "Puerto Carreño, Colombia · Contratos con interrupciones",
+      "start": "2025-02",
+      "end": "2025-10",
+      "startLabel": "feb 2025",
+      "endLabel": "oct 2025",
+      "achievements": [
+        "Gestioné facturación en Xenco, revisión y clasificación de soportes, atención al usuario y organización documental para la entrega de cuentas.",
+        "Estandaricé la recepción de escaneos y dirigí con apoyo de Copilot un script para dividir y renombrar documentos: una tarea de clasificación pasó de unas 30 horas a una."
+      ]
+    },
+    {
+      "role": "Tecnólogo de apoyo a la gestión · Talento Humano",
+      "company": "Hospital Departamental San Juan de Dios E.S.E.",
+      "context": "Puerto Carreño, Colombia · Contratos con interrupciones",
+      "start": "2025-11",
+      "end": "2026-03",
+      "startLabel": "nov 2025",
+      "endLabel": "mar 2026",
+      "achievements": [
+        "Apoyé la verificación de títulos, hojas de vida en SIGEP II y listas de chequeo de contratación; organicé los soportes requeridos para revisión y validación.",
+        "Realicé seguimiento documental a mapas de riesgos y al plan de mejora de Contraloría, dentro de las funciones de apoyo del área.",
+        "Modelé en Excel información de más de 500 contratistas de cuatro municipios y la conecté con Word mediante combinación de correspondencia: preparar un documento pasó de 20-30 a 4-5 minutos."
+      ]
+    },
+    {
+      "role": "Docente de aula · Enseñanza de matemáticas",
+      "company": "Ministerio del Poder Popular para la Educación",
+      "context": "Venezuela · C D-Pedro Lucas Urribarri",
+      "start": "2012-09",
+      "end": "2021-07",
+      "startLabel": "sep 2012",
+      "endLabel": "jul 2021",
+      "achievements": [
+        "Enseñé matemáticas durante mi trayectoria docente y adapté las explicaciones para facilitar la comprensión de los estudiantes.",
+        "Mantuve comunicación con las familias y la comunidad educativa para acompañar el proceso de aprendizaje."
+      ]
+    }
+  ],
+  "en": [
+    {
+      "role": "State Coordinator / Regional Coordinator",
+      "company": "A.C. Construyendo Futuros · UNICEF partner organization",
+      "context": "Amazonas, Venezuela · Project-based; some programs overlapped",
+      "start": "2021-09",
+      "end": "2023-12",
+      "startLabel": "Sep 2021",
+      "endLabel": "Dec 2023",
+      "achievements": [
+        "I coordinated AliMentes (Sep 2021 - Aug 2022), the water, hygiene and sanitation program in Atures schools (Jul - Oct 2022), and Manos Que Construyen (completed in Dec 2023).",
+        "I coordinated 58 people in the field, organizing tasks, schedules and delivery tracking, and connecting technical teams, communities and partner institutions.",
+        {
+          "text": "I maintained traceability through reports and document organization. My engagement was with the association; these dates group projects and do not imply continuous employment.",
+          "pdf": "I maintained traceability through reports and document organization."
+        }
+      ]
+    },
+    {
+      "role": "Cashier and Billing Technologist",
+      "company": "Hospital Departamental San Juan de Dios E.S.E.",
+      "context": "Puerto Carreño, Colombia · Separate contracts with gaps",
+      "start": "2025-02",
+      "end": "2025-10",
+      "startLabel": "Feb 2025",
+      "endLabel": "Oct 2025",
+      "achievements": [
+        "I handled billing in Xenco, reviewed and classified supporting documents, assisted users and organized documentation for account submission.",
+        "I standardized document scanning intake and directed a Copilot-assisted script to split and rename documents, reducing a classification task from about 30 hours to one."
+      ]
+    },
+    {
+      "role": "Administrative Support Technologist · Human Resources",
+      "company": "Hospital Departamental San Juan de Dios E.S.E.",
+      "context": "Puerto Carreño, Colombia · Separate contracts with gaps",
+      "start": "2025-11",
+      "end": "2026-03",
+      "startLabel": "Nov 2025",
+      "endLabel": "Mar 2026",
+      "achievements": [
+        "I supported verification of qualifications, CVs in SIGEP II and contracting checklists, organizing documents for review and validation.",
+        "I tracked documentation for risk maps and the improvement plan required by Contraloría within the support responsibilities of the department.",
+        "I modeled information on over 500 contractors across four municipalities in Excel and connected it to Word through mail merge, reducing document preparation from 20-30 to 4-5 minutes."
+      ]
+    },
+    {
+      "role": "Classroom Teacher · Mathematics teaching",
+      "company": "Ministry of Popular Power for Education",
+      "context": "Venezuela · C D-Pedro Lucas Urribarri",
+      "start": "2012-09",
+      "end": "2021-07",
+      "startLabel": "Sep 2012",
+      "endLabel": "Jul 2021",
+      "achievements": [
+        "I taught mathematics during my teaching career and adapted explanations to help students understand the material.",
+        "I maintained communication with families and the school community to support learning."
+      ]
+    }
+  ]
+};
+
+const PROJECTS = {
+  "es": [
+    {
+      "name": "directo-ia",
+      "role": "Onboarding y presentación del producto",
+      "period": "jun 2026 - ago 2026",
+      "about": "Producto de venta por WhatsApp para restaurantes · colaboración con desarrollo asistido por IA",
+      "work": [
+        "Propuse un registro conversacional y dirigí su desarrollo con agentes de IA. Revisé el flujo funcional y solicité ajustes de validación, teclado y adaptación a móvil.",
+        "También participé con agentes en ajustes responsive de la landing. El historial del repositorio conserva esas contribuciones bajo mi cuenta."
+      ],
+      "result": "El onboarding adoptó el enfoque conversacional. Mi aportación combina propuesta, dirección del trabajo asistido y revisión funcional.",
+      "href": "https://directo-ia.vercel.app",
+      "stack": "Tecnologías del proyecto: Next.js · React · TypeScript · Vercel"
+    },
+    {
+      "name": "chess-lab",
+      "role": "Internacionalización y traducción de cursos",
+      "period": "2026",
+      "about": "PWA educativa de ajedrez · colaboración en un producto de un tercero",
+      "work": [
+        "Participé mediante agentes en la adaptación multilingüe de la aplicación: traducción local, conservación de imágenes y normalización de términos de ajedrez.",
+        "Trabajé sobre la consulta del contenido traducido y su conservación local; la integración fue revisada por el responsable del repositorio."
+      ],
+      "result": "Contribución integrada en el PR #19: el contenido traducido puede consultarse y conservarse localmente.",
+      "href": "https://chesspwa.netlify.app",
+      "stack": "Tecnologías del proyecto: React · TypeScript · Dexie/IndexedDB"
+    },
+    {
+      "name": "honest-english",
+      "role": "Producto propio desarrollado con IA",
+      "period": "may 2026",
+      "about": "Herramienta personal para seguir la práctica real de inglés",
+      "work": [
+        "Definí el producto y dirigí su creación con IA, priorizando la práctica real frente a premiar solo abrir una aplicación.",
+        "El producto combina seguimiento de práctica, ejercicios y feedback de escritura."
+      ],
+      "result": "Producto de portafolio con seguimiento y feedback de escritura; repositorio y aplicación disponibles como muestra de trabajo.",
+      "href": "https://gibson1987r.github.io/honest-english/",
+      "stack": "Tecnologías del proyecto: HTML · CSS · JavaScript"
+    },
+    {
+      "name": "fiestas-web",
+      "role": "Invitaciones web con apoyo de IA",
+      "period": "feb 2026",
+      "about": "Proyecto propio de invitaciones y confirmación de asistencia",
+      "work": [
+        "Definí una invitación web que reúne información del evento y confirmación de asistencia, y dirigí su desarrollo con IA."
+      ],
+      "result": "Una misma página permite compartir el evento y recoger confirmaciones.",
+      "href": "https://fiestas-app.vercel.app",
+      "stack": "Tecnologías del proyecto: React · Firebase"
+    },
+    {
+      "name": "bancolombia-lunchmoney",
+      "role": "Automatización de registro de movimientos",
+      "period": "jun 2026",
+      "about": "Integración de alertas bancarias, correo y Lunch Money · proyecto de un tercero",
+      "work": [
+        "Participé con desarrollo asistido por IA en la integración de alertas bancarias y Lunch Money mediante Apps Script y API REST.",
+        "Reviso los movimientos registrados y los cambios de formato del correo desde la operación administrativa, y solicito o dirijo ajustes cuando es necesario."
+      ],
+      "result": "Las alertas pueden convertirse en movimientos registrados; mi aportación une conocimiento del proceso y seguimiento funcional.",
+      "stack": "Tecnologías del proyecto: Google Apps Script · JavaScript · API REST"
+    }
+  ],
+  "en": [
+    {
+      "name": "directo-ia",
+      "role": "Onboarding and product presentation",
+      "period": "Jun 2026 - Aug 2026",
+      "about": "WhatsApp sales product for restaurants · AI-assisted collaboration",
+      "work": [
+        "I proposed conversational onboarding and directed its development with AI agents. I reviewed the functional flow and requested validation, keyboard and mobile adjustments.",
+        "I also worked with agents on responsive landing-page adjustments. The repository history records those contributions under my account."
+      ],
+      "result": "The onboarding adopted the conversational approach. My contribution combines the proposal, direction of assisted development and functional review.",
+      "href": "https://directo-ia.vercel.app",
+      "stack": "Project technologies: Next.js · React · TypeScript · Vercel"
+    },
+    {
+      "name": "chess-lab",
+      "role": "Internationalization and course translation",
+      "period": "2026",
+      "about": "Educational chess PWA · contribution to a third-party product",
+      "work": [
+        "I used agents to contribute to the multilingual adaptation: local translation, image preservation and normalization of chess terminology.",
+        "I worked on accessing and keeping translated content locally; the repository owner reviewed the integration."
+      ],
+      "result": "Contribution merged through PR #19, allowing translated content to be accessed and retained locally.",
+      "href": "https://chesspwa.netlify.app",
+      "stack": "Project technologies: React · TypeScript · Dexie/IndexedDB"
+    },
+    {
+      "name": "honest-english",
+      "role": "Personal product built with AI",
+      "period": "May 2026",
+      "about": "Personal tool for tracking real English practice",
+      "work": [
+        "I defined the product and directed its creation with AI, prioritizing actual practice rather than rewarding opening an app.",
+        "The product combines practice tracking, exercises and writing feedback."
+      ],
+      "result": "Portfolio product with practice tracking and writing feedback; repository and application available as work samples.",
+      "href": "https://gibson1987r.github.io/honest-english/",
+      "stack": "Project technologies: HTML · CSS · JavaScript"
+    },
+    {
+      "name": "fiestas-web",
+      "role": "Web invitations with AI assistance",
+      "period": "Feb 2026",
+      "about": "Personal invitation and attendance confirmation project",
+      "work": [
+        "I defined an invitation page bringing together event information and attendance confirmation, and directed its development with AI."
+      ],
+      "result": "One page can share the event and collect confirmations.",
+      "href": "https://fiestas-app.vercel.app",
+      "stack": "Project technologies: React · Firebase"
+    },
+    {
+      "name": "bancolombia-lunchmoney",
+      "role": "Transaction recording automation",
+      "period": "Jun 2026",
+      "about": "Integration of bank alerts, email and Lunch Money · third-party project",
+      "work": [
+        "I contributed through AI-assisted development to the integration of bank alerts and Lunch Money using Apps Script and a REST API.",
+        "I review recorded transactions and email-format changes from the administrative operation, requesting or directing adjustments when needed."
+      ],
+      "result": "Alerts can become recorded transactions; my contribution connects process knowledge with functional follow-up.",
+      "stack": "Project technologies: Google Apps Script · JavaScript · REST API"
+    }
+  ]
+};
+
+const QA_CASES = {
+  "es": [
+    {
+      "name": "Urban Routes · Sprint 1",
+      "role": "Pruebas de regresión",
+      "period": "sep 2026 - formación en curso",
+      "about": "TripleTen · proyecto académico",
+      "work": [
+        "Ejecuté los casos proporcionados y registré el comportamiento de la aplicación: el libro conserva 11 casos, nueve aprobados y dos fallidos.",
+        "Documenté dos errores: una respuesta HTTP 503 y una pantalla de espera que bloquea la aplicación. Registré pasos, resultado esperado y real, y captura o video."
+      ],
+      "result": "Dos reportes reproducibles vinculados a los resultados de regresión. Evidencia: libro de pruebas y captura/video del proyecto."
+    },
+    {
+      "name": "Urban Routes · Sprint 2",
+      "role": "Comprobación de interfaz y reportes de errores",
+      "period": "2026 · práctica académica",
+      "about": "TripleTen · reserva de automóviles en Chrome y Firefox",
+      "work": [
+        "Trabajé una checklist de 63 comprobaciones y registré su ejecución en Chrome y Firefox, comparando la interfaz con requisitos y diseño.",
+        "Documenté siete defectos de texto o representación visual, con pasos y evidencias en ambos navegadores. Las propuestas de prioridad quedan sujetas a revisión."
+      ],
+      "result": "Checklist ejecutada y siete reportes con 14 capturas, dos por defecto. Evidencia: Proyecto-Sprint-2-Urban-Routes.xlsx."
+    }
+  ],
+  "en": [
+    {
+      "name": "Urban Routes · Sprint 1",
+      "role": "Regression testing",
+      "period": "Sep 2026 - training in progress",
+      "about": "TripleTen · academic project",
+      "work": [
+        "I executed the provided test cases and recorded application behavior: the workbook contains 11 cases, nine passed and two failed.",
+        "I documented two defects: an HTTP 503 response and a waiting screen that blocks the application, recording steps, expected and actual results, and screenshot or video evidence."
+      ],
+      "result": "Two reproducible reports linked to regression results. Evidence: test workbook and project screenshot/video."
+    },
+    {
+      "name": "Urban Routes · Sprint 2",
+      "role": "UI checks and bug reporting",
+      "period": "2026 · academic practice",
+      "about": "TripleTen · car booking in Chrome and Firefox",
+      "work": [
+        "I worked on a checklist of 63 checks and recorded execution in Chrome and Firefox, comparing the interface with requirements and design.",
+        "I documented seven text or visual defects with steps and evidence in both browsers. Proposed priorities remain subject to review."
+      ],
+      "result": "Executed checklist and seven reports with 14 screenshots, two per defect. Evidence: Proyecto-Sprint-2-Urban-Routes.xlsx."
+    }
+  ]
+};
+
+const TECH_SKILLS = {
+  "es": [
+    {
+      "category": "Creación de aplicaciones con IA",
+      "items": [
+        "Definición de requisitos y comportamiento esperado",
+        "Instrucciones y seguimiento a agentes",
+        "Revisión funcional y solicitud de correcciones",
+        "Documentación de entregas"
+      ]
+    },
+    {
+      "category": "QA manual",
+      "items": [
+        "Ejecución de casos de regresión",
+        "Checklists de UI",
+        "Resultados esperados y obtenidos",
+        "Reportes reproducibles con evidencia",
+        "Chrome y Firefox"
+      ]
+    },
+    {
+      "category": "QA con apoyo de IA",
+      "items": [
+        "Contraste de criterios de aceptación y diseños",
+        "Revisión de propuestas de cobertura",
+        "Preguntas sobre requisitos ambiguos"
+      ]
+    },
+    {
+      "category": "Práctica académica en curso",
+      "items": [
+        "Clases de equivalencia",
+        "Valores límite",
+        "Combinaciones por pares",
+        "Fundamentos Agile/Scrum"
+      ]
+    },
+    {
+      "category": "Herramientas utilizadas",
+      "items": [
+        "Codex y Claude",
+        "Git/GitHub en el flujo asistido",
+        "Hojas de cálculo",
+        "DevTools: solicitudes y estados HTTP"
+      ]
+    }
+  ],
+  "en": [
+    {
+      "category": "Building applications with AI",
+      "items": [
+        "Requirements and expected behavior",
+        "Instructions and follow-up for agents",
+        "Functional review and correction requests",
+        "Delivery documentation"
+      ]
+    },
+    {
+      "category": "Manual QA",
+      "items": [
+        "Regression test execution",
+        "UI checklists",
+        "Expected and actual results",
+        "Reproducible reports with evidence",
+        "Chrome and Firefox"
+      ]
+    },
+    {
+      "category": "AI-assisted QA",
+      "items": [
+        "Comparing acceptance criteria and designs",
+        "Reviewing coverage suggestions",
+        "Questions on ambiguous requirements"
+      ]
+    },
+    {
+      "category": "Academic practice in progress",
+      "items": [
+        "Equivalence classes",
+        "Boundary values",
+        "Pairwise combinations",
+        "Agile/Scrum fundamentals"
+      ]
+    },
+    {
+      "category": "Tools used",
+      "items": [
+        "Codex and Claude",
+        "Git/GitHub in the assisted workflow",
+        "Spreadsheets",
+        "DevTools: requests and HTTP status codes"
+      ]
+    }
+  ]
+};
+
+const ADMIN_SKILLS = {
+  "es": [
+    {
+      "category": "Talento Humano y documentación",
+      "items": [
+        "Apoyo documental a contratación",
+        "Verificación de títulos y hojas de vida",
+        "SIGEP II",
+        "Organización de expedientes y soportes"
+      ]
+    },
+    {
+      "category": "Administración y mejora de procesos",
+      "items": [
+        "Excel y Word",
+        "Combinación de correspondencia",
+        "Estructuración de información",
+        "Seguimiento documental de riesgos y planes de mejora"
+      ]
+    },
+    {
+      "category": "Coordinación",
+      "items": [
+        "Tareas y cronogramas",
+        "Seguimiento de entregas",
+        "Articulación con equipos y comunidades",
+        "Reportes y trazabilidad"
+      ]
+    }
+  ],
+  "en": [
+    {
+      "category": "Human resources and documentation",
+      "items": [
+        "Document support for contracting",
+        "Qualification and CV checks",
+        "SIGEP II",
+        "Organizing records and supporting documents"
+      ]
+    },
+    {
+      "category": "Administration and process improvement",
+      "items": [
+        "Excel and Word",
+        "Mail merge",
+        "Structuring information",
+        "Documentation follow-up for risks and improvement plans"
+      ]
+    },
+    {
+      "category": "Coordination",
+      "items": [
+        "Tasks and schedules",
+        "Delivery tracking",
+        "Coordination with teams and communities",
+        "Reporting and traceability"
+      ]
+    }
+  ]
+};
+
+const TEACHING_SKILLS = {
+  "es": [
+    {
+      "category": "Enseñanza",
+      "items": [
+        "Explicación de contenidos matemáticos",
+        "Adaptación de explicaciones",
+        "Acompañamiento al aprendizaje"
+      ]
+    },
+    {
+      "category": "Comunidad educativa",
+      "items": [
+        "Comunicación con estudiantes y familias",
+        "Coordinación de actividades escolares y comunitarias",
+        "Organización y seguimiento de entregas"
+      ]
+    },
+    {
+      "category": "Herramientas digitales",
+      "items": [
+        "Creación de aplicaciones educativas con IA",
+        "Experiencia complementaria de portafolio"
+      ]
+    }
+  ],
+  "en": [
+    {
+      "category": "Teaching",
+      "items": [
+        "Explaining mathematical concepts",
+        "Adapting explanations",
+        "Supporting learning"
+      ]
+    },
+    {
+      "category": "School community",
+      "items": [
+        "Communication with students and families",
+        "Coordination of school and community activities",
+        "Organization and delivery tracking"
+      ]
+    },
+    {
+      "category": "Digital tools",
+      "items": [
+        "Building educational applications with AI",
+        "Complementary portfolio experience"
+      ]
+    }
+  ]
+};
+
+const DEGREES = {
+  "es": [
+    {
+      "title": "Licenciado en Educación Campesina y Rural",
+      "institution": {
+        "text": "Universidad Pedagógica Experimental Libertador · Origen: Profesor Especialidad: Educación Rural, 10 jul 2019. Convalidación MEN 007939, 12 may 2023.",
+        "pdf": "Universidad Pedagógica Experimental Libertador · 2019. Convalidación MEN 007939, 12 may 2023."
+      },
+      "year": ""
+    },
+    {
+      "title": "Tecnólogo en Gestión del Talento Humano",
+      "institution": {
+        "text": "Instituto Universitario de Educación Especializada - IUNE · Origen: T.S.U. en Administración de Recursos Humanos, 30 sep 2009. Convalidación MEN 013034, 24 jun 2025.",
+        "pdf": "Instituto Universitario de Educación Especializada - IUNE · 2009. Convalidación MEN 013034, 24 jun 2025."
+      },
+      "year": ""
+    }
+  ],
+  "en": [
+    {
+      "title": "Licenciado en Educación Campesina y Rural",
+      "institution": {
+        "text": "Universidad Pedagógica Experimental Libertador · Original qualification: Profesor Especialidad: Educación Rural, 10 Jul 2019. Colombian recognition: MEN 007939, 12 May 2023.",
+        "pdf": "Universidad Pedagógica Experimental Libertador · 2019. Colombian recognition: MEN 007939, 12 May 2023."
+      },
+      "year": ""
+    },
+    {
+      "title": "Tecnólogo en Gestión del Talento Humano",
+      "institution": {
+        "text": "Instituto Universitario de Educación Especializada - IUNE · Original qualification: T.S.U. en Administración de Recursos Humanos, 30 Sep 2009. Colombian recognition: MEN 013034, 24 Jun 2025.",
+        "pdf": "Instituto Universitario de Educación Especializada - IUNE · 2009. Colombian recognition: MEN 013034, 24 Jun 2025."
+      },
+      "year": ""
+    }
+  ]
+};
+
+const QA_METHOD = {
+  "es": [
+    "Delimito el fragmento de requisitos y diseño que se quiere revisar y preparo instrucciones para que la IA señale vacíos o inconsistencias. Contrasto las propuestas con las fuentes: lo que no está especificado se registra como pregunta. La ejecución manual y la evidencia del comportamiento de la aplicación permiten comprobar el resultado real.",
+    "En el Sprint 3 de TripleTen practico clases de equivalencia, valores límite y combinaciones por pares. También preparé un prompt de tabla de decisiones basada en requisitos. La IA apoya el análisis; los ejercicios siguen en desarrollo y revisión."
+  ],
+  "en": [
+    "I define the specific requirements and design fragment to review and prepare instructions for AI to identify gaps or inconsistencies. I check suggestions against the sources, turning unspecified behavior into questions. Manual execution and evidence of actual application behavior are used to verify the result.",
+    "In TripleTen Sprint 3, I am practicing equivalence classes, boundary values and pairwise combinations. I also prepared a prompt for a requirements-based decision table. AI supports the analysis; these exercises remain in development and review."
+  ]
+};
+
+const TECH_TRAINING = {
+  "es": [
+    {
+      "title": "QA Engineering · formación en curso",
+      "institution": "TripleTen · QA manual y asistido por IA; proyectos académicos de sprints 1 y 2, ejercicios de sprint 3; fundamentos Agile/Scrum.",
+      "year": "sep 2026 - en curso"
+    },
+    {
+      "title": "Formación complementaria en programación",
+      "institution": "Platzi · Antecedentes formativos, complementados hoy con creación de productos mediante agentes.",
+      "year": "2017-2020"
+    }
+  ],
+  "en": [
+    {
+      "title": "QA Engineering · training in progress",
+      "institution": "TripleTen · manual and AI-assisted QA; academic projects from sprints 1 and 2, sprint 3 exercises; Agile/Scrum fundamentals.",
+      "year": "Sep 2026 - in progress"
+    },
+    {
+      "title": "Additional programming education",
+      "institution": "Platzi · Earlier training, now complemented by product creation using agents.",
+      "year": "2017-2020"
+    }
+  ]
+};
+
+const PROFILE_CONTENT = {
+  "es": {
+    "tecnologia": {
+      "meta": {
+        "title": "Gibson Rosales · Desarrollo web con IA y QA manual y asistido por IA",
+        "description": "Creo aplicaciones web con herramientas y agentes de IA como Codex y Claude: defino el comportamiento esperado, doy instrucciones, reviso el resultado funcional y solicito correcciones. Complemento esta práctica con formación en QA Engineering en TripleTen, donde ejecuto pruebas manuales, documento defectos y utilizo IA como apoyo al análisis y diseño de pruebas. Mi aportación se centra en entender el problema, dirigir el trabajo asistido y comprobar el producto.",
+        "pdfName": "GibsonRosalesTecnologiaES"
+      },
+      "about": [
+        "Creo aplicaciones web con herramientas y agentes de IA como Codex y Claude: defino el comportamiento esperado, doy instrucciones, reviso el resultado funcional y solicito correcciones. Complemento esta práctica con formación en QA Engineering en TripleTen, donde ejecuto pruebas manuales, documento defectos y utilizo IA como apoyo al análisis y diseño de pruebas. Mi aportación se centra en entender el problema, dirigir el trabajo asistido y comprobar el producto."
+      ],
+      "sections": [
+        {
+          "id": "about",
+          "title": "Perfil profesional",
+          "file": "about.md",
+          "type": "about"
+        },
+        {
+          "id": "skills",
+          "title": "Habilidades",
+          "file": "skills.md",
+          "type": "skills"
+        },
+        {
+          "id": "qa",
+          "title": "Formación práctica en QA",
+          "file": "qa.md",
+          "type": "experience"
+        },
+        {
+          "id": "method",
+          "title": "Cómo utilizo IA como apoyo a QA",
+          "file": "method.md",
+          "type": "about"
+        },
+        {
+          "id": "experience",
+          "title": "Proyectos de desarrollo web con IA",
+          "file": "experience.md",
+          "type": "experience",
+          "printBreak": true
+        },
+        {
+          "id": "education",
+          "title": "Formación",
+          "file": "education.md",
+          "type": "education"
+        },
+        {
+          "id": "otherExperience",
+          "title": "Experiencia profesional complementaria",
+          "file": "otherExperience.md",
+          "type": "otherExperience",
+          "soloWeb": true
+        },
+        {
+          "id": "additionalSkills",
+          "title": "Otras capacidades",
+          "file": "additionalSkills.md",
+          "type": "skills",
+          "soloWeb": true
+        }
+      ],
+      "role": "Desarrollo web con IA y QA manual y asistido por IA"
+    },
+    "talento-humano": {
+      "meta": {
+        "title": "Gibson Rosales · Gestión de Talento Humano y administración",
+        "description": "Soy tecnólogo en Gestión del Talento Humano, con experiencia en apoyo a contratación, revisión de hojas de vida, control documental y seguimiento administrativo en el sector salud. Organizo información y documentos para su validación, identifico tareas repetitivas y desarrollo mejoras con Excel, Word y apoyo de IA. Aporto experiencia adicional de coordinación de programas y equipos en territorio.",
+        "pdfName": "GibsonRosalesTalentoHumanoES"
+      },
+      "about": [
+        "Soy tecnólogo en Gestión del Talento Humano, con experiencia en apoyo a contratación, revisión de hojas de vida, control documental y seguimiento administrativo en el sector salud. Organizo información y documentos para su validación, identifico tareas repetitivas y desarrollo mejoras con Excel, Word y apoyo de IA. Aporto experiencia adicional de coordinación de programas y equipos en territorio."
+      ],
+      "improvements": [
+        {
+          "text": "Generación documental: estructuré información de contratistas y plantillas de Word para producir documentos desde una base de Excel. Clasificación de soportes: organicé el proceso y dirigí el desarrollo asistido de un script para reducir trabajo repetitivo en facturación.",
+          "pdf": "Base Excel/Word para generación documental y clasificación asistida de soportes hospitalarios, aplicadas en las experiencias anteriores."
+        }
+      ],
+      "sections": [
+        {
+          "id": "about",
+          "title": "Perfil profesional",
+          "file": "about.md",
+          "type": "about"
+        },
+        {
+          "id": "otherExperience",
+          "title": "Experiencia profesional",
+          "file": "otherExperience.md",
+          "type": "otherExperience"
+        },
+        {
+          "id": "skills",
+          "title": "Habilidades",
+          "file": "skills.md",
+          "type": "skills"
+        },
+        {
+          "id": "improvements",
+          "title": "Proyectos de mejora de procesos",
+          "file": "improvements.md",
+          "type": "about"
+        },
+        {
+          "id": "education",
+          "title": "Formación académica",
+          "file": "education.md",
+          "type": "education"
+        },
+        {
+          "id": "supportingExperience",
+          "title": "Experiencia docente",
+          "file": "supportingExperience.md",
+          "type": "otherExperience",
+          "soloWeb": true
+        },
+        {
+          "id": "experience",
+          "title": "Otros proyectos tecnológicos",
+          "file": "experience.md",
+          "type": "experience",
+          "soloWeb": true
+        },
+        {
+          "id": "additionalSkills",
+          "title": "Capacidades tecnológicas y QA",
+          "file": "additionalSkills.md",
+          "type": "skills",
+          "soloWeb": true
+        }
+      ],
+      "role": "Gestión de Talento Humano y administración"
+    },
+    "docencia": {
+      "meta": {
+        "title": "Gibson Rosales · Licenciado en Educación · Docencia y enseñanza de matemáticas",
+        "description": "Soy licenciado en Educación con título convalidado en Colombia y trayectoria docente de sep 2012 a jul 2021. Mi experiencia incluye enseñanza de matemáticas, adaptación de explicaciones y comunicación con familias. Busco aportar estas capacidades a la educación primaria y al acompañamiento del aprendizaje. Complemento la docencia con experiencia en programas escolares y creación de herramientas web con apoyo de IA.",
+        "pdfName": "GibsonRosalesDocenciaES"
+      },
+      "about": [
+        "Soy licenciado en Educación con título convalidado en Colombia y trayectoria docente de sep 2012 a jul 2021. Mi experiencia incluye enseñanza de matemáticas, adaptación de explicaciones y comunicación con familias. Busco aportar estas capacidades a la educación primaria y al acompañamiento del aprendizaje. Complemento la docencia con experiencia en programas escolares y creación de herramientas web con apoyo de IA."
+      ],
+      "projectsSummary": [
+        "honest-english (2026): definí y dirigí con IA una herramienta personal de práctica de inglés. chess-lab (2026): participé mediante agentes en la adaptación multilingüe de una aplicación educativa de ajedrez. Son experiencias complementarias de portafolio."
+      ],
+      "sections": [
+        {
+          "id": "about",
+          "title": "Perfil profesional",
+          "file": "about.md",
+          "type": "about"
+        },
+        {
+          "id": "otherExperience",
+          "title": "Experiencia profesional",
+          "file": "otherExperience.md",
+          "type": "otherExperience"
+        },
+        {
+          "id": "skills",
+          "title": "Habilidades",
+          "file": "skills.md",
+          "type": "skills"
+        },
+        {
+          "id": "projectsSummary",
+          "title": "Proyectos complementarios",
+          "file": "projectsSummary.md",
+          "type": "about"
+        },
+        {
+          "id": "education",
+          "title": "Formación académica",
+          "file": "education.md",
+          "type": "education"
+        },
+        {
+          "id": "experience",
+          "title": "Proyectos tecnológicos en detalle",
+          "file": "experience.md",
+          "type": "experience",
+          "soloWeb": true
+        },
+        {
+          "id": "supportingExperience",
+          "title": "Experiencia administrativa",
+          "file": "supportingExperience.md",
+          "type": "otherExperience",
+          "soloWeb": true
+        },
+        {
+          "id": "additionalSkills",
+          "title": "Otras capacidades",
+          "file": "additionalSkills.md",
+          "type": "skills",
+          "soloWeb": true
+        }
+      ],
+      "role": "Licenciado en Educación · Docencia y enseñanza de matemáticas"
+    }
+  },
+  "en": {
+    "tecnologia": {
+      "meta": {
+        "title": "Gibson Rosales · AI-assisted web development and manual and AI-assisted QA",
+        "description": "I create web applications using AI tools and agents such as Codex and Claude: I define expected behavior, give instructions, review functional results and request corrections. I complement this practice with QA Engineering training at TripleTen, where I execute manual tests, document defects and use AI to support test analysis and design. My contribution focuses on understanding the problem, directing assisted work and checking the product.",
+        "pdfName": "GibsonRosalesTecnologiaEN"
+      },
+      "about": [
+        "I create web applications using AI tools and agents such as Codex and Claude: I define expected behavior, give instructions, review functional results and request corrections. I complement this practice with QA Engineering training at TripleTen, where I execute manual tests, document defects and use AI to support test analysis and design. My contribution focuses on understanding the problem, directing assisted work and checking the product."
+      ],
+      "sections": [
+        {
+          "id": "about",
+          "title": "Professional summary",
+          "file": "about.md",
+          "type": "about"
+        },
+        {
+          "id": "skills",
+          "title": "Skills",
+          "file": "skills.md",
+          "type": "skills"
+        },
+        {
+          "id": "qa",
+          "title": "Practical QA training",
+          "file": "qa.md",
+          "type": "experience"
+        },
+        {
+          "id": "method",
+          "title": "How I use AI to support QA",
+          "file": "method.md",
+          "type": "about"
+        },
+        {
+          "id": "experience",
+          "title": "AI-assisted web development projects",
+          "file": "experience.md",
+          "type": "experience",
+          "printBreak": true
+        },
+        {
+          "id": "education",
+          "title": "Education",
+          "file": "education.md",
+          "type": "education"
+        },
+        {
+          "id": "otherExperience",
+          "title": "Additional professional experience",
+          "file": "otherExperience.md",
+          "type": "otherExperience",
+          "soloWeb": true
+        },
+        {
+          "id": "additionalSkills",
+          "title": "Additional capabilities",
+          "file": "additionalSkills.md",
+          "type": "skills",
+          "soloWeb": true
+        }
+      ],
+      "role": "AI-assisted web development and manual and AI-assisted QA"
+    },
+    "talento-humano": {
+      "meta": {
+        "title": "Gibson Rosales · Human resources management and administration",
+        "description": "I am a Human Resources Technologist with experience supporting contracting, reviewing CVs, controlling documents and following up on administrative processes in healthcare. I organize information and documents for validation, identify repetitive tasks and develop improvements using Excel, Word and AI assistance. I also bring experience coordinating programs and field teams.",
+        "pdfName": "GibsonRosalesTalentoHumanoEN"
+      },
+      "about": [
+        "I am a Human Resources Technologist with experience supporting contracting, reviewing CVs, controlling documents and following up on administrative processes in healthcare. I organize information and documents for validation, identify repetitive tasks and develop improvements using Excel, Word and AI assistance. I also bring experience coordinating programs and field teams."
+      ],
+      "improvements": [
+        {
+          "text": "Document generation: I structured contractor information and Word templates to produce documents from an Excel database. Supporting-document classification: I organized the process and directed an AI-assisted script to reduce repetitive billing work.",
+          "pdf": "Excel/Word document generation and assisted classification of hospital records, applied in the roles described above."
+        }
+      ],
+      "sections": [
+        {
+          "id": "about",
+          "title": "Professional summary",
+          "file": "about.md",
+          "type": "about"
+        },
+        {
+          "id": "otherExperience",
+          "title": "Professional experience",
+          "file": "otherExperience.md",
+          "type": "otherExperience"
+        },
+        {
+          "id": "skills",
+          "title": "Skills",
+          "file": "skills.md",
+          "type": "skills"
+        },
+        {
+          "id": "improvements",
+          "title": "Process improvement projects",
+          "file": "improvements.md",
+          "type": "about"
+        },
+        {
+          "id": "education",
+          "title": "Education",
+          "file": "education.md",
+          "type": "education"
+        },
+        {
+          "id": "supportingExperience",
+          "title": "Teaching experience",
+          "file": "supportingExperience.md",
+          "type": "otherExperience",
+          "soloWeb": true
+        },
+        {
+          "id": "experience",
+          "title": "Other technology projects",
+          "file": "experience.md",
+          "type": "experience",
+          "soloWeb": true
+        },
+        {
+          "id": "additionalSkills",
+          "title": "Technology and QA capabilities",
+          "file": "additionalSkills.md",
+          "type": "skills",
+          "soloWeb": true
+        }
+      ],
+      "role": "Human resources management and administration"
+    },
+    "docencia": {
+      "meta": {
+        "title": "Gibson Rosales · Education graduate · Teaching and mathematics instruction",
+        "description": "I hold an Education degree recognized in Colombia and have a teaching career from Sep 2012 to Jul 2021. My experience includes teaching mathematics, adapting explanations and communicating with families. I aim to contribute these capabilities to primary education and learning support, complemented by experience in school programs and building web tools with AI assistance.",
+        "pdfName": "GibsonRosalesDocenciaEN"
+      },
+      "about": [
+        "I hold an Education degree recognized in Colombia and have a teaching career from Sep 2012 to Jul 2021. My experience includes teaching mathematics, adapting explanations and communicating with families. I aim to contribute these capabilities to primary education and learning support, complemented by experience in school programs and building web tools with AI assistance."
+      ],
+      "projectsSummary": [
+        "honest-english (2026): I defined and directed an AI-assisted personal English practice tool. chess-lab (2026): I used agents to contribute to the multilingual adaptation of an educational chess app. These are complementary portfolio experiences."
+      ],
+      "sections": [
+        {
+          "id": "about",
+          "title": "Professional summary",
+          "file": "about.md",
+          "type": "about"
+        },
+        {
+          "id": "otherExperience",
+          "title": "Professional experience",
+          "file": "otherExperience.md",
+          "type": "otherExperience"
+        },
+        {
+          "id": "skills",
+          "title": "Skills",
+          "file": "skills.md",
+          "type": "skills"
+        },
+        {
+          "id": "projectsSummary",
+          "title": "Additional projects",
+          "file": "projectsSummary.md",
+          "type": "about"
+        },
+        {
+          "id": "education",
+          "title": "Education",
+          "file": "education.md",
+          "type": "education"
+        },
+        {
+          "id": "experience",
+          "title": "Technology projects in detail",
+          "file": "experience.md",
+          "type": "experience",
+          "soloWeb": true
+        },
+        {
+          "id": "supportingExperience",
+          "title": "Administrative experience",
+          "file": "supportingExperience.md",
+          "type": "otherExperience",
+          "soloWeb": true
+        },
+        {
+          "id": "additionalSkills",
+          "title": "Additional capabilities",
+          "file": "additionalSkills.md",
+          "type": "skills",
+          "soloWeb": true
+        }
+      ],
+      "role": "Education graduate · Teaching and mathematics instruction"
+    }
+  }
+};
+
+function makeProfile(lang, key) {
+  const content = PROFILE_CONTENT[lang][key];
+  const shared = SHARED[lang];
+  const tech = key === "tecnologia";
+  const hr = key === "talento-humano";
+  return {
+    ...shared,
+    ...content,
+    identity: { ...shared.identity, role: content.role, rolePrint: content.role },
+    skills: tech ? TECH_SKILLS[lang] : hr ? ADMIN_SKILLS[lang] : TEACHING_SKILLS[lang],
+    // Herramientas declaradas por Gibson; complementarias, sin atribuir
+    // desarrollo de servidores MCP ni una implementación específica con n8n.
+    additionalSkills: [
+      ...(tech ? ADMIN_SKILLS[lang] : TECH_SKILLS[lang]),
+      lang === "es"
+        ? { category: "Configuración de herramientas de IA", items: ["Instalación de skills", "Configuración de conexiones MCP", "n8n para integraciones y automatizaciones"] }
+        : { category: "AI tool configuration", items: ["Installing skills", "Configuring MCP connections", "n8n for integrations and automation"] },
+    ],
+    qa: QA_CASES[lang],
+    method: QA_METHOD[lang],
+    experience: PROJECTS[lang].map((item, i) => tech && i === 3 ? { ...item, soloWeb: true } : item),
+    otherExperience: tech ? JOBS[lang] : (hr ? [2, 1, 0] : [3, 0]).map(i => ({ ...JOBS[lang][i], open: true })),
+    supportingExperience: (hr ? [3] : [2, 1]).map(i => JOBS[lang][i]),
+    education: tech ? [...TECH_TRAINING[lang], ...DEGREES[lang]] : hr ? [...DEGREES[lang]].reverse() : DEGREES[lang],
+  };
+}
+
+export const CV_PROFILES = Object.fromEntries(
+  ["es", "en"].map(lang => [lang, Object.fromEntries(PROFILES.map(key => [key, makeProfile(lang, key)]))]),
+);
+
+// Compatibilidad: el bloque principal ES/EN sigue siendo el perfil tecnológico.
 export const CV_DATA = {
-  /* ══════════════════════════════════════════════════════════════════════
-     ESPAÑOL
-     ══════════════════════════════════════════════════════════════════════ */
-  es: {
-    /* Metadatos de la pestaña del navegador y del buscador */
-    meta: {
-      title: "Gibson Rosales · Desarrollador con IA",
-      description:
-        "Currículum de Gibson Rosales: construyo producto web dirigiendo agentes de IA. Llegué aquí automatizando mi propio trabajo.",
-    },
-
-    identity: {
-      name: "Gibson Rosales",
-      role: "Desarrollador con IA",
-      /**
-       * El puesto tal y como lo escribe quien publica la vacante, más el
-       * stack. Solo sale en el PDF, que es el archivo que analiza el sistema
-       * de selección de la empresa: "Desarrollador con IA" describe muy bien
-       * cómo trabaja Gibson, pero no es un título que nadie tenga en su lista
-       * de búsqueda, y en la criba automática eso se paga.
-       *
-       * Cámbialo al puesto de la vacante a la que apuntes: si buscas frontend,
-       * "Desarrollador Frontend"; si buscas full stack, ese.
-       */
-      rolePrint: "Desarrollador Web · JavaScript, React, Next.js",
-      location: "Medellín, Antioquia, Colombia",
-      status: "Disponible · remoto o presencial",
-      /**
-       * `icon` es el nombre del glifo que va delante del enlace; los dibuja
-       * js/icons.js. Si se pone uno que no existe ahí, el enlace se pinta
-       * igual, sin icono. El `label` sigue haciendo falta: es lo que anuncia
-       * un lector de pantalla, porque el icono no le dice nada.
-       */
-      links: [
-        {
-          label: "GitHub",
-          text: "github.com/Gibson1987R",
-          href: "https://github.com/Gibson1987R",
-          icon: "github",
-        },
-        {
-          label: "LinkedIn",
-          // URL personalizada, sin el sufijo que LinkedIn pone solo (se quitó
-          // el 2026-08-25 desde Editar URL pública). Si la cambias allí,
-          // cámbiala en los dos bloques de idioma.
-          text: "linkedin.com/in/gibson-rosales-fuenmayor",
-          href: "https://www.linkedin.com/in/gibson-rosales-fuenmayor",
-          icon: "linkedin",
-        },
-        /**
-         * El número va a WhatsApp, no a `tel:`. Aquí el reclutamiento pasa por
-         * ahí, y un enlace wa.me abre la conversación de un toque desde el
-         * móvil; un `tel:` obliga a llamar en frío, que casi nadie hace. El
-         * número se sigue viendo escrito, así que quien prefiera llamar lo
-         * tiene. Ojo con el formato del href: wa.me quiere el número sin `+`
-         * ni espacios, con indicativo de país (57 = Colombia).
-         */
-        {
-          label: "WhatsApp",
-          text: "+57 310 552 8854",
-          href: "https://wa.me/573105528854",
-          icon: "whatsapp",
-        },
-        {
-          label: "Email",
-          text: "gibsonrosales@gmail.com",
-          href: "mailto:gibsonrosales@gmail.com",
-          icon: "email",
-        },
-      ],
-
-      /**
-       * Datos que NO salen en la web y SÍ en el PDF.
-       * La página es pública e indexable: el número de documento ahí es
-       * material de suplantación. Muchas vacantes en Colombia sí lo piden,
-       * así que vive aquí y solo se imprime.
-       *
-       * Pon `mostrar: true` cuando una vacante lo exija; luego vuelve a false.
-       */
-      soloImpresion: {
-        mostrar: false,
-        campos: [{ label: "Documento", value: "1.127.397.395" }],
-      },
-    },
-
-    /**
-     * Un elemento por párrafo.
-     *
-     * Los dos de en medio llevan `soloWeb: true`: cuentan entera la historia
-     * del hospital, que en la web es el relato que engancha, pero en el PDF
-     * se repite —está otra vez, con más detalle, en «Experiencia profesional
-     * previa»— y esa repetición vale media página de papel. El primero (qué
-     * hace hoy) y el último (qué aporta) se quedan en los dos.
-     */
-    about: [
-      {
-        text: "Manejo agentes de IA como Codex y Claude para especificar tareas, coordinar el desarrollo asistido y revisar sus resultados. Manejo n8n para integraciones y automatizaciones. Mi experiencia incluye el flujo de onboarding de directo-ia, un producto de venta por WhatsApp para restaurantes.",
-        pdf: "Manejo agentes de IA como Codex y Claude para especificar tareas, coordinar el desarrollo asistido y revisar sus resultados. Manejo n8n para integraciones y automatizaciones. Mi experiencia incluye el flujo de onboarding de directo-ia, un producto de venta por WhatsApp para restaurantes. Vengo de coordinar equipos y de administrar procesos: entiendo el problema desde dentro antes de proponer nada.",
-      },
-      {
-        soloWeb: true,
-        text: "Llegué aquí porque una necesidad me despertó la curiosidad. Había estudiado programación años antes, pero nunca la había aplicado en un trabajo: ni dando clases ni coordinando proyectos humanitarios se me cruzó el problema que la pidiera. Se me cruzó facturando en un hospital, donde se iban las tardes partiendo a mano los PDF escaneados de cada paciente. Sabía la regla —qué documentos pide cada EPS y cómo cambian según el tipo de atención—, así que la puse por escrito, la trabajé con Copilot hasta que salió un script que se llevaba el trabajo pesado, y treinta horas de clasificación pasaron a una.",
-      },
-      {
-        soloWeb: true,
-        text: "Ese fue el primer código mío que resolvió algo de verdad, y ya lo escribí así: dirigiendo una IA con un criterio que era mío. Ahí aprendí lo que sigo haciendo hoy — el cuello de botella no es escribir el código, es entender bien el problema. Lo volví a comprobar en Talento Humano, modelando los datos de más de quinientos contratistas para que cada documento saliera solo.",
-      },
-      {
-        text: "Vengo de coordinar equipos y de administrar procesos, y eso es lo que aporto además del código: entiendo el problema desde dentro antes de proponer nada. Primero me meto en el dolor, luego construyo la solución.",
-        soloWeb: true,
-      },
-    ],
-
-    /**
-     * Experiencia en programación. Una sola lista, ordenada por IMPACTO y no
-     * por cronología ni por quién es dueño del repo: al que contrata le da
-     * igual esa distinción, quiere ver qué construiste y qué resolvió.
-     *
-     * Cada entrada es una historia STAR (ver star.md):
-     *   about  → Situación, una línea: qué es el producto
-     *   role   → Tarea: el nombre significativo de tu participación
-     *   work[] → Acción: el 60% del peso, siempre en primera persona
-     *   result → Resultado, con cifra cuando exista
-     *
-     * Sin `stack`: todo el vocabulario técnico vive en `skills`, para que aquí
-     * se lea el producto y no la lista de herramientas.
-     */
-    experience: [
-      {
-        name: "directo-ia",
-        // El repo es privado y de otra persona; lo que sí es público es el
-        // producto. Cuidado: el enlace lleva a la landing comercial, y el
-        // onboarding que hice está detrás del registro.
-        href: "https://directo-ia.vercel.app",
-        role: "Responsable del flujo de onboarding",
-        /**
-         * `period` solo sale en el PDF. Un sistema de selección calcula los
-         * años de experiencia leyendo fechas; sin ellas puede puntuar como si
-         * no hubiera ninguna. En la web no hace falta: ahí la lista va por
-         * impacto y la cronología distraería.
-         *
-         * Mismo formato que las fechas de `otherExperience`, para que todo el
-         * documento tenga un solo patrón que reconocer.
-         */
-        period: "jun 2026 - ago 2026",
-        /**
-         * La misma fecha en formato AAAA-MM. `period` es para leer; `start` es
-         * para ordenar: con este formato, comparar dos fechas es comparar dos
-         * textos, sin convertir nada. Las entradas sin `start` se quedan al
-         * final del PDF, en el orden en que estén.
-         */
-        start: "2026-06",
-        about: "Venta por WhatsApp con IA para restaurantes · desarrollo del onboarding",
-        stack: "Next.js · React · TypeScript · Vercel",
-        work: [
-          {
-            text: "El restaurante que se da de alta va a trabajar con una IA todos los días, así que propuse que el registro se pareciera a eso: una conversación, y no un formulario de pasos como el de cualquier otra web. Al dueño del producto le gustó la idea y el onboarding se rehízo con esa forma.",
-            pdf: "Propuso que el registro fuera una conversación (no un formulario por pasos), porque el restaurante trabajará con una IA a diario; la propuesta fue aceptada y el onboarding se rehízo así.",
-          },
-          {
-            text: "Construí ese flujo: cada paso pregunta lo que necesita cuando toca, avisa en el punto exacto donde falta algo y no te deja seguir con secciones a medias sin que lo sepas.",
-          },
-          {
-            text: "Lo dejé usable solo con teclado y aguantando nombres largos, pantallas bajas y móvil, porque quien da de alta un restaurante lo hace desde el celular y en medio del servicio.",
-          },
-        ],
-        result: {
-          text: "El flujo permitió dar de alta un restaurante conversando con la misma IA que usaría después, en vez de rellenando un formulario. Ese cambio de forma salió de mi propuesta.",
-        },
-      },
-      {
-        name: "chess-lab",
-        // El repo es privado y se llama `skool-scraper` por decisión del dueño;
-        // lo que sí se puede enseñar es la app desplegada. Por eso aquí va la
-        // URL de Netlify y no la de GitHub. El subdominio conserva el nombre
-        // viejo de la app (chesspwa) y no se toca: está registrado en Supabase
-        // como redirección de login y cambiarlo rompe el acceso.
-        href: "https://chesspwa.netlify.app",
-        role: "Internacionalización y traducción sin conexión",
-        period: "jun 2026",
-        start: "2026-06",
-        about:
-          "PWA para aprender ajedrez sin conexión: lecciones, tablero y puzzles",
-        stack: "React · TypeScript · PWA · Dexie · Supabase",
-        work: [
-          {
-            text: "El contenido estaba en un solo idioma y traducirlo a mano era inviable. Monté una traducción que ocurre en el propio navegador, respeta el vocabulario de ajedrez (una torre no es una «tower»), conserva las imágenes de las lecciones y guarda lo ya traducido para no repetir el trabajo ni gastar conexión.",
-            pdf: "Traducción en el propio navegador que respeta vocabulario de ajedrez, conserva imágenes y cachea lo traducido.",
-          },
-          {
-            text: "Dejé la aplicación entera en tres idiomas, de modo que el mismo curso sirve a tres públicos sin duplicar contenido.",
-            pdf: "Aplicación entera en 3 idiomas sin duplicar contenido; login opcional; arregló navegación entre puzzles.",
-          },
-          {
-            text: "Añadí el inicio de sesión opcional: quien quiera conservar su progreso puede, y quien no, sigue jugando sin cuenta. Y arreglé la navegación entre puzzles, que dejaba al usuario atascado.",
-          },
-        ],
-        result: {
-          text: "Un estudiante puede hacer el curso entero en su idioma y sin conexión; antes el contenido existía en uno solo. Todo lo que entregué entró tras la revisión del dueño del repo.",
-        },
-      },
-      {
-        name: "honest-english",
-        href: "https://gibson1987r.github.io/honest-english/",
-        role: "Producto propio, de la idea al despliegue",
-        period: "may 2026",
-        start: "2026-05",
-        about:
-          "Rastreador de aprendizaje de inglés que se niega a gamificar",
-        stack: "JavaScript · HTML · CSS · sin dependencias",
-        work: [
-          {
-            text: "Decidí el producto en contra de lo obvio: el contador muestra los días que llevo SIN practicar, no la racha. La racha premia no romperla; el hueco te enseña dónde abandonaste.",
-            pdf: "Contador de días SIN practicar (anti-racha); feedback de escritura que no adula; cero dependencias autoimpuesto.",
-          },
-          {
-            text: "Escribí un feedback de escritura que no adula: si el texto está mal, lo dice. Un producto que te felicita por todo no te enseña inglés.",
-          },
-          {
-            text: "Me impuse una restricción que ningún cliente exigía —cero dependencias— y la sostuve con una lista de revisión propia que la impide.",
-          },
-        ],
-        result: {
-          text: "En línea y en uso: es la herramienta con la que sigo mi propio inglés, sin racha que mantener ni elogios de adorno.",
-        },
-      },
-      {
-        name: "fiestas-web",
-        // La raíz es la página que vende; desde ahí se llega a /demo (fiesta
-        // inventada, con fecha futura, donde cualquiera puede confirmar) y a
-        // /joaquin (la fiesta real, ya celebrada).
-        //
-        // En Vercel el proyecto se llama `fiestas-app` y no `fiestas-web` como
-        // el repo, porque fiestas-web.vercel.app lo tiene ocupado otra persona.
-        // El dominio viejo (landing-cumple-joaquin-jeremias.vercel.app) sigue
-        // vivo a propósito: es el enlace que se repartió a los invitados.
-        href: "https://fiestas-app.vercel.app",
-        role: "Servicio propio de punta a punta",
-        period: "feb 2026",
-        start: "2026-02",
-        about:
-          "Páginas para fiestas infantiles: la invitación, la confirmación en vivo y la galería",
-        stack: "React · Firebase/Firestore · Vite · Vercel",
-        work: [
-          {
-            text: "Nació de un dolor concreto: organizar el cumpleaños de mi hijo sin saber cuánta gente iba a llegar. En vez de resolver esa fiesta, lo convertí en servicio: cada cliente es una entrada de configuración con su propia ruta y su lista de invitados aislada, así que dar de alta una fiesta nueva ya no es volver a programar.",
-            pdf: "Multi-cliente por configuración (cada fiesta con su ruta y lista aislada); permisos de administrador; demo pública.",
-          },
-          {
-            text: "Cerré la edición y el borrado con permisos de administrador: los invitados confirman, y nadie más toca la lista.",
-          },
-          {
-            text: "Publiqué una demo abierta con una fiesta inventada, porque a un cliente no le vendes una captura: le enseñas la lista actualizándose en su propio teléfono.",
-          },
-        ],
-        result: {
-          text: "Usado en una fiesta real y con demo pública donde cualquiera puede confirmar y ver la lista actualizarse en vivo.",
-        },
-      },
-      {
-        name: "bancolombia-lunchmoney",
-        // Repo de Sebastián y sobre sus cuentas: no hay nada público que
-        // enlazar, y por eso esta entrada va sin `href`.
-        role: "Automatización en producción sobre dinero real",
-        period: "jun 2026",
-        start: "2026-06",
-        about:
-          "Las alertas del banco se convierten solas en movimientos registrados",
-        stack: "JavaScript · Google Apps Script · API REST",
-        work: [
-          {
-            text: "Un cliente perdía el rastro de sus gastos porque nadie apunta cada compra. Integré las alertas bancarias, el correo y Lunch Money mediante Google Apps Script y API REST, con desarrollo asistido por IA: cada alerta se convierte en un movimiento clasificado.",
-            pdf: "Integré alertas bancarias, correo y Lunch Money mediante Google Apps Script y API REST, con desarrollo asistido por IA.",
-          },
-          {
-            text: "Es dinero de otra persona, así que no improviso: cada cambio en la lectura de los correos lo pruebo antes contra correos reales guardados.",
-          },
-          {
-            text: "La opero y la mantengo yo. Cuando el banco cambia el formato del mensaje, el que lo arregla soy yo.",
-          },
-        ],
-        result: {
-          text: "En producción sobre las cuentas reales de un cliente: sus gastos quedan registrados sin que él apunte nada.",
-        },
-      },
-    ],
-
-    /**
-     * Los empleos anteriores a la programación. Van DESPUÉS de `experience` y
-     * también ordenados por impacto, no por fecha: primero donde coordiné más
-     * gente, al final la docencia.
-     *
-     * Estas sí llevan fechas (son cargos con contrato) y tampoco llevan
-     * `stack`.
-     */
-    otherExperience: [
-      {
-        role: "Coordinador regional — Estado Amazonas",
-        company: "A.C. Construyendo Futuros / socio de UNICEF",
-        context: "Amazonas, Venezuela · Tres programas: alimentación escolar, agua y saneamiento, y medios de vida",
-        start: "2021-09",
-        end: "2023-12",
-        startLabel: "sep 2021",
-        endLabel: "dic 2023",
-        achievements: [
-          {
-            text: "Coordiné tres programas seguidos en el estado Amazonas: «AliMentes», de alimentación escolar (sep 2021 – ago 2022); el de agua, higiene y saneamiento en las escuelas del municipio Atures (jul – oct 2022); y «Manos Que Construyen» (2023), de medios de vida para empoderar a adolescentes y mujeres frente a las desigualdades de género. Los dos primeros los llevé en paralelo durante julio y agosto de 2022.",
-            pdf: "Coordinó tres programas en Amazonas: alimentación escolar «AliMentes», agua y saneamiento (WASH) y «Manos Que Construyen» (medios de vida); dos de ellos solapados.",
-          },
-          {
-            text: "Coordiné a 58 personas en territorio: en AliMentes, 21 acompañantes que verificaban el cumplimiento de los menús y 10 operadores logísticos; en el de agua y saneamiento, 6 ingenieros y técnicos con sus promotores asignados y un almacenista; más los proveedores de cada programa. Repartí las tareas, armé los cronogramas y sostuve el seguimiento de lo que cada quien tenía que entregar.",
-            pdf: "Coordinó 58 personas en territorio (acompañantes, promotores, operadores logísticos, ingenieros/técnicos de agua, almacenista y proveedores); cronogramas y seguimiento.",
-          },
-          {
-            text: "Articulé a comunidades indígenas, equipos técnicos e instituciones aliadas para que una actividad pudiera ocurrir. Sin ese acuerdo previo, en terreno no se ejecuta nada.",
-          },
-          {
-            text: "Mantuve la trazabilidad de todo lo ejecutado con reportes y organización documental: un proyecto humanitario que no puede demostrar lo que hizo, no se renueva.",
-          },
-        ],
-      },
-      {
-        role: "Tecnólogo en Caja y Facturación",
-        company: "Hospital Departamental San Juan de Dios E.S.E.",
-        context: "Colombia · Aquí escribí mi primer código útil",
-        stack: "Python · Xenco · automatización documental",
-        start: "2025-02",
-        end: "2025-10",
-        startLabel: "feb 2025",
-        endLabel: "oct 2025",
-        achievements: [
-          {
-            text: "Facturaba a diario en Xenco, el sistema de información del hospital. Cada EPS pide un juego distinto de documentos y cambia según el tipo de atención: facturar era además partir a mano un PDF escaneado, hoja por hoja. Ordené primero la recepción, para que cada escaneo saliera siempre igual.",
-          },
-          {
-            text: "Sobre ese orden, escribí con Copilot un script que identificaba EPS, factura y tipo de atención y dejaba las carpetas ya divididas y renombradas en todas las combinaciones posibles; yo solo borraba las que no aplicaban. De unas 30 horas a una, y cien casos costaban lo mismo que uno.",
-            pdf: "Ordenó la recepción para estandarizar escaneos; script (con Copilot) que identificaba EPS, factura y tipo de atención y dividía/renombraba carpetas: de ~30 horas a 1.",
-          },
-        ],
-      },
-      {
-        role: "Tecnólogo para el área de Talento Humano",
-        company: "Hospital Departamental San Juan de Dios E.S.E.",
-        context: "Colombia · Contratación y control documental",
-        stack: "Excel · modelado de datos",
-        start: "2025-11",
-        end: "2026-03",
-        startLabel: "nov 2025",
-        endLabel: "mar 2026",
-        achievements: [
-          {
-            text: "Modelé en Excel la base de más de 500 contratistas de cuatro municipios, contando que una misma persona puede tener varios perfiles si está en más de un programa: datos personales, rol y cargo, fecha de inicio y de cierre.",
-            pdf: "Modeló en Excel la base de 500+ contratistas de 4 municipios; combinación de correspondencia con Word: de 20-30 min a 4-5 por documento.",
-          },
-          {
-            text: "La conecté con Word por combinación de correspondencia, tratando la hoja como una tabla de entidad-relación: cada plantilla consulta los campos que necesita y se rellena sola. Emitir un documento pasó de 20 o 30 minutos a 4 o 5.",
-          },
-          {
-            text: "Revisé hojas de vida, soportes y expedientes verificando que cada requisito y cada título estuvieran donde debían antes de la validación jurídica, y llevé el seguimiento del plan de mejora y del mapa de riesgos que exige la Contraloría.",
-          },
-        ],
-      },
-      {
-        role: "Profesor de matemáticas y educación básica",
-        company: "Ministerio de Educación",
-        context: "Venezuela",
-        start: "2012-09",
-        end: "2021-07",
-        startLabel: "sep 2012",
-        endLabel: "jul 2021",
-        achievements: [
-          {
-            text: "Enseñé matemáticas nueve años a entre 200 y 300 estudiantes por año, y reformulé la misma explicación tantas veces como hizo falta hasta dar con la que le servía a cada uno.",
-            pdf: "9 años, entre 200 y 300 estudiantes por año; comunicación con familias y comunidad educativa.",
-          },
-          {
-            text: "Sostuve la comunicación con familias y comunidad educativa para que el acompañamiento no terminara en la puerta del aula.",
-          },
-          {
-            text: "Es la habilidad que más uso programando: leer algo ajeno, entenderlo y poder contarlo.",
-          },
-        ],
-      },
-    ],
-
-    /**
-     * Aquí y solo aquí van las palabras técnicas. Las entradas de experiencia
-     * cuentan el producto; los nombres de herramientas se concentran en esta
-     * sección para que un filtro automático los encuentre juntos.
-     */
-    skills: [
-      {
-        category: "Lenguajes",
-        items: ["JavaScript", "TypeScript", "Python", "SQL", "HTML y CSS"],
-      },
-      {
-        category: "Frontend",
-        items: [
-          "React",
-          "Next.js",
-          "Vite",
-          "PWA y offline",
-          "Accesibilidad",
-          "Internacionalización",
-          { text: "CSS sin frameworks" },
-        ],
-      },
-      {
-        category: "Backend y datos",
-        items: [
-          "Firebase / Firestore",
-          "Supabase",
-          "IndexedDB / Dexie",
-          "Google Apps Script",
-          "APIs REST",
-          { text: "Autenticación y roles" },
-        ],
-      },
-      {
-        category: "Flujo de trabajo",
-        items: [
-          "Git",
-          "GitHub",
-          { text: "Pull requests" },
-          { text: "Issues" },
-          "Revisión de código",
-          "GitHub Actions",
-          "Despliegue continuo (Vercel, Netlify)",
-        ],
-      },
-      {
-        category: "Agentes de IA, integraciones y automatización",
-        items: [
-          "Manejo de agentes de IA: Codex y Claude",
-          "Especificación de tareas",
-          "Revisión del código generado",
-          "n8n: integraciones y automatizaciones",
-        ],
-      },
-      {
-        category: "QA y Agile/Scrum — práctica académica",
-        items: [
-          "Análisis de requisitos y criterios de aceptación",
-          "Ejecución de pruebas manuales y de regresión",
-          "Checklists de UI en Chrome y Firefox",
-          "Reportes de bugs: pasos, resultado esperado y real, evidencia",
-          "Agile y Scrum: fundamentos de sprints, roles y ceremonias",
-          "DevTools: consulta de solicitudes y códigos HTTP",
-        ],
-      },
-      {
-        category: "Gestión y equipo",
-        items: [
-          "Coordinación de equipos",
-          { text: "Delegación y seguimiento" },
-          { text: "Comunicación con cliente" },
-          "Excel y Google Sheets",
-          "Modelado de datos en tablas",
-          { text: "Combinación de correspondencia" },
-          { text: "Tableros Kanban (Trello, Notion, Asana)" },
-          { text: "Documentación y trazabilidad" },
-        ],
-      },
-    ],
-
-    /**
-     * El orden es el mismo criterio que rige `sections`: lo de programación
-     * primero. Quien lee un CV de desarrollador busca formación técnica; las
-     * titulaciones formales son de otra carrera y explican de dónde viene,
-     * no a qué aspira. Van al final, que es donde se leen como contexto.
-     *
-     * Ojo con la última: es UN solo título, no dos. Se cursó en Venezuela
-     * como "Técnico Superior Universitario en Administración de Recursos
-     * Humanos" y en Colombia se convalida como "Tecnólogo en Gestión de
-     * Talento Humano". Los CV anteriores lo listaban por separado y parecían
-     * dos estudios.
-     */
-    education: [
-      /**
-       * Los 44 diplomas de Platzi están descargados en
-       * ~/Documents/Currículum/Certificados. Aquí NO se listan uno a uno: nadie
-       * lee 44 líneas. Va el titular y el enlace al perfil, que es lo que
-       * cualquiera puede comprobar en diez segundos y vale más que los PDF.
-       */
-      {
-        title: "Formación en programación — Platzi",
-        institution:
-          {
-            text: "Carrera de JavaScript · ~35 cursos entre JavaScript, React, Node y maquetación · Curso Práctico de Python: creación de un CRUD (21 h)",
-            pdf: "Carrera de JavaScript · ~35 cursos de JS, React y Node · Python: CRUD (21 h)",
-          },
-        year: "2017–2020",
-        link: {
-          text: "platzi.com/@GibsonR",
-          href: "https://platzi.com/@GibsonR",
-        },
-      },
-      {
-        title: "QA Engineering — formación en curso",
-        institution: "TripleTen · práctica de QA manual en Urban Routes; fundamentos de Agile y Scrum",
-        year: "sep 2026 - en curso",
-      },
-      {
-        title: "Formación continua",
-        institution:
-          "«Think Python» · Visual Studio Code (Udemy) · desarrollo web sobre proyectos reales",
-        year: "2026",
-      },
-      {
-        title: "Licenciado en Educación, mención Campesina y Rural",
-        institution: "Venezuela",
-        year: "",
-      },
-      {
-        title: {
-          text: "Técnico Superior Universitario en Administración de Recursos Humanos",
-          pdf: "T.S.U. en Administración de Recursos Humanos",
-        },
-        institution: {
-          text: "Convalidado en Colombia como Tecnólogo en Gestión de Talento Humano",
-          pdf: "Convalidado como Tecnólogo en Gestión de Talento Humano",
-        },
-        year: "",
-      },
-    ],
-
-    /**
-     * Orden y títulos de la página.
-     * Añadir, quitar o reordenar aquí cambia la página Y la paleta de
-     * comandos. Los `id` tienen que ser los mismos en los dos idiomas.
-     *
-     * El orden NO es casual: la experiencia en programación va antes que
-     * cualquier otra cosa. Los cargos anteriores dicen "profesor" y
-     * "facturador"; si eso es lo primero que se lee, nadie llega al código.
-     */
-    /**
-     * `titlePrint` es el nombre de la sección EN EL PDF. Existe porque ese
-     * archivo lo lee primero un programa que busca encabezados de su lista:
-     * "Otras experiencias" no le dice nada, y justo ahí están los dos únicos
-     * empleos con contrato. En pantalla no cambia nada — sigue mandando el
-     * comando `$ cat`— y un lector de pantalla sigue oyendo el título corto.
-     */
-    sections: [
-      {
-        id: "about",
-        title: "Sobre mí",
-        titlePrint: "Perfil profesional",
-        file: "sobre-mi.md",
-        type: "about",
-      },
-      {
-        id: "experience",
-        title: "Experiencia",
-        titlePrint: "Experiencia en desarrollo de software",
-        file: "experiencia.md",
-        type: "experience",
-      },
-      {
-        id: "otherExperience",
-        title: "Otras experiencias",
-        titlePrint: "Experiencia profesional previa",
-        file: "otras-experiencias.md",
-        type: "otherExperience",
-      },
-      {
-        id: "skills",
-        title: "Skills",
-        titlePrint: "Habilidades técnicas",
-        file: "skills.json",
-        type: "skills",
-      },
-      {
-        id: "education",
-        title: "Formación",
-        titlePrint: "Formación académica",
-        file: "formacion.md",
-        type: "education",
-      },
-    ],
-
-    /**
-     * `note` es la línea con el `$` del pie. Está desactivada: decía "hecho a
-     * mano", y eso contradecía el resto del CV, que dice que Gibson construye
-     * dirigiendo agentes de IA. Se guarda por si algún día vuelve a hacer
-     * falta — para reactivarla, descomenta la clave aquí y en el bloque `en`.
-     * Sin `note`, render.js no pinta el párrafo: no queda un `$` suelto.
-     */
-    footer: {
-      // note: "Hecho a mano con HTML, CSS y JavaScript. Sin frameworks, sin analítica, sin cookies.",
-      updated: "Última actualización: octubre de 2026",
-    },
-
-    /**
-     * Textos de la interfaz, no del CV. Todo lo que se ve en pantalla y no
-     * sale de los bloques de arriba está aquí: botones, paleta, etiquetas
-     * para lectores de pantalla.
-     *
-     * Las claves `…Words` son las palabras con las que la paleta encuentra
-     * cada comando al escribir. No se ven; solo se buscan.
-     */
-    ui: {
-      lang: "es",
-      /* Botón que cambia de idioma: muestra el idioma AL QUE va a cambiar */
-      langBtn: "EN",
-      langBtnLabel: "Switch to English",
-
-      skipLink: "Saltar al contenido",
-      searchBtn: "Buscar",
-      printBtn: "PDF",
-      themeBtn: "Tema",
-      themeToLight: "Cambiar a tema claro",
-      themeToDark: "Cambiar a tema oscuro",
-
-      paletteLabel: "Paleta de comandos",
-      paletteInputLabel: "Buscar sección o acción",
-      palettePlaceholder: "Ir a una sección o ejecutar una acción…",
-      paletteListLabel: "Comandos",
-      paletteEmpty: "Sin resultados.",
-      resultOne: "resultado",
-      resultMany: "resultados",
-      hintMove: "moverse",
-      hintRun: "ejecutar",
-      hintClose: "cerrar",
-
-      goTo: "Ir a",
-      open: "Abrir",
-      cmdTop: "Ir al inicio",
-      cmdTopHint: "cabecera",
-      cmdTopWords: ["inicio", "arriba", "top", "cabecera"],
-      cmdTheme: "Cambiar tema claro / oscuro",
-      cmdThemeHint: "tema",
-      cmdThemeWords: ["tema", "theme", "oscuro", "claro", "dark", "light"],
-      cmdPrint: "Descargar / imprimir en PDF",
-      cmdPrintHint: "imprimir",
-      cmdPrintWords: ["pdf", "imprimir", "print", "descargar"],
-      cmdCopyEmail: "Copiar email al portapapeles",
-      cmdCopyWords: ["copiar", "email", "correo", "mail"],
-      cmdLang: "Switch to English",
-      cmdLangHint: "idioma",
-      cmdLangWords: ["idioma", "language", "ingles", "english", "lang"],
-      emailCopied: "Email copiado:",
-
-      /* Desplegable de «Otras experiencias» */
-      foldOpen: "Ver lo que hice",
-      foldClose: "Ocultar",
-
-      /* Etiquetas invisibles: las lee un lector de pantalla, no se ven */
-      resultLabel: "Resultado:",
-      srTo: "a",
-    },
-  },
-
-  /* ══════════════════════════════════════════════════════════════════════
-     ENGLISH — misma estructura, clave por clave
-     ══════════════════════════════════════════════════════════════════════ */
-  en: {
-    meta: {
-      title: "Gibson Rosales · Developer building with AI",
-      description:
-        "CV of Gibson Rosales: I build web products by directing AI agents. I got here by automating my own job.",
-    },
-
-    identity: {
-      name: "Gibson Rosales",
-      role: "Developer building with AI",
-      /* Ver la nota del bloque `es`: el título que busca un reclutador. */
-      rolePrint: "Web Developer · JavaScript, React, Next.js",
-      location: "Medellín, Antioquia, Colombia",
-      status: "Available · remote or on-site",
-      /* Ver la nota del bloque `es` sobre `icon` y sobre el enlace de WhatsApp. */
-      links: [
-        {
-          label: "GitHub",
-          text: "github.com/Gibson1987R",
-          href: "https://github.com/Gibson1987R",
-          icon: "github",
-        },
-        {
-          label: "LinkedIn",
-          text: "linkedin.com/in/gibson-rosales-fuenmayor",
-          href: "https://www.linkedin.com/in/gibson-rosales-fuenmayor",
-          icon: "linkedin",
-        },
-        {
-          label: "WhatsApp",
-          text: "+57 310 552 8854",
-          href: "https://wa.me/573105528854",
-          icon: "whatsapp",
-        },
-        {
-          label: "Email",
-          text: "gibsonrosales@gmail.com",
-          href: "mailto:gibsonrosales@gmail.com",
-          icon: "email",
-        },
-      ],
-
-      soloImpresion: {
-        mostrar: false,
-        campos: [{ label: "ID number", value: "1.127.397.395" }],
-      },
-    },
-
-    /* Ver la nota del bloque `es`: los dos de en medio no van al PDF. */
-    about: [
-      {
-        text: "I use AI agents such as Codex and Claude to specify tasks, coordinate AI-assisted development and review results. I use n8n for integrations and automation. My experience includes the onboarding flow at directo-ia, a WhatsApp sales product for restaurants.",
-        pdf: "I use Codex and Claude to specify tasks, coordinate AI-assisted development and review results. I use n8n for integrations and automation. My experience includes the onboarding flow at directo-ia (WhatsApp sales with AI). Before that, nine years teaching and coordinating teams of 58 people.",
-      },
-      {
-        soloWeb: true,
-        text: "I got here because a need woke up my curiosity. I had studied programming years earlier but had never applied it at work: neither teaching nor coordinating humanitarian projects ever threw up the problem that called for it. Hospital billing did, where the afternoons went into splitting scanned PDFs by hand, patient by patient. I knew the rule — which documents each insurer asks for and how they change with the type of visit — so I wrote that logic down, worked it through with Copilot until a script came out that took the heavy lifting, and thirty hours of sorting came down to one.",
-      },
-      {
-        soloWeb: true,
-        text: "That was the first code of mine that solved something real, and I already wrote it this way: directing an AI with judgement that was mine. It taught me what I still do today — the bottleneck is not writing the code, it is understanding the problem. I saw it again in Human Resources, modelling the records of more than five hundred contractors so each document generated itself.",
-      },
-      {
-        soloWeb: true,
-        text: "I come from coordinating teams and running administrative processes, and that is what I bring on top of the code: I understand the problem from the inside before proposing anything. First I get into the pain, then I build the solution.",
-      },
-    ],
-
-    /* Ver la nota del bloque `es`: una sola lista, ordenada por impacto. */
-    experience: [
-      {
-        name: "directo-ia",
-        // Ver la nota del bloque `es`: el enlace es a la landing pública, no al
-        // repo (privado y ajeno).
-        href: "https://directo-ia.vercel.app",
-        role: "Owner of the onboarding flow",
-        /* Ver la nota del bloque `es`: `period` se lee, `start` ordena. */
-        period: "Jun 2026 - Aug 2026",
-        start: "2026-06",
-        about: "AI sales over WhatsApp for restaurants · onboarding development",
-        stack: "Next.js · React · TypeScript · Vercel",
-        work: [
-          {
-            text: "A restaurant signing up is going to work with an AI every day, so I proposed that the sign-up should feel like that: a conversation, not the step-by-step form every other site uses. The product owner liked the idea and the onboarding was rebuilt around it.",
-            pdf: "I proposed and built sign-up as a conversation with the product's own AI; it replaced the form and is in production.",
-          },
-          {
-            text: "I built that flow: each step asks for what it needs when it needs it, flags the exact point where something is missing, and does not let you carry on with half-finished sections without knowing.",
-          },
-          {
-            text: "I made it usable with the keyboard alone, and able to hold up with long names, short screens and mobile, because whoever signs up a restaurant does it from a phone in the middle of service.",
-          },
-        ],
-        result: {
-          text: "The flow enabled a restaurant to sign up by talking to the same AI it would use afterwards, instead of filling in a form. That change of shape came from my proposal.",
-        },
-      },
-      {
-        name: "chess-lab",
-        // Ver la nota del bloque `es` sobre por qué se enlaza Netlify y no GitHub.
-        href: "https://chesspwa.netlify.app",
-        role: "Internationalization and offline translation",
-        period: "Jun 2026",
-        start: "2026-06",
-        about: "A PWA for learning chess offline: lessons, board and puzzles",
-        stack: "React · TypeScript · PWA · Dexie · Supabase",
-        work: [
-          {
-            text: "The content existed in one language only and translating it by hand was not viable. I built a translation that happens in the browser itself, respects chess vocabulary (a «torre» is not a tower), keeps the lesson images, and stores what is already translated so the work is never repeated and no connection is wasted.",
-            pdf: "In-browser translation that respects chess vocabulary and caches to IndexedDB; whole app in three languages.",
-          },
-          {
-            text: "I left the whole application in three languages, so the same course serves three audiences without duplicating content.",
-          },
-          {
-            text: "I added optional sign-in: those who want to keep their progress can, and those who do not keep playing without an account. And I fixed the navigation between puzzles, which left users stuck.",
-          },
-        ],
-        result: {
-          text: "A student can now take the whole course in their own language and with no connection; before, the content existed in one language only. Everything I delivered went in after review by the repository owner.",
-        },
-      },
-      {
-        name: "honest-english",
-        href: "https://gibson1987r.github.io/honest-english/",
-        role: "My own product, from idea to deploy",
-        period: "May 2026",
-        start: "2026-05",
-        about: "An English learning tracker that refuses to gamify",
-        stack: "JavaScript · HTML · CSS · zero dependencies",
-        work: [
-          {
-            text: "I decided the product against the obvious: the counter shows the days I have gone WITHOUT practising, not the streak. A streak rewards not breaking it; the gap shows you where you gave up.",
-            pdf: "My own product from idea to deploy, with zero dependencies self-imposed; online and in use.",
-          },
-          {
-            text: "I wrote writing feedback that does not flatter: if the text is bad, it says so. A product that congratulates you for everything does not teach you English.",
-          },
-          {
-            text: "I imposed a constraint no client asked for — zero dependencies — and held it with a review checklist of my own that blocks them.",
-          },
-        ],
-        result: {
-          text: "Online and in use: it is the tool I track my own English with, no streak to keep and no praise for decoration.",
-        },
-      },
-      {
-        name: "fiestas-web",
-        // Ver la nota del bloque `es` sobre por qué el dominio no coincide
-        // con el nombre del repo.
-        href: "https://fiestas-app.vercel.app",
-        role: "A service of my own, end to end",
-        period: "Feb 2026",
-        start: "2026-02",
-        about:
-          "Pages for children's parties: the invitation, the live RSVP and the gallery",
-        stack: "React · Firebase/Firestore · Vite · Vercel",
-        work: [
-          {
-            text: "It came from a concrete pain: organizing my son's birthday without knowing how many people would show up. Instead of solving that one party, I turned it into a service: each client is one config entry with its own route and its own isolated guest list, so adding a new party is no longer programming again.",
-            pdf: "Multi-client service on Firestore, with live RSVP and a public demo; used at a real party.",
-          },
-          {
-            text: "I locked editing and deleting behind admin permissions: guests confirm, and nobody else touches the list.",
-          },
-          {
-            text: "I published an open demo with a made-up party, because you do not sell a client a screenshot: you show them the list updating on their own phone.",
-          },
-        ],
-        result: {
-          text: "Used at a real party, with a public demo where anyone can RSVP and watch the list update live.",
-        },
-      },
-      {
-        name: "bancolombia-lunchmoney",
-        // Ver la nota del bloque `es`: no hay nada público que enlazar.
-        role: "An automation in production over real money",
-        period: "Jun 2026",
-        start: "2026-06",
-        about: "Bank alerts turn themselves into recorded transactions",
-        stack: "JavaScript · Google Apps Script · REST API",
-        work: [
-          {
-            text: "A client kept losing track of his spending because nobody writes down every purchase. I integrated bank alerts, email and Lunch Money through Google Apps Script and a REST API, with AI-assisted development: each alert becomes a classified transaction.",
-            pdf: "I integrated bank alerts, email and Lunch Money through Google Apps Script and a REST API, with AI-assisted development.",
-          },
-          {
-            text: "It is someone else's money, so I do not improvise: every change to how the emails are read is tested first against real saved emails.",
-          },
-          {
-            text: "I run it and I maintain it. When the bank changes the format of the message, I am the one who fixes it.",
-          },
-        ],
-        result: {
-          text: "In production over a client's real accounts: his spending gets recorded without him writing down a thing.",
-        },
-      },
-    ],
-
-    /* Ver la nota del bloque `es`: también por impacto, y estas sí con fechas. */
-    otherExperience: [
-      {
-        role: "Regional coordinator — Amazonas state",
-        company: "A.C. Construyendo Futuros / UNICEF partner",
-        context: "Amazonas, Venezuela · Three programmes: school feeding, water and sanitation, and livelihoods",
-        start: "2021-09",
-        end: "2023-12",
-        startLabel: "Sep 2021",
-        endLabel: "Dec 2023",
-        achievements: [
-          {
-            text: "I coordinated three consecutive programmes in Amazonas state: «AliMentes», school feeding (Sep 2021 – Aug 2022); the water, hygiene and sanitation (WASH) programme in the schools of Atures municipality (Jul – Oct 2022); and «Manos Que Construyen» (2023), a livelihoods programme empowering adolescent girls and women against gender inequality. I ran the first two in parallel through July and August 2022.",
-            pdf: "Coordinated three programmes in Amazonas: school feeding, WASH, and a livelihoods programme; two of them running in parallel.",
-          },
-          {
-            text: "I coordinated 58 people in the field: on AliMentes, 21 monitors checking that the meal plans were met and 10 logistics operators; on WASH, 6 water engineers and technicians with their assigned promoters and a storekeeper; plus the suppliers of each programme. I split the tasks, built the schedules and kept track of what each of them had to deliver.",
-            pdf: "I coordinated 58 people in the field: schedules, delegation, follow-up and full document traceability.",
-          },
-          {
-            text: "I brought together indigenous communities, technical teams and partner institutions so an activity could happen at all. Without that agreement up front, nothing gets done on the ground.",
-          },
-          {
-            text: "I kept everything delivered traceable through reports and document management: a humanitarian project that cannot prove what it did does not get renewed.",
-          },
-        ],
-      },
-      {
-        role: "Cash desk and billing officer",
-        company: "Hospital Departamental San Juan de Dios E.S.E.",
-        context: "Colombia · Where I wrote my first useful code",
-        stack: "Python · Xenco · document automation",
-        start: "2025-02",
-        end: "2025-10",
-        startLabel: "Feb 2025",
-        endLabel: "Oct 2025",
-        achievements: [
-          {
-            text: "I billed daily in Xenco, the hospital information system. Every insurer asks for a different set of documents, and it changes again with the type of visit: billing also meant splitting a scanned PDF by hand, page by page. I fixed the intake first, so every scan came out the same.",
-          },
-          {
-            text: "On top of that order, I wrote a script with Copilot that identified the insurer, the invoice and the type of visit, and left the folders already split and renamed in every possible combination; all I did was delete the ones that did not apply. From about 30 hours down to one, and a hundred cases cost the same as one.",
-            pdf: "A Python script that sorted and split billing PDFs by insurer and type of visit: from ~30 hours down to 1.",
-          },
-        ],
-      },
-      {
-        role: "Human resources officer",
-        company: "Hospital Departamental San Juan de Dios E.S.E.",
-        context: "Colombia · Hiring paperwork and document control",
-        stack: "Excel · data modelling",
-        start: "2025-11",
-        end: "2026-03",
-        startLabel: "Nov 2025",
-        endLabel: "Mar 2026",
-        achievements: [
-          {
-            text: "I modelled in Excel the records of more than 500 contractors across four municipalities, accounting for the fact that one person can hold several profiles if they work in more than one programme: personal data, role and position, start and end dates.",
-            pdf: "I modelled the records of 500+ contractors and wired them to Word: issuing a document went from 20-30 min to 4-5.",
-          },
-          {
-            text: "I connected it to Word through mail merge, treating the sheet as an entity-relationship table: each template pulls the fields it needs and fills itself in. Issuing a document went from 20 or 30 minutes down to 4 or 5.",
-          },
-          {
-            text: "I reviewed CVs, supporting files and contractor records, checking that every requirement and every qualification was in place before legal validation, and followed up on the improvement plan and the risk map required by the public audit office.",
-          },
-        ],
-      },
-      {
-        role: "Maths and primary school teacher",
-        company: "Ministry of Education",
-        context: "Venezuela",
-        start: "2012-09",
-        end: "2021-07",
-        startLabel: "Sep 2012",
-        endLabel: "Jul 2021",
-        achievements: [
-          {
-            text: "I taught maths for nine years to between 200 and 300 students a year, and reworked the same explanation as many times as it took to find the one that worked for each of them.",
-            pdf: "Nine years teaching maths to between 200 and 300 students a year.",
-          },
-          {
-            text: "I kept up the communication with families and the school community so the support did not end at the classroom door.",
-          },
-          {
-            text: "It is the skill I use most when I program: reading something written by someone else, understanding it and being able to explain it.",
-          },
-        ],
-      },
-    ],
-
-    /* Ver la nota del bloque `es`: las palabras técnicas viven solo aquí. */
-    skills: [
-      {
-        category: "Languages",
-        items: ["JavaScript", "TypeScript", "Python", "SQL", "HTML and CSS"],
-      },
-      {
-        category: "Frontend",
-        items: [
-          "React",
-          "Next.js",
-          "Vite",
-          "PWA and offline",
-          "Accessibility",
-          "Internationalization",
-          { text: "CSS without frameworks" },
-        ],
-      },
-      {
-        category: "Backend and data",
-        items: [
-          "Firebase / Firestore",
-          "Supabase",
-          "IndexedDB / Dexie",
-          "Google Apps Script",
-          "REST APIs",
-          { text: "Authentication and roles" },
-        ],
-      },
-      {
-        category: "Workflow",
-        items: [
-          "Git",
-          "GitHub",
-          { text: "Pull requests" },
-          { text: "Issues" },
-          "Code review",
-          "GitHub Actions",
-          "Continuous deployment (Vercel, Netlify)",
-        ],
-      },
-      {
-        category: "AI agents, integrations and automation",
-        items: [
-          "Using AI agents: Codex and Claude",
-          "Writing task specs",
-          "Reviewing generated code",
-          "n8n: integrations and automation",
-        ],
-      },
-      {
-        category: "QA and Agile/Scrum — academic practice",
-        items: [
-          "Requirements and acceptance criteria analysis",
-          "Executing manual and regression tests",
-          "UI checklists in Chrome and Firefox",
-          "Bug reports: steps, expected and actual results, evidence",
-          "Agile and Scrum: sprint, role and ceremony fundamentals",
-          "DevTools: inspecting requests and HTTP status codes",
-        ],
-      },
-      {
-        category: "Management and teams",
-        items: [
-          "Team coordination",
-          { text: "Delegation and follow-up" },
-          { text: "Client communication" },
-          "Excel and Google Sheets",
-          "Data modelling in tables",
-          { text: "Mail merge" },
-          { text: "Kanban boards (Trello, Notion, Asana)" },
-          { text: "Documentation and traceability" },
-        ],
-      },
-    ],
-
-    /* Ver la nota del bloque `es`: programación primero, titulaciones al final. */
-    education: [
-      /* Ver la nota del bloque `es`: el titular y el enlace, no los 44 diplomas. */
-      {
-        title: "Programming — Platzi",
-        institution:
-          {
-            text: "JavaScript career path · ~35 courses across JavaScript, React, Node and markup · Practical Python course: building a CRUD (21 h)",
-            pdf: "JavaScript career path · ~35 courses in JS, React and Node · Python: CRUD (21 h)",
-          },
-        year: "2017–2020",
-        link: {
-          text: "platzi.com/@GibsonR",
-          href: "https://platzi.com/@GibsonR",
-        },
-      },
-      {
-        title: "QA Engineering — in progress",
-        institution: "TripleTen · manual QA practice on Urban Routes; Agile and Scrum fundamentals",
-        year: "Sep 2026 - present",
-      },
-      {
-        title: "Ongoing self-study",
-        institution:
-          "«Think Python» · Visual Studio Code (Udemy) · web development on real projects",
-        year: "2026",
-      },
-      {
-        title: {
-          text: "Bachelor's degree in Education — Rural and Farming Communities",
-          pdf: "Bachelor's degree in Education (Rural Communities)",
-        },
-        institution: "Venezuela",
-        year: "",
-      },
-      {
-        title: {
-          text: "Higher University Technician in Human Resources Administration",
-          pdf: "Higher University Technician in Human Resources",
-        },
-        institution: "Recognized in Colombia as Tecnólogo en Gestión de Talento Humano",
-        year: "",
-      },
-    ],
-
-    /* Ver la nota del bloque `es`: `titlePrint` es el encabezado del PDF. */
-    sections: [
-      {
-        id: "about",
-        title: "About me",
-        titlePrint: "Professional summary",
-        file: "about-me.md",
-        type: "about",
-      },
-      {
-        id: "experience",
-        title: "Experience",
-        titlePrint: "Software development experience",
-        file: "experience.md",
-        type: "experience",
-      },
-      {
-        id: "otherExperience",
-        title: "Other experience",
-        titlePrint: "Previous professional experience",
-        file: "other-experience.md",
-        type: "otherExperience",
-      },
-      {
-        id: "skills",
-        title: "Skills",
-        titlePrint: "Technical skills",
-        file: "skills.json",
-        type: "skills",
-      },
-      {
-        id: "education",
-        title: "Education",
-        titlePrint: "Education",
-        file: "education.md",
-        type: "education",
-      },
-    ],
-
-    footer: {
-      /* Ver la nota del bloque `es`: desactivada, se descomentan las dos a la vez. */
-      // note: "Hand-written in HTML, CSS and JavaScript. No frameworks, no analytics, no cookies.",
-      updated: "Last updated: October 2026",
-    },
-
-    ui: {
-      lang: "en",
-      langBtn: "ES",
-      langBtnLabel: "Cambiar a español",
-
-      skipLink: "Skip to content",
-      searchBtn: "Search",
-      printBtn: "PDF",
-      themeBtn: "Theme",
-      themeToLight: "Switch to light theme",
-      themeToDark: "Switch to dark theme",
-
-      paletteLabel: "Command palette",
-      paletteInputLabel: "Search a section or an action",
-      palettePlaceholder: "Go to a section or run an action…",
-      paletteListLabel: "Commands",
-      paletteEmpty: "No results.",
-      resultOne: "result",
-      resultMany: "results",
-      hintMove: "move",
-      hintRun: "run",
-      hintClose: "close",
-
-      goTo: "Go to",
-      open: "Open",
-      cmdTop: "Go to top",
-      cmdTopHint: "header",
-      cmdTopWords: ["top", "up", "start", "header"],
-      cmdTheme: "Toggle light / dark theme",
-      cmdThemeHint: "theme",
-      cmdThemeWords: ["theme", "dark", "light", "tema"],
-      cmdPrint: "Download / print as PDF",
-      cmdPrintHint: "print",
-      cmdPrintWords: ["pdf", "print", "download"],
-      cmdCopyEmail: "Copy email to clipboard",
-      cmdCopyWords: ["copy", "email", "mail"],
-      cmdLang: "Cambiar a español",
-      cmdLangHint: "language",
-      cmdLangWords: ["language", "idioma", "spanish", "español", "lang"],
-      emailCopied: "Email copied:",
-
-      foldOpen: "See what I did",
-      foldClose: "Hide",
-
-      resultLabel: "Result:",
-      srTo: "to",
-    },
-  },
+  es: CV_PROFILES.es.tecnologia,
+  en: CV_PROFILES.en.tecnologia,
 };

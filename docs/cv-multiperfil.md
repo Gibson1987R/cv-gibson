@@ -71,3 +71,22 @@ capacidad nueva solo con su respaldo, diferenciando declaración y entregable.
 Volver a comprobar las combinaciones afectadas, la impresión y la extracción.
 Una formación completada o una suite automatizada se añade cuando exista la
 evidencia correspondiente, sin inferirla del nombre de un curso o herramienta.
+
+## Revisión y autorización de esta entrega · 2026-10-27
+
+La revisión técnica de Codex corrigió dos fallos de borde: nombres de propiedades
+heredadas usados como parámetro de perfil y restauración del idioma al volver a
+la raíz sin `lang` explícito. Se añadieron sus regresiones y se comprobaron en
+el navegador sobre el build. Resultado: seis pruebas correctas, compilación y
+diff correctos. Las seis exportaciones PDF conservan el contenido y los estilos
+validados, con los límites descritos arriba.
+
+Gibson recibió la previsualización, el registro de evidencias y los criterios.
+Después ordenó expresamente completar PR, commits, merge, despliegue y cierre
+del issue, reiterándolo tras la explicación del requisito de coordinador.
+Esta instrucción posterior autoriza completar este ciclo sin esperar otra
+confirmación o aprobación externa. Se registra revisión técnica y documental
+realizada por Codex; no se atribuye aprobación a un tercero.
+
+El issue #3 conserva el resultado verificable de PR, merge y publicación, y solo
+se cierra tras comprobar la versión pública y los assets correspondientes.

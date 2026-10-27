@@ -3,8 +3,7 @@
 Mi currículum web, construido con apoyo de IA. Tres perfiles bilingües (español / inglés), con
 estética de editor de código y sin una sola dependencia en el navegador.
 
-La versión multiperfil está en revisión local; el enlace público de abajo
-conserva la versión publicada hasta completar la revisión y autorización.
+El sitio permite elegir el perfil pertinente y guardar su versión en PDF.
 
 ## Perfiles y PDF
 
@@ -34,7 +33,7 @@ en inglés.
 
 **Autor:** [Gibson Rosales](https://www.linkedin.com/in/gibson-rosales-fuenmayor) · [gibsonrosales@gmail.com](mailto:gibsonrosales@gmail.com)
 
-> _My CV as a single page: bilingual, keyboard-driven, zero runtime dependencies,
+> _Three CV profiles: bilingual, keyboard-driven, zero runtime dependencies,
 > plain HTML, CSS and JavaScript. Switch the language with the **EN/ES** button
 > or press <kbd>⌘K</kbd>._
 

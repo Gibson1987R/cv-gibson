@@ -1,0 +1,29 @@
+{
+  "base": "af93e7ffb2f7b53c06b4db8e01b14ebeb4ce36cc",
+  "review": "https://github.com/Gibson1987R/cv-gibson/pull/5#issuecomment-6457907051",
+  "source_sha256": {
+    "css/docencia.css": "6d39e86ff1a1dd327a9d9ad0b9fbc4039f89e0f525e291d2a841003df57262cb",
+    "js/teaching-scene.js": "c78033f22aada51e032c5b036f5445e033a6b1d09a36e6954ed8b5c7ced5e645",
+    "main.js": "1b0559edfccfca2ee409d1d8ca92408838b27e3bfdd683714951b4ef82628d7e"
+  },
+  "corrections": [
+    "Controls and profile links reflow with 200 percent text at 320px in ES/EN.",
+    "Scroll padding follows actual sticky toolbar height; tall toolbars become static.",
+    "Language switching preserves the reading section in Docencia.",
+    "Footer date opacity is 1 in Docencia, restoring 5.92:1 light-theme contrast."
+  ],
+  "validation": {
+    "local_tests": "6/6",
+    "build": "passed",
+    "diff_check": "passed",
+    "independent_review_r2": "36 normal-size combinations, plus ES/EN 200 percent text and search navigation in Chromium, Firefox and WebKit; reviewed source hashes match this delivery.",
+    "screenshot": "pr5-correcciones.png"
+  },
+  "limitations": [
+    "Native hidden-tab transition remains unverified; simulated handler test is separate.",
+    "PDF evidence in review r1 predates these corrections; no new PDF export claimed.",
+    "No physical mobile-device performance measurements.",
+    "Review r2 reports pre-existing development dependency advisories, outside this visual fix.",
+    "No CI workflow checks reported; local checks are not CI."
+  ]
+}

@@ -7,6 +7,7 @@ import { renderCV } from "./js/render.js";
 import { initTheme } from "./js/theme.js";
 import { initPalette } from "./js/palette.js";
 import { initMotion } from "./js/motion.js";
+import { initTeachingScene } from "./js/teaching-scene.js";
 import { fijarIdioma, otroIdioma, restaurarIdioma, idioma } from "./js/i18n.js";
 
 // 1. Primero el contenido: todo lo demás necesita que el DOM ya exista
@@ -27,8 +28,11 @@ const tema = initTheme();
 function alternarIdioma() {
   // Qué sección se está mirando, para volver a ella tras repintar. Guardamos
   // el id (que es el mismo en los dos idiomas) porque el nodo va a morir.
+  const lineaLectura = document.documentElement.dataset.profile === "docencia"
+    ? parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) + 4
+    : 80;
   const visible = [...document.querySelectorAll(".section")].find(
-    (s) => s.getBoundingClientRect().bottom > 80,
+    (s) => s.getBoundingClientRect().bottom > lineaLectura,
   )?.id;
 
   fijarIdioma(otroIdioma());
@@ -40,6 +44,7 @@ function alternarIdioma() {
   // Sin animación de entrada esta vez: el contenido ya estaba a la vista y
   // hacerlo desaparecer para que reaparezca sería un parpadeo gratuito.
   initMotion({ animar: false });
+  escena.refrescar();
 
   if (visible) document.getElementById(visible)?.scrollIntoView({ block: "start" });
 }
@@ -53,6 +58,7 @@ addEventListener("popstate", () => {
   tema.refrescar();
   paleta.refrescar();
   initMotion({ animar: false });
+  escena.refrescar();
 });
 
 // 4. Botones de la barra que no gestiona nadie más
@@ -81,6 +87,7 @@ addEventListener("afterprint", () => {
 });
 
 // 5. Micro-interacciones al final: son lo prescindible
+const escena = initTeachingScene();
 initMotion();
 
 // Si se entra con un ancla en la URL (#experience), el contenido aún no existía

@@ -97,6 +97,23 @@ export function initTeachingScene() {
   document.querySelector(".toolbar").append(boton);
   const reducir = matchMedia("(prefers-reduced-motion: reduce)");
   const imprimir = matchMedia("print");
+  const barra = document.querySelector(".window__bar");
+
+  // El margen de salto debe seguir el alto real, también con texto ampliado,
+  // traducciones y reflujo de controles. Las barras altas dejan de ser fijas.
+  function ajustarSalto() {
+    const raiz = document.documentElement;
+    if (raiz.dataset.profile !== "docencia" || imprimir.matches) {
+      raiz.style.removeProperty("--teaching-scroll-offset");
+      delete barra.dataset.tall;
+      return;
+    }
+    const alto = barra.getBoundingClientRect().height;
+    barra.dataset.tall = String(alto > innerHeight * 0.3);
+    const fijo = getComputedStyle(barra).position === "sticky";
+    raiz.style.setProperty("--teaching-scroll-offset", `${fijo ? alto + 12 : 12}px`);
+  }
+  if ("ResizeObserver" in window) new ResizeObserver(ajustarSalto).observe(barra);
   let pausado = false; // Elección del usuario, independiente de la del sistema.
   let cuadro = 0;
   let capitulo = "orbits";
@@ -146,6 +163,7 @@ export function initTeachingScene() {
       nodo.textContent = ui().sceneAlphabet.split(" ")[i];
     });
     estado();
+    ajustarSalto();
     programar();
   }
   boton.addEventListener("click", () => {
@@ -158,10 +176,10 @@ export function initTeachingScene() {
     contenedor.style.removeProperty("--scene-y");
     refrescar();
   });
-  imprimir.addEventListener("change", estado);
+  imprimir.addEventListener("change", () => { estado(); ajustarSalto(); });
   document.addEventListener("visibilitychange", () => { estado(); programar(); });
   addEventListener("scroll", programar, { passive: true });
-  addEventListener("resize", programar, { passive: true });
+  addEventListener("resize", () => { programar(); ajustarSalto(); }, { passive: true });
   // Pequeña respuesta espacial, sin capturar el puntero ni bloquear controles.
   addEventListener("pointermove", (e) => {
     if (pausado || reducir.matches || document.hidden || e.pointerType !== "mouse" || document.documentElement.dataset.profile !== "docencia") return;

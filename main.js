@@ -28,8 +28,11 @@ const tema = initTheme();
 function alternarIdioma() {
   // Qué sección se está mirando, para volver a ella tras repintar. Guardamos
   // el id (que es el mismo en los dos idiomas) porque el nodo va a morir.
+  const lineaLectura = document.documentElement.dataset.profile === "docencia"
+    ? parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) + 4
+    : 80;
   const visible = [...document.querySelectorAll(".section")].find(
-    (s) => s.getBoundingClientRect().bottom > 80,
+    (s) => s.getBoundingClientRect().bottom > lineaLectura,
   )?.id;
 
   fijarIdioma(otroIdioma());

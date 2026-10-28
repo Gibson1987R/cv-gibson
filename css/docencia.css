@@ -1,0 +1,312 @@
+/* Experimento visual de Docencia. Solo pantalla: el PDF conserva su sistema.
+   Referencia: composición pública de Adaptive Learning (MotionSites).
+   Fuente Manrope, autoalojada bajo OFL; sin servicios ni scripts externos. */
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/manrope-variable.ttf") format("truetype");
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+@media screen {
+  :root[data-profile="docencia"] {
+    --bg: #faf9f5;
+    --bg-soft: #efeee7;
+    --surface: #faf9f5;
+    --text: #242d2a;
+    --text-muted: #59635d;
+    --accent: #365e4c;
+    --link: #365e4c;
+    --border: #d5d9cf;
+    --border-strong: #7d8b7e;
+    --teaching-art: #a87930;
+    --backdrop: rgb(25 38 30 / 55%);
+  }
+
+  :root[data-profile="docencia"][data-theme="dark"] {
+    --bg: #19241f;
+    --bg-soft: #111b16;
+    --surface: #202e26;
+    --text: #f0f0e7;
+    --text-muted: #b7c4b9;
+    --accent: #bad5b8;
+    --link: #bad5b8;
+    --border: #3d5042;
+    --border-strong: #91a78f;
+    --teaching-art: #d8b77b;
+  }
+
+  :root[data-profile="docencia"] body {
+    font-family: "Manrope", sans-serif;
+  }
+
+  :root[data-profile="docencia"] ::selection {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  :root[data-profile="docencia"] .window {
+    max-width: 68rem;
+    margin: 0 auto;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  :root[data-profile="docencia"] .window__bar {
+    padding: 1rem 3rem;
+    background: var(--bg);
+  }
+
+  :root[data-profile="docencia"] :is(.window__dots, .window__path, .hero__cmd, .section__cmd, .prompt) {
+    display: none;
+  }
+
+  :root[data-profile="docencia"] .toolbar { width: 100%; }
+  :root[data-profile="docencia"] .toolbar__btn {
+    min-height: 44px;
+    border-radius: 999px;
+    padding-inline: 1rem;
+  }
+  :root[data-profile="docencia"] .toolbar__btn--lang { margin-left: auto; }
+
+  :root[data-profile="docencia"] .profiles { padding: 1.5rem 3rem 0; }
+  :root[data-profile="docencia"] .profiles__link {
+    border: 0;
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+    padding-inline: 0;
+    margin-right: 1.25rem;
+  }
+  :root[data-profile="docencia"] .profiles__link[aria-current="page"] {
+    border-bottom-color: var(--accent);
+  }
+  :root[data-profile="docencia"] .profiles__hint { padding-inline: 3rem; }
+
+  :root[data-profile="docencia"] .hero {
+    position: relative;
+    isolation: isolate;
+    padding: 4.5rem 3rem 3.5rem;
+    overflow: hidden;
+  }
+
+  /* Geometría abstracta: intersección y continuidad, sin imágenes de terceros. */
+  :root[data-profile="docencia"] .hero::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 23rem;
+    height: 23rem;
+    right: -6rem;
+    top: 1.5rem;
+    border: 1px solid var(--teaching-art);
+    border-radius: 50%;
+    box-shadow: -3rem 3rem 0 -1px var(--bg), -3rem 3rem 0 0 var(--teaching-art);
+    opacity: 0.35;
+    pointer-events: none;
+    display: none; /* Sustituido por la escena geométrica animada. */
+  }
+
+  :root[data-profile="docencia"] .hero__name {
+    max-width: 15ch;
+    font-size: clamp(2.5rem, 5.5vw, 4.75rem);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  :root[data-profile="docencia"] .hero__role {
+    margin-top: 1.5rem;
+    font-size: clamp(1.2rem, 2.6vw, 1.75rem);
+    max-width: 30ch;
+  }
+  :root[data-profile="docencia"] .typing {
+    width: auto;
+    white-space: normal;
+    animation: none;
+    border: 0;
+  }
+  :root[data-profile="docencia"] .hero__links {
+    font-size: 0.875rem;
+    margin-top: 1.5rem;
+  }
+  :root[data-profile="docencia"] main { padding-inline: 3rem; }
+  :root[data-profile="docencia"] .section {
+    padding-block: 2.5rem;
+    border-top-style: solid;
+  }
+  :root[data-profile="docencia"] .section__plain:not(.printOnly) {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+  }
+  :root[data-profile="docencia"] .section__title {
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+  }
+  :root[data-profile="docencia"] :is(.prose p, .bullets li, .entry__result) {
+    text-align: left;
+    max-width: 72ch;
+  }
+  :root[data-profile="docencia"] .entry__title { font-weight: 650; }
+  :root[data-profile="docencia"] .entry__meta { font-variant-numeric: tabular-nums; }
+  :root[data-profile="docencia"] .entry__result { margin-top: 1rem; }
+  :root[data-profile="docencia"] .bullets { list-style: disc; }
+  :root[data-profile="docencia"] .chip {
+    border: 0;
+    border-radius: 4px;
+    background: var(--bg-soft);
+    padding: 0.35rem 0.65rem;
+    font-size: 0.875rem;
+    color: var(--text);
+  }
+  :root[data-profile="docencia"] .skills { gap: 2rem; }
+  :root[data-profile="docencia"] .skills__category { letter-spacing: 0.04em; }
+  :root[data-profile="docencia"] .site-footer { padding-inline: 3rem; }
+}
+
+/* La escena se excluye del documento impreso y de los otros perfiles. */
+.teaching-scene,
+.teaching-scene__toggle { display: none; }
+
+@media screen {
+  :root[data-profile="docencia"] .window {
+    isolation: isolate;
+    /* Recorta también descendientes fixed al contorno real del panel. */
+    clip-path: inset(0);
+  }
+  :root[data-profile="docencia"] .teaching-scene {
+    display: block;
+    position: fixed;
+    inset-block: 0;
+    inset-inline: max(0px, calc((100vw - 68rem) / 2));
+    z-index: -1;
+    pointer-events: none;
+    color: var(--teaching-art);
+    opacity: 0.48;
+    overflow: clip;
+  }
+  :root[data-profile="docencia"] .teaching-scene__toggle { display: inline-flex; }
+  .teaching-scene svg {
+    position: absolute;
+    right: 0;
+    top: 13vh;
+    width: min(37vw, 29rem);
+    height: 80vh;
+    overflow: hidden;
+    stroke: currentColor;
+    stroke-width: 1.2;
+    transform: translate(var(--scene-x, 0px), var(--scene-y, 0px));
+    transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .teaching-scene__chapter { opacity: 0; --chapter-play: paused; transition: opacity 650ms ease; }
+  .teaching-scene[data-chapter="orbits"] [data-chapter="orbits"],
+  .teaching-scene[data-chapter="vectors"] [data-chapter="vectors"],
+  .teaching-scene[data-chapter="gears"] [data-chapter="gears"],
+  .teaching-scene[data-chapter="math"] [data-chapter="math"],
+  .teaching-scene[data-chapter="letters"] [data-chapter="letters"] { opacity: 1; --chapter-play: running; }
+  .teaching-scene[data-chapter]:not([data-chapter="orbits"]) { opacity: 0.24; }
+  .teaching-scene__point { fill: currentColor; stroke: none; }
+  .teaching-scene__construction { stroke-dasharray: 4 9; opacity: 0.65; }
+  .teaching-scene__orbit { transform-origin: 220px 290px; animation: teaching-turn 60s linear infinite; }
+  .teaching-scene__gear--one { transform-origin: 162px 260px; animation: teaching-turn 48s linear infinite; }
+  .teaching-scene__gear--two { transform-origin: 296px 370px; animation: teaching-turn 36s linear infinite reverse; }
+  .teaching-scene__vector { transform-origin: 95px 450px; animation: teaching-vector 9s ease-in-out infinite alternate; }
+  .teaching-scene__letter { font-family: "Manrope", sans-serif; font-size: 110px; font-weight: 400; fill: var(--bg); stroke-width: 1; animation: teaching-letter 7s ease-in-out infinite alternate; }
+  .teaching-scene__letter:nth-of-type(2) { animation-delay: -2s; }
+  .teaching-scene__letter:nth-of-type(3) { animation-delay: -4s; }
+  .teaching-scene__math-orbit { transform-origin: 220px 260px; animation: teaching-turn 18s linear infinite; }
+  .teaching-scene__wave { stroke-dasharray: 5 8; animation: teaching-wave 12s linear infinite; }
+  .teaching-scene svg.teaching-scene__dna {
+    right: auto;
+    left: 1rem;
+    top: auto;
+    bottom: 3vh;
+    width: min(18vw, 12rem);
+    height: min(52vh, 28rem);
+    opacity: 0.5;
+    transform: translate(calc(var(--scene-x, 0px) * -0.5), 0) rotate(-12deg);
+    stroke-width: 1.5;
+  }
+  .teaching-scene__strand { stroke-width: 2; }
+  .teaching-scene__rung { stroke-linecap: round; }
+  .teaching-scene__chapter * { animation-play-state: var(--chapter-play); }
+  .teaching-scene[data-paused="true"] * { animation-play-state: paused; }
+  .teaching-scene[data-paused="true"] svg { transition: none; }
+  .teaching-scene__toggle:disabled { color: var(--text-muted); cursor: default; }
+  @keyframes teaching-turn { to { transform: rotate(360deg); } }
+  @keyframes teaching-vector { to { transform: rotate(-22deg); } }
+  @keyframes teaching-letter { to { transform: translateY(-12px); } }
+  @keyframes teaching-wave { to { stroke-dashoffset: -156; } }
+}
+
+@media screen and (max-width: 60rem) {
+  :root[data-profile="docencia"] .teaching-scene { opacity: 0.15; }
+  .teaching-scene svg { right: 0; width: min(75vw, 22rem); }
+  .teaching-scene svg.teaching-scene__dna { width: 6rem; height: 34vh; left: 0.5rem; opacity: 0.5; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .teaching-scene *, .teaching-scene { animation: none !important; transition: none !important; }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  :root[data-profile="docencia"]:not([data-theme="light"]):not([data-theme="dark"]) {
+    --bg: #19241f;
+    --bg-soft: #111b16;
+    --surface: #202e26;
+    --text: #f0f0e7;
+    --text-muted: #b7c4b9;
+    --accent: #bad5b8;
+    --link: #bad5b8;
+    --border: #3d5042;
+    --border-strong: #91a78f;
+    --teaching-art: #d8b77b;
+  }
+}
+
+@media screen and (max-width: 48rem) {
+  :root[data-profile="docencia"] :is(.window__bar, .profiles, .profiles__hint, main, .site-footer) {
+    padding-inline: 1.25rem;
+  }
+  :root[data-profile="docencia"] .window__bar { padding-block: 0.75rem; }
+  :root[data-profile="docencia"] .toolbar {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin: 0;
+  }
+  :root[data-profile="docencia"] .toolbar__btn {
+    grid-column: span 2;
+    justify-content: center;
+    min-width: 0;
+    margin: 0;
+    padding-inline: 0.5rem;
+  }
+  :root[data-profile="docencia"] .teaching-scene__toggle { grid-column: span 4; }
+  :root[data-profile="docencia"] .hero { padding: 3rem 1.25rem 2.5rem; }
+  :root[data-profile="docencia"] .hero::after { right: -15rem; }
+  :root[data-profile="docencia"] .profiles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  :root[data-profile="docencia"] .profiles__link {
+    margin: 0;
+    min-width: 0;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.35;
+    font-size: 0.8125rem;
+  }
+  :root[data-profile="docencia"] .skills { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* En horizontal o ventanas bajas, la barra no ocupa permanentemente el alto. */
+@media screen and (max-height: 32rem) {
+  :root[data-profile="docencia"] .window__bar { position: static; }
+  :root[data-profile="docencia"] .hero { padding-block: 2rem; }
+}

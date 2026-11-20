@@ -1,0 +1,22 @@
+{
+  "setup_commands": [
+    [
+      "npm",
+      "ci"
+    ]
+  ],
+  "check_commands": [
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "test_commands": [
+    [
+      "npm",
+      "test"
+    ]
+  ],
+  "note": "Ejecuta scripts existentes; no sustituye revisión de cobertura de criterios."
+}
